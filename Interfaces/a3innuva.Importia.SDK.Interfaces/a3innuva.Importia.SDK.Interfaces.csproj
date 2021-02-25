@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net4;net451;net461;net471;net48</TargetFrameworks>
+    <AssemblyName>a3innuva.TAA.Migration.SDK.Interfaces</AssemblyName>
+    <RootNamespace>a3innuva.TAA.Migration.SDK.Interfaces</RootNamespace>
+    <Version>2.8.0</Version>
+  </PropertyGroup>
+
+</Project>

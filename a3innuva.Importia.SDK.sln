@@ -3,7 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a3innuva.Importia.SDK.Interfaces", "a3innuva.Importia.SDK.Interfaces\a3innuva.Importia.SDK.Interfaces.csproj", "{0A64FAD8-E817-4E4B-AE2C-622204B6DD0B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F9C3F3DE-9C56-4187-91EE-6F80E14BA19B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{E0787996-D059-47ED-9221-90F84DFEF6F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Implementations", "Implementations", "{FA05056B-8CF4-44D9-A803-8C6A81FDF58F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a3innuva.TAA.Migration.SDK.Extensions.Tests", "Tests\a3innuva.TAA.Migration.SDK.Extensions.Tests\a3innuva.TAA.Migration.SDK.Extensions.Tests.csproj", "{4D6E2392-FEA6-40BF-8E98-835A55DE28E1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a3innuva.TAA.Migration.SDK.Implementations.Tests", "Tests\a3innuva.TAA.Migration.SDK.Implementations.Tests\a3innuva.TAA.Migration.SDK.Implementations.Tests.csproj", "{30C8FBA3-1C92-46D2-AC39-F4D74C0DB510}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a3innuva.Importia.SDK.Interfaces", "Interfaces\a3innuva.Importia.SDK.Interfaces\a3innuva.Importia.SDK.Interfaces.csproj", "{06708CB9-D663-4C57-A520-E5D00AAB7D23}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a3innuva.Importia.SDK.Extensions", "Implementations\a3innuva.Importia.SDK.SDK.Extensions\a3innuva.Importia.SDK.Extensions.csproj", "{245A7828-3FB9-4CB1-95F9-F5443F7D56D6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a3innuva.Importia.SDK.Implementations", "Implementations\a3innuva.Importia.SDK.SDK.Implementations\a3innuva.Importia.SDK.Implementations.csproj", "{06050C27-531D-4E39-8FAB-F22DE796CB05}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a3innuva.Importia.SDK.Serialization", "Implementations\a3innuva.Importia.SDK.Serialization\a3innuva.Importia.SDK.Serialization.csproj", "{54241704-3218-41D9-AB75-51190830DD82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +27,41 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0A64FAD8-E817-4E4B-AE2C-622204B6DD0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A64FAD8-E817-4E4B-AE2C-622204B6DD0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A64FAD8-E817-4E4B-AE2C-622204B6DD0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A64FAD8-E817-4E4B-AE2C-622204B6DD0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D6E2392-FEA6-40BF-8E98-835A55DE28E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D6E2392-FEA6-40BF-8E98-835A55DE28E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D6E2392-FEA6-40BF-8E98-835A55DE28E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D6E2392-FEA6-40BF-8E98-835A55DE28E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30C8FBA3-1C92-46D2-AC39-F4D74C0DB510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30C8FBA3-1C92-46D2-AC39-F4D74C0DB510}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30C8FBA3-1C92-46D2-AC39-F4D74C0DB510}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30C8FBA3-1C92-46D2-AC39-F4D74C0DB510}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06708CB9-D663-4C57-A520-E5D00AAB7D23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06708CB9-D663-4C57-A520-E5D00AAB7D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06708CB9-D663-4C57-A520-E5D00AAB7D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06708CB9-D663-4C57-A520-E5D00AAB7D23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{245A7828-3FB9-4CB1-95F9-F5443F7D56D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{245A7828-3FB9-4CB1-95F9-F5443F7D56D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{245A7828-3FB9-4CB1-95F9-F5443F7D56D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{245A7828-3FB9-4CB1-95F9-F5443F7D56D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06050C27-531D-4E39-8FAB-F22DE796CB05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06050C27-531D-4E39-8FAB-F22DE796CB05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06050C27-531D-4E39-8FAB-F22DE796CB05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06050C27-531D-4E39-8FAB-F22DE796CB05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54241704-3218-41D9-AB75-51190830DD82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54241704-3218-41D9-AB75-51190830DD82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54241704-3218-41D9-AB75-51190830DD82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54241704-3218-41D9-AB75-51190830DD82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4D6E2392-FEA6-40BF-8E98-835A55DE28E1} = {F9C3F3DE-9C56-4187-91EE-6F80E14BA19B}
+		{30C8FBA3-1C92-46D2-AC39-F4D74C0DB510} = {F9C3F3DE-9C56-4187-91EE-6F80E14BA19B}
+		{06708CB9-D663-4C57-A520-E5D00AAB7D23} = {E0787996-D059-47ED-9221-90F84DFEF6F9}
+		{245A7828-3FB9-4CB1-95F9-F5443F7D56D6} = {FA05056B-8CF4-44D9-A803-8C6A81FDF58F}
+		{06050C27-531D-4E39-8FAB-F22DE796CB05} = {FA05056B-8CF4-44D9-A803-8C6A81FDF58F}
+		{54241704-3218-41D9-AB75-51190830DD82} = {FA05056B-8CF4-44D9-A803-8C6A81FDF58F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6AD6A45A-6C54-4EDA-985A-7835B462072C}

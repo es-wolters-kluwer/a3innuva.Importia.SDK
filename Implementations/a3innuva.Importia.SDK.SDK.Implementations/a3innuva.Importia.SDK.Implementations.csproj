@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net4;net451;net461;net471;net48;net5.0</TargetFrameworks>
+    <AssemblyName>a3innuva.TAA.Migration.SDK.Implementations</AssemblyName>
+    <RootNamespace>a3innuva.TAA.Migration.SDK.Implementations</RootNamespace>
+    <Version>2.8.0</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Product>a3innuva.Importia.SDK</Product>
+    <PackageId>a3innuva.Importia.SDK.Implementations</PackageId>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\a3innuva.Importia.SDK.Interfaces\a3innuva.Importia.SDK.Interfaces.csproj" />
+  </ItemGroup>
+  
+</Project>
