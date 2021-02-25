@@ -15,6 +15,11 @@
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
+  <packageSources>
+    <clear />
+    <add key="github" value="https://nuget.pkg.github.com/es-wolters-kluwer/index.json" />
+  </packageSources>
+
   <ItemGroup>
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
