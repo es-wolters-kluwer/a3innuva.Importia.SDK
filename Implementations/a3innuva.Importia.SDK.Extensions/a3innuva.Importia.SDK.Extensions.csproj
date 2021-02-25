@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Interfaces\a3innuva.Importia.SDK.Interfaces\a3innuva.Importia.SDK.Interfaces.csproj" />
-    <ProjectReference Include="..\a3innuva.Importia.SDK.SDK.Implementations\a3innuva.Importia.SDK.Implementations.csproj" />
+    <ProjectReference Include="..\a3innuva.Importia.SDK.Implementations\a3innuva.Importia.SDK.Implementations.csproj" />
   </ItemGroup>
 
 </Project>
