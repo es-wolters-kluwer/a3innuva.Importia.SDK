@@ -15,9 +15,4 @@
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
-  <packageSources>
-    <clear />
-    <add key="github" value="https://nuget.pkg.github.com/es-wolters-kluwer/index.json" />
-  </packageSources>
-
 </Project>
