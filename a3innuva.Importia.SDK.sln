@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a3innuva.Importia.SDK.Interfaces", "a3innuva.Importia.SDK.Interfaces\a3innuva.Importia.SDK.Interfaces.csproj", "{0A64FAD8-E817-4E4B-AE2C-622204B6DD0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A64FAD8-E817-4E4B-AE2C-622204B6DD0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A64FAD8-E817-4E4B-AE2C-622204B6DD0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A64FAD8-E817-4E4B-AE2C-622204B6DD0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A64FAD8-E817-4E4B-AE2C-622204B6DD0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6AD6A45A-6C54-4EDA-985A-7835B462072C}
+	EndGlobalSection
+EndGlobal
