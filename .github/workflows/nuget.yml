@@ -24,4 +24,4 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --configuration Release
     - name: Publish packages
-      run: dotnet nuget push **.nupkg --source "GPR" --api-key ${{secrets.GITHUB_TOKEN}}
+      run: dotnet nuget push **.nupkg --source "GPR" --api-key ${{secrets.GITHUB_TOKEN}} --skip-duplicate
