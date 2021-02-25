@@ -14,4 +14,4 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release
     - name: Publish packages
-      run: dotnet nuget push **.nupkg --source "github" --api-key GITHUB_TOKEN
+      run: dotnet nuget push **.nupkg --source github --api-key GITHUB_TOKEN
