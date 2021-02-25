@@ -11,15 +11,15 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-api-key: ${{ secrets.NuGetAPIKey }}
+        nuget-version: '5.x'
+    - name: Restore dependencies
+      run: dotnet restore        
     - name: Build
-      run: dotnet build --configuration Release
-    - name: Install NuGet client
-      uses: warrenbuckley/Setup-Nuget@v1  
+      run: dotnet build --configuration Release --no-restore
     - name: Add private GitHub registry to NuGet
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       run: nuget sources add -name "GPR" -Source https://nuget.pkg.github.com/es-wolters-kluwer/index.json -Username s-wolters-kluwer -Password ${{secrets.GITHUB_TOKEN}}
-      
-      
     - name: Publish packages
       run: dotnet nuget push **.nupkg --source "GPR" --api-key ${{secrets.NUGET_TOKEN}}
