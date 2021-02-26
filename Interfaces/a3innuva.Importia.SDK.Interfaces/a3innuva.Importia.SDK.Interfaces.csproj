@@ -15,11 +15,17 @@
     <RepositoryType>git</RepositoryType>
     <Description>Importia SDK interfaces</Description>
     <Authors>Wolters Kluwer Spain</Authors>
-    <Copyright>MIT</Copyright>
+    <Copyright>Wolters Kluwer Spain</Copyright>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <PackageIcon>favicon-180.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/es-wolters-kluwer/a3innuva.Importia.SDK/projects/1</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\favicon-180.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <None Include="..\..\license.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
