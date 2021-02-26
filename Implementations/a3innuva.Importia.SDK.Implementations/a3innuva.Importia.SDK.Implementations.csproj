@@ -13,8 +13,18 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <RepositoryUrl>https://github.com/es-wolters-kluwer/a3innuva.importia.SDK</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <Description>Importia SDK implementations entities and validations</Description>
+    <Authors>Wolters Kluwer Spain</Authors>
+    <Copyright>MIT</Copyright>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="..\..\license.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
