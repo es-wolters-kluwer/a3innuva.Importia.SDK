@@ -19,4 +19,4 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --configuration Release
     - name: Publish packages
-      run: run: dotnet nuget push **.nupkg --source nuget.org --api-key ${{secrets.NUGETORG_TOKEN}} --skip-duplicate
+      run: dotnet nuget push **.nupkg --source nuget.org --api-key ${{secrets.NUGETORG_TOKEN}} --skip-duplicate
