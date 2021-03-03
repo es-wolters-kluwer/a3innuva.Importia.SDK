@@ -1,7 +1,8 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Interfaces
 {
-    using System.Collections.Generic;
-
+    /// <summary>
+    /// Migration generic set
+    /// </summary>
     public interface IMigrationSet
     {
         IMigrationInfo Info { get; set; }

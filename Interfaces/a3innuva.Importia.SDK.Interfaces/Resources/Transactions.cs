@@ -31,8 +31,6 @@
                 "NOSUJ_CDED",
                 "NOSUJ_SDED",
                 "EXE_SIND25",
-
-
             };
 
             this.inputTransactions = new List<string>()
@@ -57,8 +55,6 @@
                 "IGIC_NODED",
                 "MINORISTAS",
                 "EXENTASPEQ",
-
-
             };
         }
 

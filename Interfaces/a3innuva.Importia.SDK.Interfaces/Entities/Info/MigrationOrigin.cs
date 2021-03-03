@@ -1,5 +1,8 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Interfaces
 {
+    /// <summary>
+    /// Available sources, select extern for 3rd software
+    /// </summary>
     public enum MigrationOrigin
     {
         Excel = 0,
