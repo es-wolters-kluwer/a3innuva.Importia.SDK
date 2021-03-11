@@ -30,7 +30,8 @@
                 "PEN_CYM",
                 "NOSUJ_CDED",
                 "NOSUJ_SDED",
-                "EXE_SIND25",
+                "EXE_SIND_ART25",
+                "EXE_CDED",
             };
 
             this.inputTransactions = new List<string>()
@@ -55,6 +56,8 @@
                 "IGIC_NODED",
                 "MINORISTAS",
                 "EXENTASPEQ",
+                "EXE_CDED_ART47",
+                "EXE_CDED_ART13"
             };
         }
 
