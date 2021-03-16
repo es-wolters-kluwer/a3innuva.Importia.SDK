@@ -31,7 +31,9 @@
                 "NOSUJ_CDED",
                 "NOSUJ_SDED",
                 "EXE_SIND_ART25",
-                "EXE_CDED",
+                "EXE_CDED",                
+                "EXE_CDED_ART47",
+                "EXE_CDED_ART13"
             };
 
             this.inputTransactions = new List<string>()
@@ -55,9 +57,7 @@
                 "IMPORT_BI25",
                 "IGIC_NODED",
                 "MINORISTAS",
-                "EXENTASPEQ",
-                "EXE_CDED_ART47",
-                "EXE_CDED_ART13"
+                "EXENTASPEQ"
             };
         }
 
