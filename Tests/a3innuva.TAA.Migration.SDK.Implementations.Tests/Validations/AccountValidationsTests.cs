@@ -30,11 +30,13 @@
             errors.Count.Should().Be(0);
         }
 
-        [Fact(DisplayName = "Validate Code required failed")]
-        public void Validate_Code_required_failed()
+        [Theory(DisplayName = "Validate Code required failed")]
+        [InlineData(null)]
+        [InlineData(" ")]
+        public void Validate_Code_required_failed(string code)
         {
             Account entity = this.CreateEntity();
-            entity.Code = "";
+            entity.Code = code;
 
             var errors = this.validation.Validate(entity);
 

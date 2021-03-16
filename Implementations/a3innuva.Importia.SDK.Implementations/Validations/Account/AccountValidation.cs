@@ -23,7 +23,7 @@
 
             this.CreateRule(x => this.Validate(x.Code), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Cuenta'"));
             this.CreateRule(x => this.Validate(x.Code, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Cuenta'"));
-            this.CreateRule(x => this.accountCodeFormat.IsMatch(x.Code), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta'"));
+            this.CreateRule(x => x.Code != null && this.accountCodeFormat.IsMatch(x.Code), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta'"));
 
             this.CreateRule(x => this.Validate(x.Description), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Descripción'"));
             this.CreateRule(x => this.Validate(x.Description, 255), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Descripción'"));
@@ -45,7 +45,7 @@
 
         private bool ValidateIsNotLevel(IAccount account)
         {
-            if (account.Code.Length > 5)
+            if (account.Code == null || account.Code.Length > 5)
                 return true;
 
             bool isNotLevel = !account.HasVatNumber();
@@ -57,7 +57,7 @@
 
         private bool ValidateFiscalData(IAccount account)
         {
-            if (account.Code.Length < 6)
+            if (account.Code == null || account.Code.Length < 6)
                 return true;
 
             if (account.HasPostalCode())
