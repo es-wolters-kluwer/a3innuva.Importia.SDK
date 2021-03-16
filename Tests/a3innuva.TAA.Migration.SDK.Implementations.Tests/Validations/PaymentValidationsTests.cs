@@ -6,6 +6,7 @@
     using a3innuva.TAA.Migration.SDK.Implementations;
     using a3innuva.TAA.Migration.SDK.Interfaces;
     using Xunit;
+    using System.Text;
 
     [Trait("Unit test", "PaymentValidations")]
     public class PaymentValidationsTests
@@ -87,6 +88,33 @@
             var errors = this.validation.Validate(entity);
 
             errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Cuenta bancaria' tiene formato incorrecto");
+        }
+
+        [Theory(DisplayName = "Validate bank account description failed")]
+        [InlineData(" ")]
+        [InlineData(null)]
+        public void Validate_bank_account_description_failed(string description)
+        {
+            IPayment entity = this.CreateEntity();
+            entity.BankAccount = "3543563";
+            entity.BankAccountDescription = description;
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Descripción de cuenta bancaria', obligatorio contenido");
+        }
+
+        [Fact(DisplayName = "Validate bank account description length failed")]
+        public void Validate_bank_account_description_length_failed()
+        {
+            IPayment entity = this.CreateEntity();
+            entity.BankAccount = "3543563";
+            var sb = new StringBuilder();
+            entity.BankAccountDescription = new StringBuilder().Insert(0, "a", 256).ToString();
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Descripción de cuenta bancaria' tiene longitud incorrecta");
         }
 
         private Payment CreateEntity()

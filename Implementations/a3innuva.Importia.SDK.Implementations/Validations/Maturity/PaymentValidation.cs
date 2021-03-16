@@ -21,8 +21,10 @@
             this.CreateRule(x => this.Validate(x.Date), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Fecha'"));
 
             this.CreateRule(x => x.BankAccount == null || x.BankAccount.Length <= 20, this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Cuenta bancaria'"));
-
             this.CreateRule(x => x.BankAccount == null || this.accountCodeFormat.IsMatch(x.BankAccount), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta bancaria'"));
+
+            this.CreateRule(x => x.BankAccount == null || this.Validate(x.BankAccountDescription), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Descripción de cuenta bancaria'"));
+            this.CreateRule(x => x.BankAccount == null || this.Validate(x.BankAccountDescription, 255), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Descripción de cuenta bancaria'"));
         }
     }
 }

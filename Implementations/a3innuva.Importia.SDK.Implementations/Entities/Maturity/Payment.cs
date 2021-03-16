@@ -10,6 +10,7 @@
         public DateTime Date { get; set; }
         public PaymentSituation Situation { get; set; }
         public string BankAccount { get; set; }
+        public string BankAccountDescription { get; set; }
         public decimal Amount { get; set; }
 
         public string Identity() => string.Empty;

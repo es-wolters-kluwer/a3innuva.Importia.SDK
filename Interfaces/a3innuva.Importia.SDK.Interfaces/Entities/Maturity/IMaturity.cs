@@ -6,6 +6,7 @@
     {
         DateTime Date { get; set; }
         string BankAccount { get; set; }
+        string BankAccountDescription { get; set; }
         decimal Amount { get; set; }
     }
 }
