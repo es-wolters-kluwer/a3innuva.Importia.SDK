@@ -3,5 +3,6 @@
     public interface IInputInvoice : IInvoice
     {
         IInputInvoiceLine[] Lines { get; set; }
+        IPayment[] Maturities { get; set; }
     }
 }

@@ -8,6 +8,7 @@
     public class InputInvoiceValidation : Validation<IInputInvoice>
     {
         private readonly IValidation<IInputInvoiceLine> lineValidation;
+        private readonly IValidation<IPayment> paymentValidation;
         private readonly Regex accountCodeFormat;
         private readonly Regex nifFormat;
         private readonly Regex postalCodeFormat;
@@ -15,6 +16,7 @@
         public InputInvoiceValidation()
         {
             this.lineValidation = new InputInvoiceLineValidation();
+            this.paymentValidation = new PaymentValidation();
             this.accountCodeFormat = new Regex(@"^[1-9]{1}[0-9]*$");
             this.nifFormat = new Regex(@"^[A-Z0-9]*$");
             this.postalCodeFormat = new Regex(@"^[0-9]{5}$");
@@ -58,6 +60,17 @@
 
                 var resultErrors = result.Where(x => x.IsValid == false);
                 errors.AddRange(resultErrors);
+            }
+
+            if (entity.Maturities != null)
+            {
+                foreach (var item in entity.Maturities)
+                {
+                    var result = paymentValidation.Validate(item);
+
+                    var resultErrors = result.Where(x => x.IsValid == false);
+                    errors.AddRange(resultErrors);
+                }
             }
 
             var entityErrors = base.Validate(entity);

@@ -5,5 +5,6 @@
     public interface IOutputInvoice : IInvoice
     {
         IOutputInvoiceLine[] Lines { get; set; }
+        ICharge[] Maturities { get; set; }
     }
 }
