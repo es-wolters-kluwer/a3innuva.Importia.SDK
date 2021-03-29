@@ -12,6 +12,7 @@
         public string BankAccount { get; set; }
         public string BankAccountDescription { get; set; }
         public decimal Amount { get; set; }
+        public bool AccountingAffect { get; set; }
 
         public string Identity() => string.Empty;
     }

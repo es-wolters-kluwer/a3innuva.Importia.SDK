@@ -1,6 +1,7 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Implementations
 {
     using a3innuva.TAA.Migration.SDK.Interfaces;
+    using System;
     using System.Text.RegularExpressions;
 
     public class ChargeValidation : Validation<ICharge>
@@ -25,6 +26,11 @@
 
             this.CreateRule(x => x.BankAccount == null || this.Validate(x.BankAccountDescription), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Descripción de cuenta bancaria'"));
             this.CreateRule(x => x.BankAccount == null || this.Validate(x.BankAccountDescription, 255), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Descripción de cuenta bancaria'"));
+
+            this.CreateRule(x => this.ValidateAccountingCanBeAffected(x.AccountingAffect, x.Situation, x.BankAccount), this.ReplaceInMessage(ValidationMessages.InvalidValue, "'Efecto contable'"));
         }
+
+        private bool ValidateAccountingCanBeAffected(bool accountingAffect, ChargeSituation situation, string bankAccount)
+            => !(situation == ChargeSituation.Pending && accountingAffect) && !(accountingAffect && string.IsNullOrWhiteSpace(bankAccount));
     }
 }

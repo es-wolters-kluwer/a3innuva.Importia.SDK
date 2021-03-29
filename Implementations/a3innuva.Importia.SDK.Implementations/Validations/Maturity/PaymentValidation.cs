@@ -25,6 +25,11 @@
 
             this.CreateRule(x => x.BankAccount == null || this.Validate(x.BankAccountDescription), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Descripción de cuenta bancaria'"));
             this.CreateRule(x => x.BankAccount == null || this.Validate(x.BankAccountDescription, 255), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Descripción de cuenta bancaria'"));
+
+            this.CreateRule(x => this.ValidateAccountingCanBeAffected(x.AccountingAffect, x.Situation, x.BankAccount), this.ReplaceInMessage(ValidationMessages.InvalidValue, "'Efecto contable'"));
         }
+
+        private bool ValidateAccountingCanBeAffected(bool accountingAffect, PaymentSituation situation, string bankAccount)
+            => !(situation == PaymentSituation.Pending && accountingAffect) && !(accountingAffect && string.IsNullOrEmpty(bankAccount));
     }
 }

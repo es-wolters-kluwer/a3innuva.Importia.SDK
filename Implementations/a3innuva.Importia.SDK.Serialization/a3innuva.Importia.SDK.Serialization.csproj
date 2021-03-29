@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1;net4;net451;net461;net471;net48;net5.0;netcoreapp3.1</TargetFrameworks>
     <AssemblyName>a3innuva.TAA.Migration.SDK.Serialization</AssemblyName>
     <RootNamespace>a3innuva.TAA.Migration.SDK.Serialization</RootNamespace>
-    <Version>2.9.0</Version>
+    <Version>2.10.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Product>a3innuva.Importia.SDK</Product>
     <PackageId>a3innuva.Importia.SDK.Serialization</PackageId>

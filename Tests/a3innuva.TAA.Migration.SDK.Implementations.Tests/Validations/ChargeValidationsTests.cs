@@ -116,6 +116,39 @@
             errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Descripción de cuenta bancaria' tiene longitud incorrecta");
         }
 
+        [Theory(DisplayName = "Validate accounting affect")]
+        [InlineData(false, ChargeSituation.Pending, "4234567890", true)]
+        [InlineData(true, ChargeSituation.Pending, "4234567890", false)]
+        [InlineData(false, ChargeSituation.Satisfied, "4234567890", true)]
+        [InlineData(true, ChargeSituation.Satisfied, "4234567890", true)]
+        [InlineData(false, ChargeSituation.Returned, "4234567890", true)]
+        [InlineData(true, ChargeSituation.Returned, "4234567890", true)]
+        [InlineData(false, ChargeSituation.Pending, null, true)]
+        [InlineData(true, ChargeSituation.Pending, null, false)]
+        [InlineData(false, ChargeSituation.Satisfied, null, true)]
+        [InlineData(true, ChargeSituation.Satisfied, null, false)]
+        [InlineData(false, ChargeSituation.Returned, null, true)]
+        [InlineData(true, ChargeSituation.Returned, null, false)]
+        public void Validate_accounting_affect(bool accountingAffect, ChargeSituation situation, string bankAccount, bool isValid)
+        {
+            ICharge entity = this.CreateEntity();
+            entity.AccountingAffect = accountingAffect;
+            entity.Situation = situation;
+            entity.BankAccount = bankAccount;
+            entity.BankAccountDescription = "Dummy";
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            if (isValid)
+            {
+                errors.Count.Should().Be(0);
+            }
+            else
+            {
+                errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Efecto contable' tiene valor incorrecto");
+            }
+        }
+
         private Charge CreateEntity()
         {
             return new Charge()

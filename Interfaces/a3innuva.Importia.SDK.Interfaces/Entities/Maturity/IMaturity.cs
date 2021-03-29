@@ -8,5 +8,6 @@
         string BankAccount { get; set; }
         string BankAccountDescription { get; set; }
         decimal Amount { get; set; }
+        bool AccountingAffect { get; set; }
     }
 }
