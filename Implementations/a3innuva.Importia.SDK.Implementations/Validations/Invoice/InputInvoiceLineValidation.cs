@@ -17,8 +17,9 @@
         protected override void SetupValidations()
         {
             this.CreateRule(x => this.Validate(x.Id), "Id");
-
             this.CreateRule(x => this.Validate(x.BaseAmount), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Base imponible'"));
+            this.CreateRule(x => this.ValidateNullable(x.BaseAccount, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Cuenta de la base'"));
+            this.CreateRule(x => this.ValidateAccountFormat(x.BaseAccount), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta de la base'"));
 
             this.CreateRule(x => this.Validate(x.Transaction), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Operación'"));
             this.CreateRule(x => this.ValidateTransaction(x.Transaction), this.ReplaceInMessage("No es una operación valida"));
@@ -54,6 +55,14 @@
                 return true;
 
             return 0 <= input &&  input <= 100;
+        }
+
+        private bool ValidateAccountFormat(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return true;
+
+            return this.accountCodeFormat.IsMatch(input);
         }
     }
 }

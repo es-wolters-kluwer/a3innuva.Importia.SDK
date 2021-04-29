@@ -99,6 +99,31 @@
 
             errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Porcentaje de retención' tiene formato incorrecto");
         }
+
+        [Theory(DisplayName = "Validate account numeric failed")]
+        [InlineData("000000")]
+        [InlineData("A00000")]
+        public void Validate_account_numeric_failed(string input)
+        {
+            IOutputInvoiceLine entity = this.CreateEntity();
+            entity.BaseAccount = input;
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Cuenta de la base' tiene formato incorrecto");
+        }
+
+        [Fact(DisplayName = "Validate account length failed")]
+        public void Validate_account_length_failed()
+        {
+            IOutputInvoiceLine entity = this.CreateEntity();
+            entity.BaseAccount = "123456789012345678901";
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Cuenta de la base' tiene longitud incorrecta");
+        }
+
         
         private IOutputInvoiceLine CreateEntity()
         {
@@ -108,7 +133,8 @@
                 Line = 1,
                 BaseAmount = 1210,
                 TaxAmount = 210,
-                Transaction = "OP_INT"
+                Transaction = "OP_INT",
+                BaseAccount = "77000000"
             };
         }
     }

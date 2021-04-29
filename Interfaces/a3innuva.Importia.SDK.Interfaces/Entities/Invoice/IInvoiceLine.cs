@@ -11,6 +11,10 @@
         /// </summary>
         decimal BaseAmount { get; set; }
         /// <summary>
+        /// Base account, [6-20] 
+        /// </summary>
+        string BaseAccount{ get; set; }
+        /// <summary>
         /// Tax amount, optional format X.XX, null for IGIC exent operations, zero for type zero IGIC operations
         /// </summary>
         decimal? TaxAmount { get; set; }
