@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using a3innuva.TAA.Migration.SDK.Implementations;
     using a3innuva.TAA.Migration.SDK.Interfaces;
 
@@ -52,12 +53,30 @@
         {
             var type = info.Type != MigrationType.None;
             var defineType = Enum.IsDefined(typeof(MigrationType), info.Type);
+            var origin = info.Origin != MigrationOrigin.None;
             var defineOrigin = Enum.IsDefined(typeof(MigrationOrigin), info.Origin);
             var year = info.Type == MigrationType.ChartOfAccount ? info.Year == 0 : info.Year != 0;
             var vatNumber = !String.IsNullOrEmpty(info.VatNumber?.Trim());
             var version = info.Version == "2.0";
 
-            return type & defineType & defineOrigin & year & vatNumber & version;
+            return type & defineType & origin & defineOrigin & year & vatNumber & version;
+        }
+
+        public static bool ValidateTypeAndContent(this IMigrationSet set)
+        {
+            switch (set.Info.Type)
+            {
+                case MigrationType.ChartOfAccount:
+                    return set.Entities.ToList().TrueForAll(x => x.GetType() == typeof(Account));
+                case MigrationType.Journal:
+                    return set.Entities.ToList().TrueForAll(x => x.GetType() == typeof(Journal));
+                case MigrationType.InputInvoice:
+                    return set.Entities.ToList().TrueForAll(x => x.GetType() == typeof(InputInvoice));
+                case MigrationType.OutputInvoice:
+                    return set.Entities.ToList().TrueForAll(x => x.GetType() == typeof(OutputInvoice));
+                default:
+                    return false;
+            }
         }
 
         private static (bool valid, IEnumerable<IValidationResult> errors) Validate<T>(IValidation<T> validator, IEnumerable<T> items, bool isValidInfo)
