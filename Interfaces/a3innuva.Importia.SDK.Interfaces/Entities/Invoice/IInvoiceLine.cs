@@ -11,9 +11,13 @@
         /// </summary>
         decimal BaseAmount { get; set; }
         /// <summary>
-        /// Base account, [6-20] 
+        /// Counterpart account, [6-20] 
         /// </summary>
-        string BaseAccount{ get; set; }
+        string CounterPart{ get; set; }
+        /// <summary>
+        /// Counterpart account, optional [1-255]
+        /// </summary>
+        string CounterPartDescription{ get; set; }
         /// <summary>
         /// Tax amount, optional format X.XX, null for IGIC exent operations, zero for type zero IGIC operations
         /// </summary>

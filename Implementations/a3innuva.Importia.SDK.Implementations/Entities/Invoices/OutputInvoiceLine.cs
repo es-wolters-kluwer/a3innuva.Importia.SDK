@@ -15,7 +15,8 @@
 
         public int Index { get; set; }
         public decimal BaseAmount { get; set; }
-        public string BaseAccount { get; set; }
+        public string CounterPart { get; set; }
+        public string CounterPartDescription { get; set; }
         public decimal? TaxAmount { get; set; }
         public decimal? TaxSurchargeAmount { get; set; }
         public decimal? TaxDeductibleAmount { get; set; }

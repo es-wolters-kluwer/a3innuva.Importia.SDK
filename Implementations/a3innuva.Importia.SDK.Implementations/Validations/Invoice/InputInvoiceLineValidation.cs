@@ -6,21 +6,18 @@
     public class InputInvoiceLineValidation : Validation<IInputInvoiceLine>
     {
         private readonly Regex accountCodeFormat;
-        private readonly Regex nifFormat;
-
         public InputInvoiceLineValidation()
         {
             this.accountCodeFormat = new Regex(@"^[1-9]{1}[0-9]*$");
-            this.nifFormat = new Regex(@"^[A-Z0-9]*$");
         }
 
         protected override void SetupValidations()
         {
             this.CreateRule(x => this.Validate(x.Id), "Id");
             this.CreateRule(x => this.Validate(x.BaseAmount), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Base imponible'"));
-            this.CreateRule(x => this.ValidateNullable(x.BaseAccount, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Cuenta de la base'"));
-            this.CreateRule(x => this.ValidateAccountFormat(x.BaseAccount), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta de la base'"));
-
+            this.CreateRule(x => this.ValidateNullable(x.CounterPart, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Contrapartida'"));
+            this.CreateRule(x => this.ValidateAccountFormat(x.CounterPart), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Contrapartida'"));
+            this.CreateRule(x => this.ValidateNullable(x.CounterPartDescription, 255), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Descripción contrapartida'"));
             this.CreateRule(x => this.Validate(x.Transaction), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Operación'"));
             this.CreateRule(x => this.ValidateTransaction(x.Transaction), this.ReplaceInMessage("No es una operación valida"));
 

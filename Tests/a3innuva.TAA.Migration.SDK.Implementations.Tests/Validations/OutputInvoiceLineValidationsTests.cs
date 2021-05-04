@@ -106,22 +106,44 @@
         public void Validate_account_numeric_failed(string input)
         {
             IOutputInvoiceLine entity = this.CreateEntity();
-            entity.BaseAccount = input;
+            entity.CounterPart = input;
 
             var errors = this.validation.Validate(entity);
 
-            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Cuenta de la base' tiene formato incorrecto");
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Contrapartida' tiene formato incorrecto");
         }
 
         [Fact(DisplayName = "Validate account length failed")]
         public void Validate_account_length_failed()
         {
             IOutputInvoiceLine entity = this.CreateEntity();
-            entity.BaseAccount = "123456789012345678901";
+            entity.CounterPart = "123456789012345678901";
 
             var errors = this.validation.Validate(entity);
 
-            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Cuenta de la base' tiene longitud incorrecta");
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Contrapartida' tiene longitud incorrecta");
+        }
+
+        [Fact(DisplayName = "Validate Description length succeed")]
+        public void Validate_Description_length_succeed()
+        {
+            IOutputInvoiceLine entity = this.CreateEntity();
+            entity.CounterPartDescription = "1234";
+
+            var errors = this.validation.Validate(entity);
+
+            errors.ToList().Count.Should().Be(0);
+        }
+
+        [Fact(DisplayName = "Validate Description length failed")]
+        public void Validate_Description_length_failed()
+        {
+            IOutputInvoiceLine entity = this.CreateEntity();
+            entity.CounterPartDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce interdum gravida dolor, vehicula lobortis turpis tristique rhoncus. Donec sit amet fringilla sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam sodales nisl id augue sed.";
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Descripción contrapartida' tiene longitud incorrecta");
         }
 
         
@@ -134,7 +156,7 @@
                 BaseAmount = 1210,
                 TaxAmount = 210,
                 Transaction = "OP_INT",
-                BaseAccount = "77000000"
+                CounterPart = "77000000"
             };
         }
     }
