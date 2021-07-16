@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1;net4;net451;net461;net471;net48;net5.0;netcoreapp3.1</TargetFrameworks>
     <AssemblyName>a3innuva.TAA.Migration.SDK.Serialization</AssemblyName>
     <RootNamespace>a3innuva.TAA.Migration.SDK.Serialization</RootNamespace>
-    <Version>2.11.2</Version>
+    <Version>2.11.3</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Product>a3innuva.Importia.SDK</Product>
     <PackageId>a3innuva.Importia.SDK.Serialization</PackageId>
@@ -34,5 +34,10 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\a3innuva.Importia.SDK.Interfaces\a3innuva.Importia.SDK.Interfaces.csproj" />
+    <ProjectReference Include="..\a3innuva.Importia.SDK.Implementations\a3innuva.Importia.SDK.Implementations.csproj" />
   </ItemGroup>
 </Project>
