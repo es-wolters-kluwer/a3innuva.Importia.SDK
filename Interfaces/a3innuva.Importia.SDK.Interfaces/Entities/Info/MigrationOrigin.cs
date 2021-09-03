@@ -13,6 +13,7 @@
         A3ASESORnom = 40,
         A3InnuvaNomina = 50,
         A3InnuvaFactura = 60,
+        A3Factura = 70,
         Extern = 90,
         None = 99
     }
