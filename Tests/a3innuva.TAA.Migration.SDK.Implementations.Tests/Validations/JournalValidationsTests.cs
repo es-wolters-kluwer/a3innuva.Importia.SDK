@@ -150,7 +150,18 @@
 
             errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Fecha de asiento', obligatorio contenido");
         }
-        
+
+        [Fact(DisplayName = "Validate max date failed")]
+        public void Validate_max_date_failed()
+        {
+            IJournal entity = this.CreateEntity();
+            entity.Date = new DateTime(2101, 1, 1);
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Fecha de asiento', obligatorio contenido");
+        }
+
         [Fact(DisplayName = "Validate source required failed")]
         public void Validate_source_required_failed()
         {
@@ -171,7 +182,7 @@
                 Document = "document",
                 Date = DateTime.Now,
                 Number = "1",
-                Lines = new List<IJournalLine>(){this.CreateLineEntity()}.ToArray(),
+                Lines = new List<IJournalLine>() { this.CreateLineEntity() }.ToArray(),
                 Source = "source"
             };
         }

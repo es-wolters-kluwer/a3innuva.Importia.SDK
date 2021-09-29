@@ -44,6 +44,17 @@
             errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Fecha de factura', obligatorio contenido");
         }
 
+        [Fact(DisplayName = "Validate invoice max date failed")]
+        public void Validate_invoice_max_date_failed()
+        {
+            IInputInvoice entity = this.CreateEntity();
+            entity.InvoiceDate = new DateTime(2101, 1, 1);
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Fecha de factura', obligatorio contenido");
+        }
+
         [Fact(DisplayName = "Validate journal date failed")]
         public void Validate_journal_date_failed()
         {
@@ -55,11 +66,33 @@
             errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Fecha de asiento' tiene formato incorrecto");
         }
 
+        [Fact(DisplayName = "Validate journal date failed")]
+        public void Validate_journal_max_date_failed()
+        {
+            IInputInvoice entity = this.CreateEntity();
+            entity.JournalDate = new DateTime(2101, 1, 1);
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Fecha de asiento' tiene formato incorrecto");
+        }
+
         [Fact(DisplayName = "Validate transaction date failed")]
         public void Validate_transaction_date_failed()
         {
             IInputInvoice entity = this.CreateEntity();
             entity.TransactionDate = DateTime.MinValue;
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Fecha de operación' tiene formato incorrecto");
+        }
+
+        [Fact(DisplayName = "Validate transaction max date failed")]
+        public void Validate_transaction_max_date_failed()
+        {
+            IInputInvoice entity = this.CreateEntity();
+            entity.TransactionDate = new DateTime(2101, 1, 1);
 
             var errors = this.validation.Validate(entity);
 
@@ -101,7 +134,7 @@
             errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Cuenta de cliente' tiene longitud incorrecta");
         }
 
-        
+
         [Fact(DisplayName = "Validate invoice number required failed")]
         public void Validate_invoice_number_required_failed()
         {
@@ -281,7 +314,7 @@
         [Theory(DisplayName = "Validate pending and satisfied amounts failed")]
         [InlineData(null, 20.02)]
         [InlineData(10.01, null)]
-        public void Validate_pending_and_satisfied_failed(double ? pending, double ? satisfied)
+        public void Validate_pending_and_satisfied_failed(double? pending, double? satisfied)
         {
             IInputInvoice entity = this.CreateEntity();
             entity.PendingAmount = (decimal?)pending;
@@ -295,7 +328,7 @@
         [Theory(DisplayName = "Validate pending and satisfied amounts succeed")]
         [InlineData(10.01, 20.02)]
         [InlineData(null, null)]
-        public void Validate_pending_and_satisfied_succeed(double ? pending, double ? satisfied)
+        public void Validate_pending_and_satisfied_succeed(double? pending, double? satisfied)
         {
             IInputInvoice entity = this.CreateEntity();
             entity.PendingAmount = (decimal?)pending;

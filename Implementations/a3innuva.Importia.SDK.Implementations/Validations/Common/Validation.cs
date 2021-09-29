@@ -50,7 +50,7 @@
 
         protected bool Validate(DateTime date)
         {
-            return date != DateTime.MinValue;
+            return date != DateTime.MinValue && date <= new DateTime(2100,12,31);
         }
 
         protected bool Validate(DateTime? date)
@@ -58,7 +58,7 @@
             if (date == null)
                 return true;
 
-            return date != DateTime.MinValue;
+            return this.Validate(date.Value);
         }
 
         protected bool ValidateMinDate(DateTime date)

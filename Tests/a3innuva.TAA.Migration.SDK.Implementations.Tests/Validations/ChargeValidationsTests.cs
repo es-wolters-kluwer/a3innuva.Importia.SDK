@@ -55,6 +55,17 @@
             errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Fecha', obligatorio contenido");
         }
 
+        [Fact(DisplayName = "Validate max date failed")]
+        public void Validate_max_date_failed()
+        {
+            ICharge entity = this.CreateEntity();
+            entity.Date = new DateTime(2101, 1, 1);
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Fecha', obligatorio contenido");
+        }
+
         [Fact(DisplayName = "Validate id failed")]
         public void Validate_id_failed()
         {
