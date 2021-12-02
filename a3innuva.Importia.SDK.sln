@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31019.35
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F9C3F3DE-9C56-4187-91EE-6F80E14BA19B}"
 EndProject
@@ -20,6 +20,15 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a3innuva.Importia.SDK.Implementations", "Implementations\a3innuva.Importia.SDK.Implementations\a3innuva.Importia.SDK.Implementations.csproj", "{E3D10EF4-99F3-4F81-816D-04DDA93CA4EB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a3innuva.Importia.SDK.Extensions", "Implementations\a3innuva.Importia.SDK.Extensions\a3innuva.Importia.SDK.Extensions.csproj", "{B63D33DB-B9C8-44DD-B175-407B0A6FF7BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a3innuva.TAA.Migration.SDK.Serialization.Tests", "Tests\a3innuva.TAA.Migration.SDK.Serialization.Tests\a3innuva.TAA.Migration.SDK.Serialization.Tests.csproj", "{659BF329-1079-45B3-8125-D31A1645CCE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{FA1AE514-2CB4-4B22-B247-AEA6C889CC83}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\buildAndTest.yml = .github\workflows\buildAndTest.yml
+		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
+		.github\workflows\nuget.yml = .github\workflows\nuget.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +60,10 @@ Global
 		{B63D33DB-B9C8-44DD-B175-407B0A6FF7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B63D33DB-B9C8-44DD-B175-407B0A6FF7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B63D33DB-B9C8-44DD-B175-407B0A6FF7BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{659BF329-1079-45B3-8125-D31A1645CCE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{659BF329-1079-45B3-8125-D31A1645CCE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{659BF329-1079-45B3-8125-D31A1645CCE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{659BF329-1079-45B3-8125-D31A1645CCE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +75,7 @@ Global
 		{54241704-3218-41D9-AB75-51190830DD82} = {FA05056B-8CF4-44D9-A803-8C6A81FDF58F}
 		{E3D10EF4-99F3-4F81-816D-04DDA93CA4EB} = {FA05056B-8CF4-44D9-A803-8C6A81FDF58F}
 		{B63D33DB-B9C8-44DD-B175-407B0A6FF7BA} = {FA05056B-8CF4-44D9-A803-8C6A81FDF58F}
+		{659BF329-1079-45B3-8125-D31A1645CCE9} = {F9C3F3DE-9C56-4187-91EE-6F80E14BA19B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6AD6A45A-6C54-4EDA-985A-7835B462072C}
