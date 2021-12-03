@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net4;net451;net461;net471;net48;net5.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net451;net461;net471;net48;net5.0;netcoreapp3.1;net6.0</TargetFrameworks>
     <AssemblyName>a3innuva.TAA.Migration.SDK.Implementations</AssemblyName>
     <RootNamespace>a3innuva.TAA.Migration.SDK.Implementations</RootNamespace>
-    <Version>2.12.2</Version>
+    <Version>2.13.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Product>a3innuva.Importia.SDK</Product>
     <PackageId>a3innuva.Importia.SDK.Implementations</PackageId>
