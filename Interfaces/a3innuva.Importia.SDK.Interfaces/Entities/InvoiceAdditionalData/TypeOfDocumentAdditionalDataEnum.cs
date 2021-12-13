@@ -16,8 +16,8 @@
 
 
         InputNotCorrectiveInvoice = 30,
-        InputNotCorrectiveSimplifiedInvoice = 0x1F,
-        InputNotCorrectiveJustificantesContables = 0x20,
+        InputNotCorrectiveSimplifiedInvoice = 31,
+        InputNotCorrectiveJustificantesContables = 32,
         InputCorrectiveErrorFundado = 40,
         InputCorrectiveConcurso = 41,
         InputCorrectiveDeudaIncobrable = 42,
