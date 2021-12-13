@@ -4,5 +4,6 @@
     {
         IInputInvoiceLine[] Lines { get; set; }
         IPayment[] Maturities { get; set; }
+        IInputInvoiceAdditionalData AdditionalData { get; set; }
     }
 }

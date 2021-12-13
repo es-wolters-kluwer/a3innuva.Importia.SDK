@@ -17,7 +17,7 @@
         [Fact(DisplayName = "Check number bindings")]
         public void Check_number_bindings()
         {
-            this.binder.KnownTypes.Count.Should().Be(17);
+            this.binder.KnownTypes.Count.Should().Be(21);
         }
         
         [Fact(DisplayName = "Check bindings")]
@@ -45,6 +45,10 @@
                 x.FullName == typeof(a3innuva.TAA.Migration.SDK.Implementations.Payment).FullName);
             this.binder.KnownTypes.Should().ContainSingle(x =>
                 x.FullName == typeof(a3innuva.TAA.Migration.SDK.Implementations.Charge).FullName);
+            this.binder.KnownTypes.Should().ContainSingle(x =>
+               x.FullName == typeof(a3innuva.TAA.Migration.SDK.Implementations.InputInvoiceAdditionalData).FullName);
+            this.binder.KnownTypes.Should().ContainSingle(x =>
+                x.FullName == typeof(a3innuva.TAA.Migration.SDK.Implementations.InputInvoiceAdditionalData).FullName);
             this.binder.KnownTypes.Should().ContainSingle(x =>
                 x.FullName == typeof(a3innuva.TAA.Migration.SDK.Interfaces.IMigrationEntity[]).FullName);
             this.binder.KnownTypes.Should().ContainSingle(x =>

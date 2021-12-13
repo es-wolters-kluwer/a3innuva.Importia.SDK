@@ -4,5 +4,6 @@
     {
         IOutputInvoiceLine[] Lines { get; set; }
         ICharge[] Maturities { get; set; }
+        IOutputInvoiceAdditionalData AdditionalData { get; set; }
     }
 }
