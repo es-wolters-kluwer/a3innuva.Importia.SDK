@@ -28,9 +28,7 @@
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IJournalLine[]),
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IOutputInvoiceLine[]),
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IPayment[]),
-            typeof(a3innuva.TAA.Migration.SDK.Interfaces.ICharge[]),
-            typeof(a3innuva.TAA.Migration.SDK.Interfaces.IInputInvoiceAdditionalData[]),
-            typeof(a3innuva.TAA.Migration.SDK.Interfaces.IOutputInvoiceAdditionalData[])
+            typeof(a3innuva.TAA.Migration.SDK.Interfaces.ICharge[])
         };
 
         public Type BindToType(string assemblyName, string typeName)
