@@ -29,5 +29,6 @@
         public decimal? PendingAmount { get; set; }
         public decimal? SatisfiedAmount { get; set; }
         public IPayment[] Maturities { get; set; }
+        public IInputInvoiceAdditionalData AdditionalData { get; set; }
     }
 }
