@@ -9,8 +9,8 @@
 
             this.CreateRule(x => x.Description.Length <= 500, this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Descripción'"));
 
-            this.CreateRule(x => x.InitialNumberOfDocument.Length <= 60, this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Número de documento inicial'"));
-            this.CreateRule(x => x.LastNumberOfDocument.Length <= 60, this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Número de documento final'"));
+            this.CreateRule(x => this.ValidateNullable(x.InitialNumberOfDocument, 60), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Número de documento inicial'"));
+            this.CreateRule(x => this.ValidateNullable(x.LastNumberOfDocument, 60), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Número de documento final'"));
         }
     }
 }
