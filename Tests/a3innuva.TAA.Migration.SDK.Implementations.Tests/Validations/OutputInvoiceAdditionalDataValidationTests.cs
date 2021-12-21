@@ -64,6 +64,17 @@
             errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Número de documento inicial' tiene longitud incorrecta");
         }
 
+        [Fact(DisplayName = "Validate initial invoice number null succeed")]
+        public void Validate_initial_invoice_number_null_succeed()
+        {
+            IOutputInvoiceAdditionalData entity = this.CreateEntity();
+            entity.InitialNumberOfDocument = null;
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            errors.Count.Should().Be(0);
+        }
+
         [Fact(DisplayName = "Validate last invoice number length failed")]
         public void Validate_last_invoice_number_length_failed()
         {
@@ -73,6 +84,17 @@
             var errors = this.validation.Validate(entity);
 
             errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Número de documento final' tiene longitud incorrecta");
+        }
+
+        [Fact(DisplayName = "Validate last invoice number null succeed")]
+        public void Validate_last_invoice_number_null_succeed()
+        {
+            IOutputInvoiceAdditionalData entity = this.CreateEntity();
+            entity.LastNumberOfDocument = null;
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            errors.Count.Should().Be(0);
         }
 
         private IOutputInvoiceAdditionalData CreateEntity()
