@@ -289,7 +289,7 @@ namespace a3innuva.TAA.Migration.SDK.Serialization.Tests
                     AdditionalData = new OutputInvoiceAdditionalData(){ 
                         CouponsBonusesOrDiscounts = true,
                         Description = "desc",
-                        Fundamental = FundamentalAdditionalDataEnum.IssuedNotCorrectiveGeneralRegime,
+                        Fundamental = "CLAVE_REGIMEN_GENERAL",
                         Id = Guid.NewGuid(),
                         InitialNumberOfDocument = "10",
                         LastNumberOfDocument = "20",
@@ -298,7 +298,7 @@ namespace a3innuva.TAA.Migration.SDK.Serialization.Tests
                         MultipleRecipients = true,
                         NotIncludedInCensus = true,
                         TaxableIncomeAtCost = 10,
-                        TypeOfDocument = TypeOfDocumentAdditionalDataEnum.IssuedNotCorrectiveInvoiceWithoutObligation
+                        TypeOfDocument = "TIPO_FACTURA_SIN_NIF"
                     }
                 }
             };
