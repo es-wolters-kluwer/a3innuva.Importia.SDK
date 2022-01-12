@@ -11,6 +11,29 @@
 
             this.CreateRule(x => this.ValidateNullable(x.InitialNumberOfDocument, 60), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Número de documento inicial'"));
             this.CreateRule(x => this.ValidateNullable(x.LastNumberOfDocument, 60), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Número de documento final'"));
+
+            this.CreateRule(x => this.ValidateTypeOfDocument(x.TypeOfDocument), this.ReplaceInMessage("No es un tipo de documento válido"));
+            this.CreateRule(x => this.ValidateFundamental(x.Fundamental), this.ReplaceInMessage("No es un tipo de clave válida"));
+        }
+
+        private bool ValidateTypeOfDocument(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return true;
+
+            var typeOfDocuments = new TypeOfDocumentAdditionalData();
+
+            return typeOfDocuments.ItExistForOutput(input);
+        }
+
+        private bool ValidateFundamental(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return true;
+
+            var fundamentals = new FundamentalAdditionalData();
+
+            return fundamentals.ItExistForOutput(input);
         }
     }
 }

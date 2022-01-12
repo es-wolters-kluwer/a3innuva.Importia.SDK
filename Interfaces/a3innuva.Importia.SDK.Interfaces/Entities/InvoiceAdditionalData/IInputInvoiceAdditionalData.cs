@@ -34,10 +34,10 @@
         /// <summary>
         /// Type of document additional data
         /// </summary>
-        TypeOfDocumentAdditionalDataEnum TypeOfDocument { get; set; }
+        string TypeOfDocument { get; set; }
         /// <summary>
         /// Fundamental additional data
         /// </summary>
-        FundamentalAdditionalDataEnum Fundamental { get; set; }
+        string Fundamental { get; set; }
     }
 }

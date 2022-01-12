@@ -14,8 +14,8 @@
         public string InitialNumberOfDocument { get; set; }
         public string LastNumberOfDocument { get; set; }
         public bool NotIncludedInCensus { get; set; }
-        public TypeOfDocumentAdditionalDataEnum TypeOfDocument { get; set; }
-        public FundamentalAdditionalDataEnum Fundamental { get; set; }
+        public string TypeOfDocument { get; set; }
+        public string Fundamental { get; set; }
         public Guid Id { get; set; }
         public int Line { get; set; }
         public string Source { get; set; }

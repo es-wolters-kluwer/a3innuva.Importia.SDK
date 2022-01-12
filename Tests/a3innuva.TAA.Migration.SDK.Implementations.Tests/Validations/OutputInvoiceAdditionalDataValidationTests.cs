@@ -97,6 +97,72 @@
             errors.Count.Should().Be(0);
         }
 
+        [Fact(DisplayName = "Validate empty type of document succeed")]
+        public void Validate_empty_typeOfDocument_succeed()
+        {
+            IOutputInvoiceAdditionalData entity = this.CreateEntity();
+            entity.TypeOfDocument = String.Empty;
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            errors.Count.Should().Be(0);
+        }
+
+        [Fact(DisplayName = "Validate bad type of document failed")]
+        public void Validate_bad_typeOfDocument_failed()
+        {
+            IOutputInvoiceAdditionalData entity = this.CreateEntity();
+            entity.TypeOfDocument = "op";
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "No es un tipo de documento válido");
+        }
+
+        [Fact(DisplayName = "Validate type of document succeed")]
+        public void Validate_typeOfDocument_succed()
+        {
+            IOutputInvoiceAdditionalData entity = this.CreateEntity();
+            entity.TypeOfDocument = "TIPO_FACTURA_COMPLETA";
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            errors.Count.Should().Be(0);
+        }
+
+        [Fact(DisplayName = "Validate empty fundamental succeed")]
+        public void Validate_empty_fundamental_succeed()
+        {
+            IOutputInvoiceAdditionalData entity = this.CreateEntity();
+            entity.Fundamental = String.Empty;
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            errors.Count.Should().Be(0);
+        }
+
+        [Fact(DisplayName = "Validate bad fundamental failed")]
+        public void Validate_bad_fundamental_failed()
+        {
+            IOutputInvoiceAdditionalData entity = this.CreateEntity();
+            entity.Fundamental = "op";
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "No es un tipo de clave válida");
+        }
+
+        [Fact(DisplayName = "Validate fundamental succeed")]
+        public void Validate_fundamental_succed()
+        {
+            IOutputInvoiceAdditionalData entity = this.CreateEntity();
+            entity.Fundamental = "CLAVE_REGIMEN_GENERAL";
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            errors.Count.Should().Be(0);
+        }
+
         private IOutputInvoiceAdditionalData CreateEntity()
         {
             return new OutputInvoiceAdditionalData()
@@ -104,7 +170,9 @@
                 Id = Guid.NewGuid(),
                 Description = "desc",
                 InitialNumberOfDocument = "1",
-                LastNumberOfDocument = "2"
+                LastNumberOfDocument = "2",
+                TypeOfDocument = "TIPO_FACTURA_COMPLETA",
+                Fundamental = "CLAVE_REGIMEN_GENERAL"
             };
         }
     }
