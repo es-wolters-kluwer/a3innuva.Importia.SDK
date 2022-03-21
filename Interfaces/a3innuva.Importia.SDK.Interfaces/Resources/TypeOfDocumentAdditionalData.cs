@@ -4,12 +4,12 @@
 
     public class TypeOfDocumentAdditionalData
     {
-        private readonly List<string> outputTypeOfDocuments;
-        private readonly List<string> inputTypeOfDocuments;
+        private static readonly List<string> outputTypeOfDocuments;
+        private static readonly List<string> inputTypeOfDocuments;
 
-        public TypeOfDocumentAdditionalData()
+        static TypeOfDocumentAdditionalData()
         {
-            this.outputTypeOfDocuments = new List<string>()
+            outputTypeOfDocuments = new List<string>()
             {
                 "TIPO_FACTURA_COMPLETA",
                 "TIPO_SIMPLIFICADA",
@@ -21,7 +21,7 @@
                 "TIPO_RECT_SIMPLIFICADA"
             };
 
-            this.inputTypeOfDocuments = new List<string>()
+            inputTypeOfDocuments = new List<string>()
             {
                 "TIPO_FACTURA_COMPLETA",
                 "TIPO_SIMPLIFICADA",
@@ -34,14 +34,14 @@
             };
         }
 
-        public bool ItExistForOutput(string code)
+        public static bool ItExistForOutput(string code)
         {
-            return this.outputTypeOfDocuments.Contains(code);
+            return outputTypeOfDocuments.Contains(code);
         }
 
-        public bool ItExistForInput(string code)
+        public static bool ItExistForInput(string code)
         {
-            return this.inputTypeOfDocuments.Contains(code);
+            return inputTypeOfDocuments.Contains(code);
         }
     }
 }

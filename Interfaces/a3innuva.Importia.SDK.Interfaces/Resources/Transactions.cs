@@ -2,14 +2,14 @@
 {
     using System.Collections.Generic;
 
-    public class Transactions
+    public static class Transactions
     {
-        private readonly List<string> outputTransactions;
-        private readonly List<string> inputTransactions;
+        private static readonly List<string> outputTransactions;
+        private static readonly List<string> inputTransactions;
 
-        public Transactions()
+        static Transactions()
         {
-            this.outputTransactions = new List<string>()
+            outputTransactions = new List<string>()
             {
                 "OP_INT",
                 "ARR_LOCN",
@@ -36,7 +36,7 @@
                 "EXE_CDED_ART13"
             };
 
-            this.inputTransactions = new List<string>()
+            inputTransactions = new List<string>()
             {
                 "OP_INT",
                 "ARR_LOCN",
@@ -61,14 +61,14 @@
             };
         }
 
-        public bool ItExistForOutput(string code)
+        public static bool ItExistForOutput(string code)
         {
-            return this.outputTransactions.Contains(code);
+            return outputTransactions.Contains(code);
         }
 
-        public bool ItExistForInput(string code)
+        public static bool ItExistForInput(string code)
         {
-            return this.inputTransactions.Contains(code);
+            return inputTransactions.Contains(code);
         }
     }
 }

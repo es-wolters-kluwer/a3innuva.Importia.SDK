@@ -2,14 +2,14 @@
 {
     using System.Collections.Generic;
 
-    public class WithHoldings
+    public static class WithHoldings
     {
-        private readonly List<string> withHoldingsOutput;
-        private readonly List<string> withHoldingsInput;
+        private static readonly List<string> withHoldingsOutput;
+        private static readonly List<string> withHoldingsInput;
 
-        public WithHoldings()
+        static WithHoldings()
         {
-            this.withHoldingsOutput = new List<string>()
+            withHoldingsOutput = new List<string>()
             {
                 "CIN_ARR",
                 "AP_CG",
@@ -51,7 +51,7 @@
                 "AGR_AYF",
             };
 
-            this.withHoldingsInput = new List<string>()
+            withHoldingsInput = new List<string>()
             {
                 "CIN_ARR",
                 "AP_CG",
@@ -94,14 +94,14 @@
             };
         }
 
-        public bool ItExistForOutput(string code)
+        public static bool ItExistForOutput(string code)
         {
-            return this.withHoldingsOutput.Contains(code);
+            return withHoldingsOutput.Contains(code);
         }
 
-        public bool ItExistForInput(string code)
+        public static bool ItExistForInput(string code)
         {
-            return this.withHoldingsInput.Contains(code);
+            return withHoldingsInput.Contains(code);
         }
     }
 }

@@ -2,14 +2,14 @@
 {
     using System.Collections.Generic;
 
-    public class FundamentalAdditionalData
+    public static class FundamentalAdditionalData
     {
-        private readonly List<string> outputFundamentals;
-        private readonly List<string> inputFundamentals;
+        private static readonly List<string> outputFundamentals;
+        private static readonly List<string> inputFundamentals;
 
-        public FundamentalAdditionalData()
+        static FundamentalAdditionalData()
         {
-            this.outputFundamentals = new List<string>()
+            outputFundamentals = new List<string>()
             {
                 "CLAVE_REGIMEN_GENERAL",
                 "CLAVE_AGENCIAS_VIAJES",
@@ -25,7 +25,7 @@
                 "CLAVE_RECT_AGENCIAS_VIAJE_MEDIADOR"
             };
 
-            this.inputFundamentals = new List<string>()
+            inputFundamentals = new List<string>()
             {
                 "CLAVE_REGIMEN_GENERAL",
                 "CLAVE_AGENCIAS_VIAJES",
@@ -37,14 +37,14 @@
             };
         }
 
-        public bool ItExistForOutput(string code)
+        public static bool ItExistForOutput(string code)
         {
-            return this.outputFundamentals.Contains(code);
+            return outputFundamentals.Contains(code);
         }
 
-        public bool ItExistForInput(string code)
+        public static bool ItExistForInput(string code)
         {
-            return this.inputFundamentals.Contains(code);
+            return inputFundamentals.Contains(code);
         }
     }
 }

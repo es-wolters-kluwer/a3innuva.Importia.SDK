@@ -21,9 +21,7 @@
             if (string.IsNullOrEmpty(input))
                 return true;
 
-            var typeOfDocuments = new TypeOfDocumentAdditionalData();
-
-            return typeOfDocuments.ItExistForOutput(input);
+            return TypeOfDocumentAdditionalData.ItExistForOutput(input);
         }
 
         private bool ValidateFundamental(string input)
@@ -31,9 +29,7 @@
             if (string.IsNullOrEmpty(input))
                 return true;
 
-            var fundamentals = new FundamentalAdditionalData();
-
-            return fundamentals.ItExistForOutput(input);
+            return FundamentalAdditionalData.ItExistForOutput(input);
         }
     }
 }

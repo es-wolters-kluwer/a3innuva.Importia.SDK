@@ -24,6 +24,9 @@
             this.CreateRule(x => this.ValidateWithHolding(x.WithHolding), this.ReplaceInMessage("No es una retención valida"));
 
             this.CreateRule(x => this.ValidatePercentage(x.WithHoldingPercentage), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Porcentaje de retención'"));
+
+            this.CreateRule(x => this.Validate(x.BaseAmount), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Base imponible'"));
+
         }
 
         private bool ValidateTransaction(string input)
@@ -31,9 +34,7 @@
             if (string.IsNullOrEmpty(input))
                 return false;
 
-            var transactions = new Transactions();
-
-            return transactions.ItExistForInput(input);
+            return Transactions.ItExistForInput(input);
         }
 
         private bool ValidateWithHolding(string input)
@@ -41,17 +42,12 @@
             if (string.IsNullOrEmpty(input))
                 return true;
 
-            var winthHoldings = new WithHoldings();
-
-            return winthHoldings.ItExistForInput(input);
+            return WithHoldings.ItExistForInput(input);
         }
 
         private bool ValidatePercentage(decimal ? input)
         {
-            if (input == null)
-                return true;
-
-            return 0 <= input &&  input <= 100;
+            return input.ValidatePercentage();
         }
 
         private bool ValidateAccountFormat(string input)

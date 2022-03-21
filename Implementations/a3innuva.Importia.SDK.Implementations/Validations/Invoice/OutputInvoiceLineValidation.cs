@@ -31,9 +31,7 @@
             if (string.IsNullOrEmpty(input))
                 return false;
 
-            var transactions = new Transactions();
-
-            return transactions.ItExistForOutput(input);
+            return Transactions.ItExistForOutput(input);
         }
 
         private bool ValidateWithHolding(string input)
@@ -41,17 +39,13 @@
             if (string.IsNullOrEmpty(input))
                 return true;
 
-            var winthHoldings = new WithHoldings();
-
-            return winthHoldings.ItExistForOutput(input);
+            return WithHoldings.ItExistForOutput(input);
         }
 
         private bool ValidatePercentage(decimal ? input)
         {
-            if (input == null)
-                return true;
+            return input.ValidatePercentage();
 
-            return 0 <= input &&  input <= 100;
         }
 
         private bool ValidateAccountFormat(string input)
