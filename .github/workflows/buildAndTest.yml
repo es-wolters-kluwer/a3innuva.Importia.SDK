@@ -2,9 +2,9 @@ name: Build and test
 
 on:
   push:
-    branches: [ principal, develop ]
+    branches: [ principal, develop, 'feature/**' ]
   pull_request:
-    branches: [ principal, develop ]
+    branches: [ principal, develop, 'feature/**']
 
 jobs:
   build:
@@ -33,7 +33,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore --framework net6.0
     - name: Test
-      run: dotnet test --no-build --no-restore --verbosity normal --configuration Release --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+      run: dotnet test --no-build --no-restore --verbosity normal --configuration Release --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=opencover    
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
@@ -46,7 +46,8 @@ jobs:
           -Dsonar.projectName=${{ secrets.SONARQUBE_NAME }}
           -Dsonar.projectKey=${{ secrets.SONARQUBE_NAME }}
           -Dsonar.cs.opencover.reportsPaths=**/coverage.opencover.xml
+          -Dsonar.cs.vstest.reportsPaths=**/*.trx
           -Dsonar.sources=.
           -Dsonar.verbose=info
-          -Dsonar.projectVersion=$GitVersion_SemVer
+          -Dsonar.projectVersion=${env.GitVersion_SemVer}
 
