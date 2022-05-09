@@ -1,0 +1,126 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+pool:
+  # Agente de Azure:
+  name: Azure Pipelines
+# Agente de WKE:
+#  name: Newpol-AgentsDEV
+
+variables:
+  ## Constants
+  domain: 'importia'
+  BuildConfiguration: 'Release'
+  BuildPlatform: 'any cpu'
+  netCoreVersion: 'net6.0'
+
+trigger:
+  branches:
+    include:
+      - principal
+
+stages:
+
+##################
+##  Stage_SonarQube_Analysis
+##################
+- stage: 'Stage_SonarQube_Analysis'
+  condition: and(eq(variables['runSonarQube'], 'true'), succeeded())
+  jobs:
+ 
+  ##################
+  ##  Job_SonarQube_analysis
+  ##################
+  - job: Job_SonarQube_analysis
+    displayName: 'SonarQube Analysis'
+    condition: eq(variables['runSonarQube'], 'true')
+    pool:
+      vmImage: 'ubuntu-latest'
+                
+    steps:
+      - checkout: self
+        clean: true
+
+      - task: gitversion/setup@0
+        displayName: 'Install GitTools'
+        inputs:
+          versionSpec: '5.x'
+
+      - task: gitversion/execute@0
+        displayName: 'Execute Git version'
+        inputs:
+          useConfigFile: true
+          configFilePath: 'GitVersion.yml'
+          versionSpec: '5.x'
+
+      - task: PowerShell@2
+        displayName: 'Set Version'
+        inputs:
+          targetType: 'inline'
+          script: |
+            Write-Host "Versioning to: $(GitVersion.SemVer)"
+          failOnStderr: true
+      
+      - task: SonarQubePrepare@5
+        displayName: 'Prepare SonarQube Analysis'
+        inputs:
+          SonarQube: 'SonarQube - Github'
+          scannerMode: 'MSBuild'
+          projectKey: $(SonarQubeProjectName)
+          projectName: $(SonarQubeProjectName)
+          projectVersion : $(GitVersion.SemVer)
+          extraProperties: |
+            sonar.cs.vstest.reportsPaths=$(Agent.TempDirectory)/*.trx
+            sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/coverage.opencover.xml
+            sonar.sources=$(Agent.BuildDirectory)/Importia.SDK
+            sonar.tests=$(Agent.BuildDirectory)/Importia.SDK/Tests
+            sonar.log.level=INFO
+
+      - task: DotNetCoreCLI@2
+        displayName: 'dotnet restore'
+        inputs:
+          command: 'restore'
+          projects: 'a3innuva.Importia.SDK.sln'
+          noCache: true
+          verbosityRestore : 'normal'
+
+      - task: DotNetCoreCLI@2
+        displayName: 'dotnet build'
+        inputs:
+          command: 'build'
+          projects: 'a3innuva.Importia.SDK.sln'
+          arguments: '--configuration $(BuildConfiguration) --no-restore'
+
+      - task: DotNetCoreCLI@2
+        displayName: 'dotnet test'
+        inputs:
+          command: 'test'
+          projects: a3innuva.Importia.SDK.sln
+          arguments: '--filter "FullyQualifiedName~.tests"  -c $(BuildConfiguration) --no-build --no-restore --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=opencover'
+          testRunTitle: 'BackendTests'
+
+      - script: 'dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.6'
+        displayName: 'Install ReportGenerator tool'
+        
+      - script: 'reportgenerator -reports:**/coverage.opencover.xml -targetdir:$(Agent.TempDirectory) -reporttypes:"Cobertura"'
+        displayName: 'Create reports'
+            
+      - task: SonarQubeAnalyze@5
+        displayName: 'SonarQube analyze'
+        continueOnError: false
+        
+      - task: SonarQubePublish@5
+        displayName: 'SonarQube publish'
+        inputs:
+          pollingTimeoutSec: '300'
+
+      - task: PublishCodeCoverageResults@1
+        displayName: 'Publish code coverage'
+        inputs:
+          codeCoverageTool: 'Cobertura'
+          summaryFileLocation: '$(Agent.TempDirectory)/*.xml'

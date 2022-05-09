@@ -2,9 +2,9 @@ name: Build and test
 
 on:
   push:
-    branches: [ principal, develop, 'feature/**' ]
+    branches: [ principal]
   pull_request:
-    branches: [ principal, develop, 'feature/**']
+    branches: [ principal]
 
 jobs:
   build:
@@ -14,16 +14,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.7
-      with:
-        versionSpec: '5.x'
-    - name: Determine Version
-      uses: gittools/actions/gitversion/execute@v0.9.7
-      with:
-        useConfigFile: true
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
@@ -33,21 +23,4 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore --framework net6.0
     - name: Test
-      run: dotnet test --no-build --no-restore --verbosity normal --configuration Release --logger trx /p:CollectCoverage=true /p:CoverletOutputFormat=opencover    
-    - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
-      with:
-        projectBaseDir: ./
-        args: >
-          -Dsonar.host.url=${{ secrets.SONARQUBE_HOST }}
-          -Dsonar.projectName=${{ secrets.SONARQUBE_NAME }}
-          -Dsonar.projectKey=${{ secrets.SONARQUBE_NAME }}
-          -Dsonar.cs.opencover.reportsPaths=**/coverage.opencover.xml
-          -Dsonar.cs.vstest.reportsPaths=**/*.trx
-          -Dsonar.sources=.
-          -Dsonar.verbose=info
-          -Dsonar.projectVersion=${env.GitVersion_SemVer}
-
+      run: dotnet test --no-build --no-restore --verbosity normal --configuration Release 

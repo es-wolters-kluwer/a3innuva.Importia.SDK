@@ -9,25 +9,30 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Implementations", "Implementations", "{FA05056B-8CF4-44D9-A803-8C6A81FDF58F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a3innuva.TAA.Migration.SDK.Extensions.Tests", "Tests\a3innuva.TAA.Migration.SDK.Extensions.Tests\a3innuva.TAA.Migration.SDK.Extensions.Tests.csproj", "{4D6E2392-FEA6-40BF-8E98-835A55DE28E1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a3innuva.TAA.Migration.SDK.Implementations.Tests", "Tests\a3innuva.TAA.Migration.SDK.Implementations.Tests\a3innuva.TAA.Migration.SDK.Implementations.Tests.csproj", "{30C8FBA3-1C92-46D2-AC39-F4D74C0DB510}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a3innuva.Importia.SDK.Interfaces", "Interfaces\a3innuva.Importia.SDK.Interfaces\a3innuva.Importia.SDK.Interfaces.csproj", "{06708CB9-D663-4C57-A520-E5D00AAB7D23}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a3innuva.Importia.SDK.Serialization", "Implementations\a3innuva.Importia.SDK.Serialization\a3innuva.Importia.SDK.Serialization.csproj", "{54241704-3218-41D9-AB75-51190830DD82}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a3innuva.Importia.SDK.Implementations", "Implementations\a3innuva.Importia.SDK.Implementations\a3innuva.Importia.SDK.Implementations.csproj", "{E3D10EF4-99F3-4F81-816D-04DDA93CA4EB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a3innuva.Importia.SDK.Extensions", "Implementations\a3innuva.Importia.SDK.Extensions\a3innuva.Importia.SDK.Extensions.csproj", "{B63D33DB-B9C8-44DD-B175-407B0A6FF7BA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a3innuva.TAA.Migration.SDK.Serialization.Tests", "Tests\a3innuva.TAA.Migration.SDK.Serialization.Tests\a3innuva.TAA.Migration.SDK.Serialization.Tests.csproj", "{659BF329-1079-45B3-8125-D31A1645CCE9}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{FA1AE514-2CB4-4B22-B247-AEA6C889CC83}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\buildAndTest.yml = .github\workflows\buildAndTest.yml
 		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
 		.github\workflows\nuget.yml = .github\workflows\nuget.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a3innuva.Importia.SDK.Interfaces", "Importia.SDK\Interfaces\a3innuva.Importia.SDK.Interfaces\a3innuva.Importia.SDK.Interfaces.csproj", "{02D227FF-4C9A-444E-9805-80D093483A7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a3innuva.Importia.SDK.Extensions", "Importia.SDK\Implementations\a3innuva.Importia.SDK.Extensions\a3innuva.Importia.SDK.Extensions.csproj", "{C6C55900-526F-4982-9886-3E1F759336D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a3innuva.Importia.SDK.Implementations", "Importia.SDK\Implementations\a3innuva.Importia.SDK.Implementations\a3innuva.Importia.SDK.Implementations.csproj", "{367CA165-01C3-478D-9ECD-D7365E9E8F7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a3innuva.Importia.SDK.Serialization", "Importia.SDK\Implementations\a3innuva.Importia.SDK.Serialization\a3innuva.Importia.SDK.Serialization.csproj", "{479DCF9F-CEB6-4BC0-9639-061C4D75606F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a3innuva.TAA.Migration.SDK.Extensions.Tests", "Importia.SDK\Tests\a3innuva.TAA.Migration.SDK.Extensions.Tests\a3innuva.TAA.Migration.SDK.Extensions.Tests.csproj", "{55B60543-D5E1-4FFE-A6F1-18D0D94C53E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a3innuva.TAA.Migration.SDK.Implementations.Tests", "Importia.SDK\Tests\a3innuva.TAA.Migration.SDK.Implementations.Tests\a3innuva.TAA.Migration.SDK.Implementations.Tests.csproj", "{BD458405-B079-4D6F-A92B-6F1CC4C3A69F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a3innuva.TAA.Migration.SDK.Serialization.Tests", "Importia.SDK\Tests\a3innuva.TAA.Migration.SDK.Serialization.Tests\a3innuva.TAA.Migration.SDK.Serialization.Tests.csproj", "{DE722F36-6B9F-4259-B872-2263D533EBE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".BuildDefinitions", ".BuildDefinitions", "{837178D6-4E45-4F6B-B949-13E5330D88EF}"
+	ProjectSection(SolutionItems) = preProject
+		Importia.SDK\.BuildDefinitions\azure-pipeline.yml = Importia.SDK\.BuildDefinitions\azure-pipeline.yml
 	EndProjectSection
 EndProject
 Global
@@ -36,46 +41,46 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4D6E2392-FEA6-40BF-8E98-835A55DE28E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4D6E2392-FEA6-40BF-8E98-835A55DE28E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4D6E2392-FEA6-40BF-8E98-835A55DE28E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4D6E2392-FEA6-40BF-8E98-835A55DE28E1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{30C8FBA3-1C92-46D2-AC39-F4D74C0DB510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{30C8FBA3-1C92-46D2-AC39-F4D74C0DB510}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{30C8FBA3-1C92-46D2-AC39-F4D74C0DB510}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{30C8FBA3-1C92-46D2-AC39-F4D74C0DB510}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06708CB9-D663-4C57-A520-E5D00AAB7D23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06708CB9-D663-4C57-A520-E5D00AAB7D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06708CB9-D663-4C57-A520-E5D00AAB7D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06708CB9-D663-4C57-A520-E5D00AAB7D23}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54241704-3218-41D9-AB75-51190830DD82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54241704-3218-41D9-AB75-51190830DD82}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54241704-3218-41D9-AB75-51190830DD82}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54241704-3218-41D9-AB75-51190830DD82}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3D10EF4-99F3-4F81-816D-04DDA93CA4EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3D10EF4-99F3-4F81-816D-04DDA93CA4EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3D10EF4-99F3-4F81-816D-04DDA93CA4EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3D10EF4-99F3-4F81-816D-04DDA93CA4EB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B63D33DB-B9C8-44DD-B175-407B0A6FF7BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B63D33DB-B9C8-44DD-B175-407B0A6FF7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B63D33DB-B9C8-44DD-B175-407B0A6FF7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B63D33DB-B9C8-44DD-B175-407B0A6FF7BA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{659BF329-1079-45B3-8125-D31A1645CCE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{659BF329-1079-45B3-8125-D31A1645CCE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{659BF329-1079-45B3-8125-D31A1645CCE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{659BF329-1079-45B3-8125-D31A1645CCE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02D227FF-4C9A-444E-9805-80D093483A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D227FF-4C9A-444E-9805-80D093483A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D227FF-4C9A-444E-9805-80D093483A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D227FF-4C9A-444E-9805-80D093483A7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6C55900-526F-4982-9886-3E1F759336D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6C55900-526F-4982-9886-3E1F759336D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6C55900-526F-4982-9886-3E1F759336D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6C55900-526F-4982-9886-3E1F759336D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{367CA165-01C3-478D-9ECD-D7365E9E8F7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{367CA165-01C3-478D-9ECD-D7365E9E8F7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{367CA165-01C3-478D-9ECD-D7365E9E8F7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{367CA165-01C3-478D-9ECD-D7365E9E8F7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{479DCF9F-CEB6-4BC0-9639-061C4D75606F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{479DCF9F-CEB6-4BC0-9639-061C4D75606F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{479DCF9F-CEB6-4BC0-9639-061C4D75606F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{479DCF9F-CEB6-4BC0-9639-061C4D75606F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55B60543-D5E1-4FFE-A6F1-18D0D94C53E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55B60543-D5E1-4FFE-A6F1-18D0D94C53E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55B60543-D5E1-4FFE-A6F1-18D0D94C53E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55B60543-D5E1-4FFE-A6F1-18D0D94C53E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD458405-B079-4D6F-A92B-6F1CC4C3A69F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD458405-B079-4D6F-A92B-6F1CC4C3A69F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD458405-B079-4D6F-A92B-6F1CC4C3A69F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD458405-B079-4D6F-A92B-6F1CC4C3A69F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE722F36-6B9F-4259-B872-2263D533EBE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE722F36-6B9F-4259-B872-2263D533EBE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE722F36-6B9F-4259-B872-2263D533EBE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE722F36-6B9F-4259-B872-2263D533EBE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{4D6E2392-FEA6-40BF-8E98-835A55DE28E1} = {F9C3F3DE-9C56-4187-91EE-6F80E14BA19B}
-		{30C8FBA3-1C92-46D2-AC39-F4D74C0DB510} = {F9C3F3DE-9C56-4187-91EE-6F80E14BA19B}
-		{06708CB9-D663-4C57-A520-E5D00AAB7D23} = {E0787996-D059-47ED-9221-90F84DFEF6F9}
-		{54241704-3218-41D9-AB75-51190830DD82} = {FA05056B-8CF4-44D9-A803-8C6A81FDF58F}
-		{E3D10EF4-99F3-4F81-816D-04DDA93CA4EB} = {FA05056B-8CF4-44D9-A803-8C6A81FDF58F}
-		{B63D33DB-B9C8-44DD-B175-407B0A6FF7BA} = {FA05056B-8CF4-44D9-A803-8C6A81FDF58F}
-		{659BF329-1079-45B3-8125-D31A1645CCE9} = {F9C3F3DE-9C56-4187-91EE-6F80E14BA19B}
+		{02D227FF-4C9A-444E-9805-80D093483A7E} = {E0787996-D059-47ED-9221-90F84DFEF6F9}
+		{C6C55900-526F-4982-9886-3E1F759336D7} = {FA05056B-8CF4-44D9-A803-8C6A81FDF58F}
+		{367CA165-01C3-478D-9ECD-D7365E9E8F7E} = {FA05056B-8CF4-44D9-A803-8C6A81FDF58F}
+		{479DCF9F-CEB6-4BC0-9639-061C4D75606F} = {FA05056B-8CF4-44D9-A803-8C6A81FDF58F}
+		{55B60543-D5E1-4FFE-A6F1-18D0D94C53E6} = {F9C3F3DE-9C56-4187-91EE-6F80E14BA19B}
+		{BD458405-B079-4D6F-A92B-6F1CC4C3A69F} = {F9C3F3DE-9C56-4187-91EE-6F80E14BA19B}
+		{DE722F36-6B9F-4259-B872-2263D533EBE0} = {F9C3F3DE-9C56-4187-91EE-6F80E14BA19B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6AD6A45A-6C54-4EDA-985A-7835B462072C}

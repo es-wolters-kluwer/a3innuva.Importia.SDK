@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net451;net461;net471;net48;net5.0;netcoreapp3.1;net6.0</TargetFrameworks>
+    <AssemblyName>a3innuva.TAA.Migration.SDK.Serialization</AssemblyName>
+    <RootNamespace>a3innuva.TAA.Migration.SDK.Serialization</RootNamespace>
+    <Version>2.16.1</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Product>a3innuva.Importia.SDK</Product>
+    <PackageId>a3innuva.Importia.SDK.Serialization</PackageId>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <RepositoryUrl>https://github.com/es-wolters-kluwer/a3innuva.importia.SDK</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Description>Importia SDK serialzation options</Description>
+    <Authors>Wolters Kluwer Spain</Authors>
+    <Copyright>Wolters Kluwer Spain</Copyright>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <PackageIcon>favicon-180.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/es-wolters-kluwer/a3innuva.Importia.SDK/projects/1</PackageProjectUrl>
+    <CodeAnalysisRuleSet>..\..\..\sonarLint.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\favicon-180.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\..\license.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\a3innuva.Importia.SDK.Interfaces\a3innuva.Importia.SDK.Interfaces.csproj" />
+    <ProjectReference Include="..\a3innuva.Importia.SDK.Implementations\a3innuva.Importia.SDK.Implementations.csproj" />
+  </ItemGroup>
+</Project>
