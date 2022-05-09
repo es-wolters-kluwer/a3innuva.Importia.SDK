@@ -1,0 +1,55 @@
+mode: Mainline
+branches:
+  main:
+    regex: ^main$
+    tag: ''
+    increment: Minor
+    is-release-branch: false
+    is-mainline: false
+    source-branches: []
+  release:
+    tag: ''
+    increment: Minor
+    regex: ^release?
+    source-branches:
+      - develop
+      - main
+      - release
+    is-release-branch: true
+    is-mainline: true
+  develop:
+    regex: ^develop$
+    tag: 'beta'
+    increment: Minor
+    is-release-branch: false
+    is-mainline: true
+    source-branches:
+      - feature
+  feature:
+    tag: 'alpha'
+    increment: Inherit
+    regex: ^feature?
+    source-branches:
+      - feature
+      - support
+      - hotfix
+      - develop
+      - main
+  pull-request:
+    tag: 'PR'
+    increment: Inherit
+    source-branches:
+      - develop
+      - main
+      - release
+      - feature
+      - support
+      - hotfix
+  hotfix:
+    tag: 'beta'
+    increment: Patch
+    source-branches:
+      - release
+ignore:
+  sha: []
+merge-message-formats: {}
