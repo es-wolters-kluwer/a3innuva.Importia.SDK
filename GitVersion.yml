@@ -1,7 +1,7 @@
 mode: Mainline
 branches:
   main:
-    regex: ^main$
+    regex: ^principal$
     tag: ''
     increment: Minor
     is-release-branch: false
