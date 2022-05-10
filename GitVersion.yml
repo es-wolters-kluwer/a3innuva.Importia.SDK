@@ -4,27 +4,19 @@ branches:
     regex: ^principal$
     tag: ''
     increment: Minor
-    is-release-branch: false
-    is-mainline: false
-    source-branches: []
+    is-release-branch: true
+    is-mainline: true
+    source-branches: 
+      - feature
   release:
     tag: ''
     increment: Minor
     regex: ^release?
     source-branches:
-      - develop
       - main
       - release
     is-release-branch: true
     is-mainline: true
-  develop:
-    regex: ^develop$
-    tag: 'beta'
-    increment: Minor
-    is-release-branch: false
-    is-mainline: true
-    source-branches:
-      - feature
   feature:
     tag: 'alpha'
     increment: Inherit
@@ -33,13 +25,11 @@ branches:
       - feature
       - support
       - hotfix
-      - develop
       - main
   pull-request:
     tag: 'PR'
     increment: Inherit
     source-branches:
-      - develop
       - main
       - release
       - feature
