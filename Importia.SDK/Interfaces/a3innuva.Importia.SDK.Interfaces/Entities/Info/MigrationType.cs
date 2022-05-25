@@ -6,6 +6,8 @@
         Journal = 1,
         ChartOfAccount = 2,
         OutputInvoice = 3,
-        InputInvoice = 4
+        InputInvoice = 4,
+        Activity = 5,
+        Channel = 6
     }
 }

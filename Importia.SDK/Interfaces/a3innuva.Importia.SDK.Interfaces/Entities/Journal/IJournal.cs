@@ -26,5 +26,9 @@
         /// Journal type
         /// </summary>
         JournalTypes Type { get; set; }
+        /// <summary>
+        /// Invoice id
+        /// </summary>
+        string InvoiceId { get; set; }
     }
 }

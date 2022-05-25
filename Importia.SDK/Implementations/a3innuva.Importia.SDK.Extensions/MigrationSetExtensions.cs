@@ -41,6 +41,16 @@
                         var validation = new OutputInvoiceValidation();
                         return Validate(validation, set.Entities.Cast<IOutputInvoice>(), isValidInfo);
                     }
+                case MigrationType.Activity:
+                    {
+                        var validation = new ActivityValidation();
+                        return Validate(validation, set.Entities.Cast<IActivity>(), isValidInfo);
+                    }
+                case MigrationType.Channel:
+                {
+                    var validation = new ChannelValidation();
+                    return Validate(validation, set.Entities.Cast<IChannel>(), isValidInfo);
+                }
                 case MigrationType.None:
                     return (false, errors);
                 default:

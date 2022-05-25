@@ -29,5 +29,13 @@
         /// Version of set, it's must be match with the valid version on a3innuva.Importia suite, Actual 2.0
         /// </summary>
         string Version { get; set; }
+        /// <summary>
+        /// Activity Id
+        /// </summary>
+        string ActivityId { get; set; }
+        /// <summary>
+        /// Channel Id
+        /// </summary>
+        string ChannelId { get; set; }
     }
 }
