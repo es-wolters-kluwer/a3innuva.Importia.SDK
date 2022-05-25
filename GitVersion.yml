@@ -23,7 +23,6 @@ branches:
     regex: ^feature?
     source-branches:
       - feature
-      - support
       - hotfix
       - main
   pull-request:
@@ -33,7 +32,6 @@ branches:
       - main
       - release
       - feature
-      - support
       - hotfix
   hotfix:
     tag: 'beta'
