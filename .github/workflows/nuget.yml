@@ -10,21 +10,12 @@ jobs:
     - name: Setup .NET 6.0.x
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x
-    - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.13
-      with:
-        versionSpec: '5.x'
-    - name: Set Version
-      uses: gittools/actions/gitversion/execute@v0.9.13
-      with:
-        useConfigFile: true
-        configFilePath: GitVersion.yml        
+        dotnet-version: 6.0.x      
     - name: Restore dependencies
       run: dotnet restore        
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal --configuration Release
-#    - name: Publish packages
-#      run: dotnet nuget push **.nupkg --source nuget.org --api-key ${{secrets.NUGETORG_TOKEN}} --skip-duplicate
+    - name: Publish packages
+      run: dotnet nuget push **.nupkg --source nuget.org --api-key ${{secrets.NUGETORG_TOKEN}} --skip-duplicate
