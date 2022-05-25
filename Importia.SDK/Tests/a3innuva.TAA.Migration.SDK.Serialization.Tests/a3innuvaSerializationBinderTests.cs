@@ -22,7 +22,7 @@
         [Fact(DisplayName = "Check number bindings")]
         public void Check_number_bindings()
         {
-            this.binder.KnownTypes.Count.Should().Be(19);
+            this.binder.KnownTypes.Count.Should().Be(23);
         }
         
         [Fact(DisplayName = "Check bindings")]
