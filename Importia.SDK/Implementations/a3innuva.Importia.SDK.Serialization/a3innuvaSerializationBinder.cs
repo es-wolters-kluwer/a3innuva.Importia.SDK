@@ -24,6 +24,8 @@
             typeof(a3innuva.TAA.Migration.SDK.Implementations.Charge),
             typeof(a3innuva.TAA.Migration.SDK.Implementations.InputInvoiceAdditionalData),
             typeof(a3innuva.TAA.Migration.SDK.Implementations.OutputInvoiceAdditionalData),
+            typeof(a3innuva.TAA.Migration.SDK.Implementations.Activity),
+            typeof(a3innuva.TAA.Migration.SDK.Implementations.Channel),
 
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IMigrationEntity[]),
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IInputInvoiceLine[]),
