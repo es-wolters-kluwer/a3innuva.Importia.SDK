@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1;net451;net461;net471;net48;net5.0;netcoreapp3.1;net6.0</TargetFrameworks>
     <AssemblyName>a3innuva.TAA.Migration.SDK.Extensions</AssemblyName>
     <RootNamespace>a3innuva.TAA.Migration.SDK.Extensions</RootNamespace>
-    <Version>2.16.1</Version>
+    <Version>2.17.2</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Product>a3innuva.Importia.SDK</Product>
     <PackageId>a3innuva.Importia.SDK.Extensions</PackageId>
