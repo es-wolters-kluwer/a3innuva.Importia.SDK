@@ -53,7 +53,7 @@
         private bool Validate(IEstimation estimation)
         {
             return estimation.Year >= 2000 && estimation.Year <= 2050 &&
-                   string.IsNullOrWhiteSpace(estimation.Epigraph);
+                   !string.IsNullOrWhiteSpace(estimation.Epigraph);
         }
     }
 }
