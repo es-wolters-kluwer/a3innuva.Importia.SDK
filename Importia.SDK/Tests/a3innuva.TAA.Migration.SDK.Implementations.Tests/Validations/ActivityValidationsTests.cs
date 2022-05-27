@@ -128,11 +128,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
                 new Estimation()
                 {
                     Year = 2020,
-<<<<<<< HEAD
                     Epigraph = "500.1"
-=======
-                    Epigraph = 500
->>>>>>> principal
                 }
             };
         }
