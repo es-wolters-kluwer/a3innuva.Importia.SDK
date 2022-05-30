@@ -29,6 +29,6 @@
         /// <summary>
         /// Invoice id
         /// </summary>
-        string InvoiceId { get; set; }
+        Guid? InvoiceId { get; set; }
     }
 }
