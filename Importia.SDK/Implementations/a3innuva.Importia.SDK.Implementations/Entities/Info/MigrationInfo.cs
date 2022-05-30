@@ -4,8 +4,8 @@
 
     public class MigrationInfo : IMigrationInfo
     {       
-        public string ActivityId { get; set; }
-        public string ChannelId { get; set; }
+        public string CorrelationActivityId { get; set; }
+        public string CorrelationChannelId { get; set; }
         public string VatNumber { get; set; }
         public int Year { get; set; }
         public MigrationType Type { get; set; }

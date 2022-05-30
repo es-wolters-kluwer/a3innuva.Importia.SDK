@@ -9,6 +9,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
         public int Line { get; set; }
 
         public string Source { get; set; }
+        public string CorrelationId { get; set; }
         public string Description { get; set; }
         public string ShortDescription { get; set; }
         public Taxation Taxation { get; set; }

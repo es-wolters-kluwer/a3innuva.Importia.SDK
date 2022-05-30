@@ -27,8 +27,8 @@
         /// </summary>
         JournalTypes Type { get; set; }
         /// <summary>
-        /// Invoice id
+        /// Invoice Correlation id
         /// </summary>
-        Guid? InvoiceId { get; set; }
+        string CorrelationInvoiceId { get; set; }
     }
 }
