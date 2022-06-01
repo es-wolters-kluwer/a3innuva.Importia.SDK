@@ -95,7 +95,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
         public void Validate_Estimation_Epigraph_failed()
         {
             Activity entity = this.CreateEntity();
-            entity.Estimations[0].Epigraph = 0;
+            entity.Estimations[0].Epigraph = string.Empty;
 
             var errors = this.validation.Validate(entity);
             
@@ -128,7 +128,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
                 new Estimation()
                 {
                     Year = 2020,
-                    Epigraph = 500
+                    Epigraph = "500.1"
                 }
             };
         }

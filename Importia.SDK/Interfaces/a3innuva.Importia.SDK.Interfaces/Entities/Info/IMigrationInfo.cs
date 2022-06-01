@@ -32,10 +32,10 @@
         /// <summary>
         /// Activity Id
         /// </summary>
-        string ActivityId { get; set; }
+        string CorrelationActivityId { get; set; }
         /// <summary>
         /// Channel Id
         /// </summary>
-        string ChannelId { get; set; }
+        string CorrelationChannelId { get; set; }
     }
 }

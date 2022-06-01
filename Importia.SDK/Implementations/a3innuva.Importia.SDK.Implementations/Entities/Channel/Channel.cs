@@ -7,6 +7,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
     {
         public string Identity() => Id.ToString();
         public string Description { get; set; }
+        public string CorrelationId { get; set; }
         public string ShortDescription { get; set; }
         public Guid Id { get; set; }
         public int Line { get; set; }

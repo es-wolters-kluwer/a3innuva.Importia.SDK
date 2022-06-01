@@ -10,7 +10,7 @@
         public string Document { get; set; }
         public IJournalLine[] Lines { get; set; }
         public JournalTypes Type { get; set; }
-        public string InvoiceId { get; set; }
+        public string CorrelationInvoiceId { get; set; }
         public Guid Id { get; set; }
         public int Line { get; set; }
         public string Identity()

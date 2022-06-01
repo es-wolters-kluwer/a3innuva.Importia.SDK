@@ -5,6 +5,11 @@
     public interface IInvoice : IMigrationEntity, IMigrationSourceInfo
     {
         /// <summary>
+        /// Invoice Correlation id
+        /// </summary>
+        string CorrelationId { get; set; }
+
+        /// <summary>
         /// Invoice's date
         /// </summary>
         DateTime InvoiceDate { get; set; }

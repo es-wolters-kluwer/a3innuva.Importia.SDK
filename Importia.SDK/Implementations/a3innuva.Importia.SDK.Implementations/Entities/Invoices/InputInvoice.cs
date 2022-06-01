@@ -12,6 +12,7 @@
             return $"{this.InvoiceDate.ToShortDateString()}-{this.JournalDate.GetValueOrDefault().ToShortDateString()}-{this.InvoiceNumber}-{this.PartnerAccount}";
         }
         public string Source { get; set; }
+        public string CorrelationId { get; set; }
         public DateTime InvoiceDate { get; set; }
         public DateTime? JournalDate { get; set; }
         public string InvoiceNumber { get; set; }
