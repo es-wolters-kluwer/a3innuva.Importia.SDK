@@ -27,6 +27,6 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal --configuration Release /p:Version=${{ steps.gitversion.outputs.semVer }} /p:FileVersion=${{ steps.gitversion.outputs.semVer }} /p:AssemblyVersion=${{ steps.gitversion.outputs.majorMinorPatch }}
+      run: dotnet test --no-build --verbosity normal --configuration Release /p:Version=$GitVersion_SemVer /p:FileVersion=$GitVersion_SemVer /p:AssemblyVersion=GitVersion_MajorMinorPatch
     - name: Publish packages
       run: dotnet nuget push **.nupkg --source nuget.org --api-key ${{secrets.NUGETORG_TOKEN}} --skip-duplicate
