@@ -25,8 +25,8 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore        
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore /p:Version=$GitVersion_SemVer /p:FileVersion=$GitVersion_SemVer /p:AssemblyVersion=$GitVersion_MajorMinorPatch
     - name: Test
-      run: dotnet test --no-build --verbosity normal --configuration Release /p:Version=$GitVersion_SemVer /p:FileVersion=$GitVersion_SemVer /p:AssemblyVersion=$GitVersion_MajorMinorPatch
+      run: dotnet test --no-build --verbosity normal --configuration Release 
     - name: Publish packages
       run: dotnet nuget push **.nupkg --source nuget.org --api-key ${{secrets.NUGETORG_TOKEN}} --skip-duplicate
