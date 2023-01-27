@@ -26,7 +26,7 @@
             this.CreateRule(x => this.ValidatePercentage(x.WithHoldingPercentage), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Porcentaje de retención'"));
 
             this.CreateRule(x => this.Validate(x.BaseAmount), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Base imponible'"));
-
+            this.CreateRule(x => this.ValidateTypeTaxCode(x.TaxCode), this.ReplaceInMessage(ValidationMessages.InvalidValue, "'Código impuesto'"));
         }
 
         private bool ValidateTransaction(string input)
@@ -57,5 +57,13 @@
 
             return this.accountCodeFormat.IsMatch(input);
         }
-    }
+
+		private bool ValidateTypeTaxCode(string input)
+		{
+			if (string.IsNullOrEmpty(input))
+				return true;
+
+			return TypeOfTaxInvoice.ItExistForInput(input);
+		}
+	}
 }
