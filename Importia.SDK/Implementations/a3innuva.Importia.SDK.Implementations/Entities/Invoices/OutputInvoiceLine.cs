@@ -17,7 +17,8 @@
         public decimal BaseAmount { get; set; }
         public string CounterPart { get; set; }
         public string CounterPartDescription { get; set; }
-        public decimal? TaxAmount { get; set; }
+		public string TaxCode { get; set; }
+		public decimal? TaxAmount { get; set; }
         public decimal? TaxSurchargeAmount { get; set; }
         public decimal? TaxDeductibleAmount { get; set; }
         public decimal? TaxNonDeductibleAmount { get; set; }

@@ -18,10 +18,14 @@
         /// Counterpart account, optional [1-255]
         /// </summary>
         string CounterPartDescription{ get; set; }
-        /// <summary>
-        /// Tax amount, optional format X.XX, null for IGIC exent operations, zero for type zero IGIC operations
-        /// </summary>
-        decimal? TaxAmount { get; set; }
+		/// <summary>
+		/// Tax code, optional value [General, TaxFree, Donations, SurchargeDonations]
+		/// </summary>
+		string TaxCode { get; set; }
+		/// <summary>
+		/// Tax amount, optional format X.XX, null for IGIC exent operations, zero for type zero IGIC operations
+		/// </summary>
+		decimal? TaxAmount { get; set; }
         /// <summary>
         /// Tax surcharge amount, format X.XX
         /// </summary>
