@@ -8,7 +8,7 @@
         {
             "EXENTO",
             "DONACIONES",
-            "DONACIONES_RECARGO"
+            "DONACIONES RECARGO"
         };
 
         public static bool ItExist(string code)
