@@ -1,10 +1,11 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Interfaces
 {
-    using System.Collections.Generic;
+    using System;
+    using System.Linq;
 
     public static class TypeOfTaxInputInvoice
 	{
-        private static readonly List<string> TypeTax = new List<string>()
+        private static readonly string[] TypeTax = new string[]
         {
             "EXENTO",
             "DONACIONES",
@@ -13,7 +14,7 @@
 
         public static bool ItExist(string code)
         {
-            return TypeTax.Contains(code);
+            return TypeTax.Contains(code, StringComparer.OrdinalIgnoreCase);
         }
     }
 }
