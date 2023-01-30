@@ -24,7 +24,7 @@
             this.CreateRule(x => this.ValidateWithHolding(x.WithHolding), this.ReplaceInMessage("No es una retención valida"));
 
             this.CreateRule(x => this.ValidatePercentage(x.WithHoldingPercentage), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Porcentaje de retención'"));
-			this.CreateRule(x => this.ValidateTypeTaxCode(x.TaxCode), this.ReplaceInMessage(ValidationMessages.InvalidValue, "'Código impuesto'"));
+			this.CreateRule(x => this.ValidateTypeTaxCode(x.TaxCode), this.ReplaceInMessage(ValidationMessages.InvalidValue, "'Código IVA'"));
 		}
         
         private bool ValidateTransaction(string input)
