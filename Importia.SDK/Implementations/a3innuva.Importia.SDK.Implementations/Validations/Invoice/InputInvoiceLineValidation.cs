@@ -63,7 +63,7 @@
 			if (string.IsNullOrEmpty(input))
 				return true;
 
-			return TypeOfTaxInvoice.ItExistForInput(input);
+			return TypeOfTaxInputInvoice.ItExist(input);
 		}
 	}
 }
