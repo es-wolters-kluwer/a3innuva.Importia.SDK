@@ -14,15 +14,12 @@
         protected override void SetupValidations()
         {
             this.CreateRule(x => this.Validate(x.Id), "Id");
-            this.CreateRule(x => this.Validate(x.BaseAmount), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Base imponible'"));
             this.CreateRule(x => this.ValidateNullable(x.CounterPart, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Contrapartida'"));
             this.CreateRule(x => this.ValidateAccountFormat(x.CounterPart), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Contrapartida'"));
             this.CreateRule(x => this.ValidateNullable(x.CounterPartDescription, 255), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Descripción contrapartida'"));
             this.CreateRule(x => this.Validate(x.Transaction), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Operación'"));
             this.CreateRule(x => this.ValidateTransaction(x.Transaction), this.ReplaceInMessage("No es una operación valida"));
-
             this.CreateRule(x => this.ValidateWithHolding(x.WithHolding), this.ReplaceInMessage("No es una retención valida"));
-
             this.CreateRule(x => this.ValidatePercentage(x.WithHoldingPercentage), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Porcentaje de retención'"));
 			this.CreateRule(x => this.ValidateTypeTaxCode(x.TaxCode), this.ReplaceInMessage(ValidationMessages.InvalidValue, "'Código IVA'"));
 		}
