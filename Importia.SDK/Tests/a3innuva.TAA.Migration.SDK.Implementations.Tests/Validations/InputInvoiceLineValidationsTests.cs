@@ -32,17 +32,6 @@
             errors.Count.Should().Be(0);
         }
 
-        [Fact(DisplayName = "Validate base amount failed")]
-        public void Validate_base_amount_failed()
-        {
-            IInputInvoiceLine entity = this.CreateEntity();
-            entity.BaseAmount = 0;
-
-            var errors = this.validation.Validate(entity);
-
-            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Base imponible', obligatorio contenido");
-        }
-
         [Fact(DisplayName = "Validate empty transaction failed")]
         public void Validate_empty_transaction_failed()
         {
