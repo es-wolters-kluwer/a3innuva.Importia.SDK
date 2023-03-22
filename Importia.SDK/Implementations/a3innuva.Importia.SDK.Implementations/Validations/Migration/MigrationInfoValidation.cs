@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using a3innuva.TAA.Migration.SDK.Interfaces;
 
 namespace a3innuva.TAA.Migration.SDK.Implementations
@@ -28,12 +30,15 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 			this.info = info;
 		}
 
-		public bool MigrationInfoIsValid()
+		public bool InfoIsValid
 		{
-			ApplyValidations();
-			return IsValid;
+			get
+			{
+				ApplyValidations();
+				return IsValid;
+			}
 		}
-		
+
 		private void ApplyValidations()
 		{
 			isValidType = info.Type != MigrationType.None;
