@@ -56,6 +56,25 @@
 
             info.IsValid().Should().Be(isValid);
         }
+        
+        [Theory(DisplayName = "Validate info")]
+        [InlineData((MigrationOrigin)1, MigrationType.ChartOfAccount, "vatNumber", 0, "2.0")]
+        public void ShouldReturnErrorsValidationIfInfoIsInvalid(MigrationOrigin origin, MigrationType type, string vatNumber, int year, string version)
+        {
+            IMigrationInfo info  = new MigrationInfo()
+            {
+                Origin = origin,
+                Type = type, 
+                Year = year, 
+                VatNumber = vatNumber,
+                Version = version
+            };
+
+            var (isValid, validationResults) = info.GetValidations();
+            
+            isValid.Should().BeFalse();
+            validationResults.Should().HaveCountGreaterThan(0);
+        }
 
         [Fact(DisplayName = "Validate entities account succeed")]
         public void Validate_entities_account_succeed()

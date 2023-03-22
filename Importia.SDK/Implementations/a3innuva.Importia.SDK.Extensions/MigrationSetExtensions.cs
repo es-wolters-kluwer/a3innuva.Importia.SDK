@@ -63,6 +63,11 @@
             var infoValidation = new MigrationInfoValidation(info);
             return infoValidation.InfoIsValid;
         }
+        
+        public static (bool, IEnumerable<IValidationResult>) GetValidations(this IMigrationInfo info)
+        {
+            return (false, new List<IValidationResult>() { new ValidationResult()});
+        }
 
         public static bool ValidateTypeAndContent(this IMigrationSet set)
         {
