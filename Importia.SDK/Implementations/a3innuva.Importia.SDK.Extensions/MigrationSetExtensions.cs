@@ -60,15 +60,15 @@
 
         public static bool IsValid(this IMigrationInfo info)
         {
-            var type = info.Type != MigrationType.None;
-            var defineType = Enum.IsDefined(typeof(MigrationType), info.Type);
-            var origin = info.Origin != MigrationOrigin.None;
-            var defineOrigin = Enum.IsDefined(typeof(MigrationOrigin), info.Origin);
-            var year = info.Type == MigrationType.ChartOfAccount ? info.Year == 0 : info.Year != 0;
-            var vatNumber = !String.IsNullOrEmpty(info.VatNumber?.Trim());
-            var version = info.Version == "2.0";
-
-            return type && defineType && origin && defineOrigin && year && vatNumber && version;
+            var infoValidation = new MigrationInfoValidation(info);
+            infoValidation.ApplyValidations();
+            return infoValidation.IsValidType &&
+                   infoValidation.IsValidDefineType &&
+                   infoValidation.IsValidOrigin &&
+                   infoValidation.IsValidDefineOrigin &&
+                   infoValidation.IsValidYear &&
+                   infoValidation.IsValidVatNumber &&
+                   infoValidation.IsValidVersion;
         }
 
         public static bool ValidateTypeAndContent(this IMigrationSet set)
