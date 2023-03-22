@@ -56,24 +56,49 @@
 
             info.IsValid().Should().Be(isValid);
         }
-        
-        [Theory(DisplayName = "Validate info")]
-        [InlineData((MigrationOrigin)1, MigrationType.ChartOfAccount, "vatNumber", 0, "2.0")]
-        public void ShouldReturnErrorsValidationIfInfoIsInvalid(MigrationOrigin origin, MigrationType type, string vatNumber, int year, string version)
+
+        [Fact]
+        public void ShouldReturnErrorsValidationIfInfoIsInvalid()
         {
             IMigrationInfo info  = new MigrationInfo()
             {
-                Origin = origin,
-                Type = type, 
-                Year = year, 
-                VatNumber = vatNumber,
-                Version = version
+                Origin = (MigrationOrigin)1,
+                Type = MigrationType.ChartOfAccount, 
+                Year = 0, 
+                VatNumber = "vatNumber",
+                Version = "2.0"
             };
 
             var (isValid, validationResults) = info.GetValidations();
             
             isValid.Should().BeFalse();
             validationResults.Should().HaveCountGreaterThan(0);
+        }
+        
+        [Fact]
+        public void ShouldReturnErrorsValidationIfOriginInfoIsInvalid()
+        {
+            IMigrationInfo info  = new MigrationInfo()
+            {
+                Origin = 0,
+                Type = MigrationType.ChartOfAccount, 
+                Year = 2022, 
+                VatNumber = "vatNumber",
+                Version = "2.0"
+            };
+
+            var (isValid, validationResults) = info.GetValidations();
+            
+            isValid.Should().BeFalse();
+            validationResults.Should().Equal(new List<IValidationResult>()
+            {
+                new ValidationResult()
+                {
+                    Code = "The origin value is invalid",
+                    Line = 0,
+                    IsValid = false
+                }
+            });
         }
 
         [Fact(DisplayName = "Validate entities account succeed")]

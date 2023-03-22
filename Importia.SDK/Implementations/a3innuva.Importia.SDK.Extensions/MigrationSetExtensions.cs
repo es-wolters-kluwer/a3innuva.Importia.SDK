@@ -66,7 +66,16 @@
         
         public static (bool, IEnumerable<IValidationResult>) GetValidations(this IMigrationInfo info)
         {
-            return (false, new List<IValidationResult>() { new ValidationResult()});
+            var validationResults = new List<IValidationResult>()
+            {
+                new ValidationResult()
+                {
+                    Code = "The origin value is invalid",
+                    Line = 0,
+                    IsValid = false
+                }
+            };
+            return (false, validationResults);
         }
 
         public static bool ValidateTypeAndContent(this IMigrationSet set)
