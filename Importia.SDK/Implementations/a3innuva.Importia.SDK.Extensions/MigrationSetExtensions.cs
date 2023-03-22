@@ -61,14 +61,7 @@
         public static bool IsValid(this IMigrationInfo info)
         {
             var infoValidation = new MigrationInfoValidation(info);
-            infoValidation.ApplyValidations();
-            return infoValidation.IsValidType &&
-                   infoValidation.IsValidDefineType &&
-                   infoValidation.IsValidOrigin &&
-                   infoValidation.IsValidDefineOrigin &&
-                   infoValidation.IsValidYear &&
-                   infoValidation.IsValidVatNumber &&
-                   infoValidation.IsValidVersion;
+            return infoValidation.MigrationInfoIsValid();
         }
 
         public static bool ValidateTypeAndContent(this IMigrationSet set)

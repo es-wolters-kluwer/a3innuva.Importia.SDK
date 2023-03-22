@@ -6,27 +6,43 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 	public class MigrationInfoValidation
 	{
 		private readonly IMigrationInfo info;
-		public bool IsValidType {get; private set; }
-		public bool IsValidDefineType {get; private set; }
-		public bool IsValidOrigin {get; private set; }
-		public bool IsValidDefineOrigin {get; private set; }
-		public bool IsValidYear {get; private set; }
-		public bool IsValidVatNumber {get; private set; }
-		public bool IsValidVersion {get; private set; }
+		private bool isValidType;
+		private bool isValidDefineType;
+		private bool isValidOrigin;
+		private bool isValidDefineOrigin;
+		private bool isValidYear;
+		private bool isValidVatNumber;
+		private bool isValidVersion;
+
+		private bool IsValid =>
+			isValidType &&
+			isValidDefineType &&
+			isValidOrigin &&
+			isValidDefineOrigin &&
+			isValidYear &&
+			isValidVatNumber &&
+			isValidVersion;
+
 		public MigrationInfoValidation(IMigrationInfo info)
 		{
 			this.info = info;
 		}
 
-		public void ApplyValidations()
+		public bool MigrationInfoIsValid()
 		{
-			IsValidType = info.Type != MigrationType.None;
-			IsValidDefineType = Enum.IsDefined(typeof(MigrationType), info.Type);
-			IsValidOrigin = info.Origin != MigrationOrigin.None;
-			IsValidDefineOrigin = Enum.IsDefined(typeof(MigrationOrigin), info.Origin);
-			IsValidYear = info.Type == MigrationType.ChartOfAccount ? info.Year == 0 : info.Year != 0;
-			IsValidVatNumber = !String.IsNullOrEmpty(info.VatNumber?.Trim());
-			IsValidVersion = info.Version == "2.0";
+			ApplyValidations();
+			return IsValid;
+		}
+		
+		private void ApplyValidations()
+		{
+			isValidType = info.Type != MigrationType.None;
+			isValidDefineType = Enum.IsDefined(typeof(MigrationType), info.Type);
+			isValidOrigin = info.Origin != MigrationOrigin.None;
+			isValidDefineOrigin = Enum.IsDefined(typeof(MigrationOrigin), info.Origin);
+			isValidYear = info.Type == MigrationType.ChartOfAccount ? info.Year == 0 : info.Year != 0;
+			isValidVatNumber = !string.IsNullOrEmpty(info.VatNumber?.Trim());
+			isValidVersion = info.Version == "2.0";
 		}
 	}
 }
