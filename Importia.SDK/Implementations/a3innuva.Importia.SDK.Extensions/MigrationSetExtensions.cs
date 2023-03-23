@@ -58,12 +58,8 @@
             }
         }
 
-        public static bool IsValid(this IMigrationInfo info)
-        {
-            var infoValidation = new MigrationInfoValidation(info);
-            return infoValidation.InfoIsValid;
-        }
-        
+        public static bool IsValid(this IMigrationInfo info) => info.IsValid();
+
         public static IEnumerable<IValidationResult> GetValidations(this IMigrationInfo info)
         {
             var infoValidation = new MigrationInfoValidation(info);

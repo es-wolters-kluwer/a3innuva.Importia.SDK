@@ -25,7 +25,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 
         public bool IsValidVersion() => Version == "2.0";
 
-        public bool GetIsValid() =>
+        public bool IsValid() =>
             IsValidType() &&
             IsValidOrigin() &&
             IsValidYear() &&
