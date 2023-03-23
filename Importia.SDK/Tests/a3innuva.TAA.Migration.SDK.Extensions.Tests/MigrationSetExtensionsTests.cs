@@ -1338,8 +1338,11 @@
                 {
                     new MigrationInfo
                     {
-                        Origin = MigrationOrigin.None, Type = MigrationType.Journal, Year = 2022,
-                        VatNumber = "vatNumber", Version = "2.0"
+                        Origin = MigrationOrigin.None,
+                        Type = MigrationType.Journal,
+                        Year = 2022,
+                        VatNumber = "vatNumber",
+                        Version = "2.0"
                     },
                     new ValidationResult
                     {
