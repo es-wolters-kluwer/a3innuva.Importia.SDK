@@ -64,6 +64,20 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 					Line = 0,
 					IsValid = false
 				});
+			if (!isValidYear)
+				validationResults.Add(new ValidationResult()
+				{
+					Code = "The year value is invalid",
+					Line = 0,
+					IsValid = false
+				});
+			if (!isValidVatNumber)
+				validationResults.Add(new ValidationResult()
+				{
+					Code = "The VatNumber value is invalid",
+					Line = 0,
+					IsValid = false
+				});
 			
 			return validationResults;
 		}
