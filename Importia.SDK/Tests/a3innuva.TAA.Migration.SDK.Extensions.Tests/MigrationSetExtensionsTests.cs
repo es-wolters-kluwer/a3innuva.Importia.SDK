@@ -124,8 +124,8 @@
 
             var validationResultExpected = new List<IValidationResult>()
             {
-                new ValidationResult { Code = "The origin value is invalid", IsValid = false, Line = 0 },
-                new ValidationResult { Code = "The type value is invalid", IsValid = false, Line = 0 },
+                new ValidationResult { Code = "The Origin value is invalid", IsValid = false, Line = 0 },
+                new ValidationResult { Code = "The Type value is invalid", IsValid = false, Line = 0 },
                 new ValidationResult { Code = "The VatNumber value is invalid", IsValid = false, Line = 0 },
                 new ValidationResult { Code = "The Version value is invalid", IsValid = false, Line = 0 },
             };
@@ -1343,7 +1343,7 @@
                     },
                     new ValidationResult
                     {
-                        Code = "The origin value is invalid",
+                        Code = "The Origin value is invalid",
                         Line = 0,
                         IsValid = false
                     }
@@ -1359,7 +1359,7 @@
                     },
                     new ValidationResult()
                     {
-                        Code = "The type value is invalid",
+                        Code = "The Type value is invalid",
                         Line = 0,
                         IsValid = false
                     }
@@ -1375,7 +1375,7 @@
                     },
                     new ValidationResult()
                     {
-                        Code = "The year value is invalid",
+                        Code = "The Year value is invalid",
                         Line = 0,
                         IsValid = false
                     }
