@@ -39,5 +39,9 @@
         string CorrelationChannelId { get; set; }
 
         bool IsValidOrigin();
+        bool IsValidType();
+        bool IsValidYear();
+        bool IsValidVatNumber();
+        bool IsValidVersion();
     }
 }
