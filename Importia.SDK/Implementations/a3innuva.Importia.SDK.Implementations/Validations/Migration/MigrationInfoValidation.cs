@@ -35,6 +35,38 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 			}
 		}
 
+		public IEnumerable<IValidationResult> GetErrorValidations()
+		{
+			var validationResults = new List<IValidationResult>();
+			ApplyValidations();
+			if (IsValid) return validationResults;
+
+			var listErrors = BuildErrorMessages()
+				.Where(x => x.isInvalid)
+				.Select(x => new ValidationResult()
+				{
+					Code = x.errorMessage,
+					Line = 0,
+					IsValid = false
+				});
+			
+			validationResults.AddRange(listErrors);
+
+			return validationResults;
+		}
+
+		private IEnumerable<(bool isInvalid, string errorMessage)> BuildErrorMessages()
+		{
+			return new List<(bool isInvalid, string errorMessage)>
+			{
+				( !isValidOrigin, "The origin value is invalid" ),
+				( !isValidType, "The type value is invalid" ),
+				( !isValidYear, "The year value is invalid" ),
+				( !isValidVatNumber, "The VatNumber value is invalid" ),
+				( !isValidVersion, "The Version value is invalid")
+			};
+		}
+
 		private void ApplyValidations()
 		{
 			isValidOrigin = info.Origin != MigrationOrigin.None && Enum.IsDefined(typeof(MigrationOrigin), info.Origin);
@@ -42,51 +74,6 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 			isValidYear = info.Type == MigrationType.ChartOfAccount ? info.Year == 0 : info.Year != 0;
 			isValidVatNumber = !string.IsNullOrEmpty(info.VatNumber?.Trim());
 			isValidVersion = info.Version == "2.0";
-		}
-
-		public IEnumerable<IValidationResult> GetErrorValidations()
-		{
-			var validationResults = new List<IValidationResult>();
-			ApplyValidations();
-			if (IsValid) return validationResults;
-			
-			if (!isValidOrigin)
-				validationResults.Add(new ValidationResult()
-				{
-					Code = "The origin value is invalid",
-					Line = 0,
-					IsValid = false
-				});
-			if (!isValidType)
-				validationResults.Add(new ValidationResult()
-				{
-					Code = "The type value is invalid",
-					Line = 0,
-					IsValid = false
-				});
-			if (!isValidYear)
-				validationResults.Add(new ValidationResult()
-				{
-					Code = "The year value is invalid",
-					Line = 0,
-					IsValid = false
-				});
-			if (!isValidVatNumber)
-				validationResults.Add(new ValidationResult()
-				{
-					Code = "The VatNumber value is invalid",
-					Line = 0,
-					IsValid = false
-				});
-			if (!isValidVersion)
-				validationResults.Add(new ValidationResult()
-				{
-					Code = "The Version value is invalid",
-					Line = 0,
-					IsValid = false
-				});
-			
-			return validationResults;
 		}
 	}
 }
