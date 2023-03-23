@@ -178,6 +178,32 @@
                 }
             });
         }
+        
+        [Fact]
+        public void ShouldReturnErrorsValidationIfVersionIsDifferentTo2()
+        {
+            IMigrationInfo info  = new MigrationInfo()
+            {
+                Origin = MigrationOrigin.Eco,
+                Type = MigrationType.Journal, 
+                Year = 2022, 
+                VatNumber = "vatNumber",
+                Version = "1.0"
+            };
+
+            var (isValid, validationResults) = info.GetValidations();
+            
+            isValid.Should().BeFalse();
+            validationResults.Should().BeEquivalentTo(new List<IValidationResult>()
+            {
+                new ValidationResult()
+                {
+                    Code = "The Version value is invalid",
+                    Line = 0,
+                    IsValid = false
+                }
+            });
+        }
 
         [Fact(DisplayName = "Validate entities account succeed")]
         public void Validate_entities_account_succeed()
