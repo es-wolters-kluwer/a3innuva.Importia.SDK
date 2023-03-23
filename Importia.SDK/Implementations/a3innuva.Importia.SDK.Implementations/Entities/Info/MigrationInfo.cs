@@ -15,30 +15,15 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
         public string FileName { get; set; }
         public string Version { get; set; }
 
-        public bool IsValidOrigin()
-        {
-            return Origin != MigrationOrigin.None && Enum.IsDefined(typeof(MigrationOrigin), Origin);
-        }
+        public bool IsValidOrigin() => Origin != MigrationOrigin.None && Enum.IsDefined(typeof(MigrationOrigin), Origin);
 
-        public bool IsValidType()
-        {
-            return Type != MigrationType.None && Enum.IsDefined(typeof(MigrationType), Type);
-        }
+        public bool IsValidType() => Type != MigrationType.None && Enum.IsDefined(typeof(MigrationType), Type);
 
-        public bool IsValidYear()
-        {
-            return Type == MigrationType.ChartOfAccount ? Year == 0 : Year != 0;
-        }
+        public bool IsValidYear() => Type == MigrationType.ChartOfAccount ? Year == 0 : Year != 0;
 
-        public bool IsValidVatNumber()
-        {
-            return !string.IsNullOrEmpty(VatNumber?.Trim());
-        }
+        public bool IsValidVatNumber() => !string.IsNullOrEmpty(VatNumber?.Trim());
 
-        public bool IsValidVersion()
-        {
-            return Version == "2.0";
-        }
+        public bool IsValidVersion() => Version == "2.0";
 
         public bool GetIsValid() =>
             IsValidType() &&
