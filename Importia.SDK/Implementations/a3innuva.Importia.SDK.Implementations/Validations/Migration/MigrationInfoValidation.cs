@@ -58,7 +58,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 
 		private void ApplyValidations()
 		{
-			isValidOrigin = info.Origin != MigrationOrigin.None && Enum.IsDefined(typeof(MigrationOrigin), info.Origin);
+			isValidOrigin = info.IsValidOrigin();
 			isValidType = info.Type != MigrationType.None && Enum.IsDefined(typeof(MigrationType), info.Type);
 			isValidYear = info.Type == MigrationType.ChartOfAccount ? info.Year == 0 : info.Year != 0;
 			isValidVatNumber = !string.IsNullOrEmpty(info.VatNumber?.Trim());

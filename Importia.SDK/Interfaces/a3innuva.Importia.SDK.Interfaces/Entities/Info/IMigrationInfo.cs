@@ -37,5 +37,7 @@
         /// Channel Id
         /// </summary>
         string CorrelationChannelId { get; set; }
+
+        bool IsValidOrigin();
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace a3innuva.TAA.Migration.SDK.Implementations
+﻿using System;
+
+namespace a3innuva.TAA.Migration.SDK.Implementations
 {
     using Interfaces;
 
@@ -12,6 +14,10 @@
         public MigrationOrigin Origin { get; set; }
         public string FileName { get; set; }
         public string Version { get; set; }
- 
+
+        public bool IsValidOrigin()
+        {
+            return Origin != MigrationOrigin.None && Enum.IsDefined(typeof(MigrationOrigin), Origin);
+        }
     }
 }
