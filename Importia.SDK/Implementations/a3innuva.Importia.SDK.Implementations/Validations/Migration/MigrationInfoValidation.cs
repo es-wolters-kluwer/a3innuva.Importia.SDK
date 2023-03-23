@@ -24,20 +24,13 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 		public MigrationInfoValidation(IMigrationInfo info)
 		{
 			this.info = info;
+			ApplyValidations();
 		}
 
-		public bool InfoIsValid
-		{
-			get
-			{
-				ApplyValidations();
-				return IsValid;
-			}
-		}
+		public bool InfoIsValid => IsValid;
 
 		public IEnumerable<IValidationResult> GetErrorValidations()
 		{
-			ApplyValidations();
 			if (IsValid) return Enumerable.Empty<IValidationResult>();
 
 			var listErrors = BuildErrorMessages()
