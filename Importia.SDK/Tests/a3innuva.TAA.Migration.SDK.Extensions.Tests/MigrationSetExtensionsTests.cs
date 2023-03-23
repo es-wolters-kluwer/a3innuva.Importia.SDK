@@ -60,6 +60,24 @@
         }
 
         [Fact]
+        public void ShouldReturnTrueWhenInfoIsValid()
+        {
+            IMigrationInfo info = new MigrationInfo()
+            {
+                Origin = MigrationOrigin.Eco,
+                Type = MigrationType.ChartOfAccount,
+                Year = 0,
+                VatNumber = "vatNumber",
+                Version = "2.0"
+            };
+
+            var (isValid, validationResults) = info.GetValidations();
+
+            isValid.Should().BeTrue();
+            validationResults.Should().BeEmpty();
+        }
+
+        [Fact]
         public void ShouldReturnErrorsValidationIfInfoIsInvalid()
         {
             IMigrationInfo info = new MigrationInfo()
@@ -118,7 +136,6 @@
                 validationResults.Should().BeEquivalentTo(validationResultExpected);
             }
         }
-
         
         [Fact(DisplayName = "Validate entities account succeed")]
         public void Validate_entities_account_succeed()
