@@ -58,12 +58,6 @@
             }
         }
 
-        public static IEnumerable<IValidationResult> GetValidations(this IMigrationInfo info)
-        {
-            var infoValidation = new MigrationInfoValidation(info);
-            return infoValidation.GetErrorValidations();
-        }
-
         public static bool ValidateTypeAndContent(this IMigrationSet set)
         {
             switch (set.Info.Type)

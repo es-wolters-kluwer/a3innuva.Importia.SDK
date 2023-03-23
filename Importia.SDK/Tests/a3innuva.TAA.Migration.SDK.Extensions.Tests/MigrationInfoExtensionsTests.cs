@@ -6,7 +6,7 @@ using Xunit;
 
 namespace a3innuva.TAA.Migration.SDK.Extensions.Tests;
 
-public class MigrationInfoValidationTests
+public class MigrationInfoExtensionsTests
 {
 	[Fact]
 	public void ShouldReturnTrueWhenInfoIsValid()
@@ -68,7 +68,7 @@ public class MigrationInfoValidationTests
 	}
 
 	[Theory]
-	[MemberData(nameof(ShouldReturnErrorsValidationScenaries), MemberType = typeof(MigrationInfoValidationTests))]
+	[MemberData(nameof(ShouldReturnErrorsValidationScenaries), MemberType = typeof(MigrationInfoExtensionsTests))]
 	public void ShouldReturnErrorsValidation(IMigrationInfo infoGiven, ValidationResult validationResultExpected)
 	{
 		var validationResults = infoGiven.GetValidations();
