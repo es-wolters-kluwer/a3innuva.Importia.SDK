@@ -1,5 +1,6 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Extensions.Tests
 {
+    using FluentAssertions.Execution;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -43,13 +44,14 @@
         [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.OutputInvoice, "", 2010, "2.0", false)]
         [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.OutputInvoice, "vatNumber", 0, "2.0", false)]
         [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.OutputInvoice, "vatNumber", 2010, "1.0", false)]
-        public void ValidateInfo(MigrationOrigin origin, MigrationType type, string vatNumber, int year, string version, bool isValid)
+        public void ValidateInfo(MigrationOrigin origin, MigrationType type, string vatNumber, int year, string version,
+            bool isValid)
         {
-            IMigrationInfo info  = new MigrationInfo()
+            IMigrationInfo info = new MigrationInfo()
             {
                 Origin = origin,
-                Type = type, 
-                Year = year, 
+                Type = type,
+                Year = year,
                 VatNumber = vatNumber,
                 Version = version
             };
@@ -60,151 +62,64 @@
         [Fact]
         public void ShouldReturnErrorsValidationIfInfoIsInvalid()
         {
-            IMigrationInfo info  = new MigrationInfo()
+            IMigrationInfo info = new MigrationInfo()
             {
                 Origin = (MigrationOrigin)1,
-                Type = MigrationType.ChartOfAccount, 
-                Year = 0, 
+                Type = MigrationType.ChartOfAccount,
+                Year = 0,
                 VatNumber = "vatNumber",
                 Version = "2.0"
             };
 
             var (isValid, validationResults) = info.GetValidations();
-            
+
             isValid.Should().BeFalse();
             validationResults.Should().HaveCountGreaterThan(0);
         }
-        
-        [Fact]
-        public void ShouldReturnErrorsValidationIfOriginIsNone()
-        {
-            IMigrationInfo info  = new MigrationInfo()
-            {
-                Origin = MigrationOrigin.None,
-                Type = MigrationType.Journal, 
-                Year = 2022, 
-                VatNumber = "vatNumber",
-                Version = "2.0"
-            };
 
-            var (isValid, validationResults) = info.GetValidations();
-            
-            isValid.Should().BeFalse();
-            validationResults.Should().BeEquivalentTo(new List<IValidationResult>()
-            {
-                new ValidationResult()
-                {
-                    Code = "The origin value is invalid",
-                    Line = 0,
-                    IsValid = false
-                }
-            });
-        }
-        
-        [Fact]
-        public void ShouldReturnErrorsValidationIfTypeInfoIsNone()
+        [Theory]
+        [MemberData(nameof(ShouldReturnErrorsValidationEscenaries), MemberType = typeof(MigrationSetExtensionsTests))]
+        public void ShouldReturnErrorsValidation(IMigrationInfo infoGiven, ValidationResult validationResultExpected)
         {
-            IMigrationInfo info  = new MigrationInfo()
-            {
-                Origin = MigrationOrigin.Eco,
-                Type = MigrationType.None, 
-                Year = 2022, 
-                VatNumber = "vatNumber",
-                Version = "2.0"
-            };
+            var (isValid, validationResults) = infoGiven.GetValidations();
 
-            var (isValid, validationResults) = info.GetValidations();
-            
-            isValid.Should().BeFalse();
-            validationResults.Should().BeEquivalentTo(new List<IValidationResult>()
+            using (new AssertionScope())
             {
-                new ValidationResult()
-                {
-                    Code = "The type value is invalid",
-                    Line = 0,
-                    IsValid = false
-                }
-            });
+                isValid.Should().BeFalse();
+                validationResults.Should().BeEquivalentTo(new List<IValidationResult> { validationResultExpected });
+            }
         }
-        
-        [Fact]
-        public void ShouldReturnErrorsValidationIfInfoTypeIsChartOfAccountAndYearIsDifferentZero()
-        {
-            IMigrationInfo info  = new MigrationInfo()
-            {
-                Origin = MigrationOrigin.Eco,
-                Type = MigrationType.ChartOfAccount, 
-                Year = 10, 
-                VatNumber = "vatNumber",
-                Version = "2.0"
-            };
 
-            var (isValid, validationResults) = info.GetValidations();
-            
-            isValid.Should().BeFalse();
-            validationResults.Should().BeEquivalentTo(new List<IValidationResult>()
-            {
-                new ValidationResult()
-                {
-                    Code = "The year value is invalid",
-                    Line = 0,
-                    IsValid = false
-                }
-            });
-        }
-        
         [Fact]
-        public void ShouldReturnErrorsValidationIfVatNumberIsEmpty()
+        public void ShouldReturnMultipleValidationErrors()
         {
-            IMigrationInfo info  = new MigrationInfo()
+            var infoGiven = new MigrationInfo()
             {
-                Origin = MigrationOrigin.Eco,
-                Type = MigrationType.Journal, 
-                Year = 2022, 
-                VatNumber = string.Empty,
-                Version = "2.0"
-            };
-
-            var (isValid, validationResults) = info.GetValidations();
-            
-            isValid.Should().BeFalse();
-            validationResults.Should().BeEquivalentTo(new List<IValidationResult>()
-            {
-                new ValidationResult()
-                {
-                    Code = "The VatNumber value is invalid",
-                    Line = 0,
-                    IsValid = false
-                }
-            });
-        }
-        
-        [Fact]
-        public void ShouldReturnErrorsValidationIfVersionIsDifferentTo2()
-        {
-            IMigrationInfo info  = new MigrationInfo()
-            {
-                Origin = MigrationOrigin.Eco,
-                Type = MigrationType.Journal, 
-                Year = 2022, 
-                VatNumber = "vatNumber",
+                Origin = (MigrationOrigin) 1,
+                Type = (MigrationType) 99,
+                Year = 0,
+                VatNumber = "",
                 Version = "1.0"
             };
 
-            var (isValid, validationResults) = info.GetValidations();
-            
-            isValid.Should().BeFalse();
-            validationResults.Should().BeEquivalentTo(new List<IValidationResult>()
+            var (isValid, validationResults) = infoGiven.GetValidations();
+
+            var validationResultExpected = new List<IValidationResult>()
             {
-                new ValidationResult()
-                {
-                    Code = "The Version value is invalid",
-                    Line = 0,
-                    IsValid = false
-                }
-            });
+                new ValidationResult { Code = "The origin value is invalid", IsValid = false, Line = 0 },
+                new ValidationResult { Code = "The type value is invalid", IsValid = false, Line = 0 },
+                new ValidationResult { Code = "The year value is invalid", IsValid = false, Line = 0 },
+                new ValidationResult { Code = "The VatNumber value is invalid", IsValid = false, Line = 0 },
+                new ValidationResult { Code = "The Version value is invalid", IsValid = false, Line = 0 },
+            };
+            using (new AssertionScope())
+            {
+                isValid.Should().BeFalse();
+                validationResults.Should().BeEquivalentTo(validationResultExpected);
+            }
         }
 
+        
         [Fact(DisplayName = "Validate entities account succeed")]
         public void Validate_entities_account_succeed()
         {
@@ -402,7 +317,6 @@
 
             result.Should().BeFalse();
         }
-
         
         [Fact(DisplayName = "Validate entities journal succeed")]
         public void Validate_entities_journal_succeed()
@@ -1401,5 +1315,87 @@
 
             result.Should().BeFalse();
         }
+        
+        public static TheoryData<IMigrationInfo, ValidationResult> ShouldReturnErrorsValidationEscenaries =>
+            new TheoryData<IMigrationInfo, ValidationResult>
+            {
+                {
+                    new MigrationInfo
+                    {
+                        Origin = MigrationOrigin.None, Type = MigrationType.Journal, Year = 2022,
+                        VatNumber = "vatNumber", Version = "2.0"
+                    },
+                    new ValidationResult
+                    {
+                        Code = "The origin value is invalid",
+                        Line = 0,
+                        IsValid = false
+                    }
+                },
+                {
+                    new MigrationInfo()
+                    {
+                        Origin = MigrationOrigin.Eco,
+                        Type = MigrationType.None, 
+                        Year = 2022, 
+                        VatNumber = "vatNumber",
+                        Version = "2.0"
+                    },
+                    new ValidationResult()
+                    {
+                        Code = "The type value is invalid",
+                        Line = 0,
+                        IsValid = false
+                    }
+                },
+                {
+                    new MigrationInfo()
+                    {
+                        Origin = MigrationOrigin.Eco,
+                        Type = MigrationType.ChartOfAccount, 
+                        Year = 10, 
+                        VatNumber = "vatNumber",
+                        Version = "2.0"
+                    },
+                    new ValidationResult()
+                    {
+                        Code = "The year value is invalid",
+                        Line = 0,
+                        IsValid = false
+                    }
+                },
+                {
+                    new MigrationInfo()
+                    {
+                        Origin = MigrationOrigin.Eco,
+                        Type = MigrationType.Journal, 
+                        Year = 2022, 
+                        VatNumber = string.Empty,
+                        Version = "2.0"
+                    },
+                    new ValidationResult()
+                    {
+                        Code = "The VatNumber value is invalid",
+                        Line = 0,
+                        IsValid = false
+                    }
+                },
+                {
+                    new MigrationInfo()
+                    {
+                        Origin = MigrationOrigin.Eco,
+                        Type = MigrationType.Journal, 
+                        Year = 2022, 
+                        VatNumber = "vatNumber",
+                        Version = "1.0"
+                    },
+                    new ValidationResult()
+                    {
+                        Code = "The Version value is invalid",
+                        Line = 0,
+                        IsValid = false
+                    }
+                }
+            };
     }
 }
