@@ -9,18 +9,14 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 	{
 		private readonly IMigrationInfo info;
 		private bool isValidType;
-		private bool isValidDefineType;
 		private bool isValidOrigin;
-		private bool isValidDefineOrigin;
 		private bool isValidYear;
 		private bool isValidVatNumber;
 		private bool isValidVersion;
 
 		private bool IsValid =>
 			isValidType &&
-			isValidDefineType &&
 			isValidOrigin &&
-			isValidDefineOrigin &&
 			isValidYear &&
 			isValidVatNumber &&
 			isValidVersion;
@@ -41,13 +37,35 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 
 		private void ApplyValidations()
 		{
-			isValidType = info.Type != MigrationType.None;
-			isValidDefineType = Enum.IsDefined(typeof(MigrationType), info.Type);
-			isValidOrigin = info.Origin != MigrationOrigin.None;
-			isValidDefineOrigin = Enum.IsDefined(typeof(MigrationOrigin), info.Origin);
+			isValidOrigin = info.Origin != MigrationOrigin.None && Enum.IsDefined(typeof(MigrationOrigin), info.Origin);
+			isValidType = info.Type != MigrationType.None && Enum.IsDefined(typeof(MigrationType), info.Type);
 			isValidYear = info.Type == MigrationType.ChartOfAccount ? info.Year == 0 : info.Year != 0;
 			isValidVatNumber = !string.IsNullOrEmpty(info.VatNumber?.Trim());
 			isValidVersion = info.Version == "2.0";
+		}
+
+		public IEnumerable<IValidationResult> GetValidationResults()
+		{
+			var validationResults = new List<IValidationResult>();
+			ApplyValidations();
+			if (IsValid) return validationResults;
+			
+			if (!isValidOrigin)
+				validationResults.Add(new ValidationResult()
+				{
+					Code = "The origin value is invalid",
+					Line = 0,
+					IsValid = false
+				});
+			if (!isValidType)
+				validationResults.Add(new ValidationResult()
+				{
+					Code = "The type value is invalid",
+					Line = 0,
+					IsValid = false
+				});
+			
+			return validationResults;
 		}
 	}
 }

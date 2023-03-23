@@ -80,7 +80,7 @@
         {
             IMigrationInfo info  = new MigrationInfo()
             {
-                Origin = 0,
+                Origin = MigrationOrigin.None,
                 Type = MigrationType.ChartOfAccount, 
                 Year = 2022, 
                 VatNumber = "vatNumber",
@@ -90,11 +90,37 @@
             var (isValid, validationResults) = info.GetValidations();
             
             isValid.Should().BeFalse();
-            validationResults.Should().Equal(new List<IValidationResult>()
+            validationResults.Should().BeEquivalentTo(new List<IValidationResult>()
             {
                 new ValidationResult()
                 {
                     Code = "The origin value is invalid",
+                    Line = 0,
+                    IsValid = false
+                }
+            });
+        }
+        
+        [Fact]
+        public void ShouldReturnErrorsValidationIfTypeInfoIsInvalid()
+        {
+            IMigrationInfo info  = new MigrationInfo()
+            {
+                Origin = MigrationOrigin.Eco,
+                Type = MigrationType.None, 
+                Year = 2022, 
+                VatNumber = "vatNumber",
+                Version = "2.0"
+            };
+
+            var (isValid, validationResults) = info.GetValidations();
+            
+            isValid.Should().BeFalse();
+            validationResults.Should().BeEquivalentTo(new List<IValidationResult>()
+            {
+                new ValidationResult()
+                {
+                    Code = "The type value is invalid",
                     Line = 0,
                     IsValid = false
                 }
