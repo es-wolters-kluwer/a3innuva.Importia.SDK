@@ -44,7 +44,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 			isValidVersion = info.Version == "2.0";
 		}
 
-		public IEnumerable<IValidationResult> GetValidationResults()
+		public IEnumerable<IValidationResult> GetErrorValidations()
 		{
 			var validationResults = new List<IValidationResult>();
 			ApplyValidations();

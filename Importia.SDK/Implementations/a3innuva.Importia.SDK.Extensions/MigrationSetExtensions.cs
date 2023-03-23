@@ -67,9 +67,9 @@
         public static (bool, IEnumerable<IValidationResult>) GetValidations(this IMigrationInfo info)
         {
             var infoValidation = new MigrationInfoValidation(info);
-            var validationResults = infoValidation.GetValidationResults();
+            var errorValidations = infoValidation.GetErrorValidations().ToList();
             
-            return (false, validationResults);
+            return (!errorValidations.Any(), errorValidations);
         }
 
         public static bool ValidateTypeAndContent(this IMigrationSet set)
