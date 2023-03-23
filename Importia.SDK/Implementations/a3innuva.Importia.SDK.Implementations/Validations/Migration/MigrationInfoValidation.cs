@@ -78,6 +78,13 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 					Line = 0,
 					IsValid = false
 				});
+			if (!isValidVersion)
+				validationResults.Add(new ValidationResult()
+				{
+					Code = "The Version value is invalid",
+					Line = 0,
+					IsValid = false
+				});
 			
 			return validationResults;
 		}
