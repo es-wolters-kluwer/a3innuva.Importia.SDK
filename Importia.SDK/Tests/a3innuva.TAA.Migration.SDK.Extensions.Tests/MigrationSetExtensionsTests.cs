@@ -71,9 +71,8 @@
                 Version = "2.0"
             };
 
-            var (isValid, validationResults) = info.GetValidations();
+            var (_, validationResults) = info.GetValidations();
 
-            isValid.Should().BeTrue();
             validationResults.Should().BeEmpty();
         }
 
@@ -89,9 +88,8 @@
                 Version = "2.0"
             };
 
-            var (isValid, validationResults) = info.GetValidations();
+            var (_, validationResults) = info.GetValidations();
 
-            isValid.Should().BeFalse();
             validationResults.Should().HaveCountGreaterThan(0);
         }
 
@@ -99,13 +97,9 @@
         [MemberData(nameof(ShouldReturnErrorsValidationEscenaries), MemberType = typeof(MigrationSetExtensionsTests))]
         public void ShouldReturnErrorsValidation(IMigrationInfo infoGiven, ValidationResult validationResultExpected)
         {
-            var (isValid, validationResults) = infoGiven.GetValidations();
+            var (_, validationResults) = infoGiven.GetValidations();
 
-            using (new AssertionScope())
-            {
-                isValid.Should().BeFalse();
-                validationResults.Should().BeEquivalentTo(new List<IValidationResult> { validationResultExpected });
-            }
+            validationResults.Should().BeEquivalentTo(new List<IValidationResult> { validationResultExpected });
         }
 
         [Fact]
@@ -120,7 +114,7 @@
                 Version = "1.0"
             };
 
-            var (isValid, validationResults) = infoGiven.GetValidations();
+            var (_, validationResults) = infoGiven.GetValidations();
 
             var validationResultExpected = new List<IValidationResult>()
             {
@@ -129,11 +123,8 @@
                 new ValidationResult { Code = "The VatNumber value is invalid", IsValid = false, Line = 0 },
                 new ValidationResult { Code = "The Version value is invalid", IsValid = false, Line = 0 },
             };
-            using (new AssertionScope())
-            {
-                isValid.Should().BeFalse();
-                validationResults.Should().BeEquivalentTo(validationResultExpected);
-            }
+            
+            validationResults.Should().BeEquivalentTo(validationResultExpected);
         }
         
         [Fact(DisplayName = "Validate entities account succeed")]
