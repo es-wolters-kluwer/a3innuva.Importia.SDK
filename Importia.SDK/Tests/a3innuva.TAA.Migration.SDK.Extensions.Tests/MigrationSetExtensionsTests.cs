@@ -56,7 +56,7 @@
                 Version = version
             };
 
-            MigrationSetExtensions.IsValid(info).Should().Be(isValid);
+            info.IsValid().Should().Be(isValid);
         }
 
         [Fact]
