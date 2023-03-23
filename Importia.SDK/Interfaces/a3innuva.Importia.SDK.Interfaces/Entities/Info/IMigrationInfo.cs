@@ -43,5 +43,6 @@
         bool IsValidYear();
         bool IsValidVatNumber();
         bool IsValidVersion();
+        bool GetIsValid();
     }
 }

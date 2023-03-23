@@ -39,5 +39,12 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
         {
             return Version == "2.0";
         }
+
+        public bool GetIsValid() =>
+            IsValidType() &&
+            IsValidOrigin() &&
+            IsValidYear() &&
+            IsValidVatNumber() &&
+            IsValidVersion();
     }
 }
