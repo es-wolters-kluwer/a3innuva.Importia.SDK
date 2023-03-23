@@ -37,12 +37,10 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 
 		public IEnumerable<IValidationResult> GetErrorValidations()
 		{
-			var validationResults = new List<IValidationResult>();
 			ApplyValidations();
-			if (IsValid) return validationResults;
+			if (IsValid) return Enumerable.Empty<IValidationResult>();
 
 			var listErrors = BuildErrorMessages()
-				.Where(x => x.isInvalid)
 				.Select(x => new ValidationResult()
 				{
 					Code = x.errorMessage,
@@ -50,9 +48,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 					IsValid = false
 				});
 			
-			validationResults.AddRange(listErrors);
-
-			return validationResults;
+			return listErrors;
 		}
 
 		private IEnumerable<(bool isInvalid, string errorMessage)> BuildErrorMessages()
@@ -64,7 +60,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 				( !isValidYear, "The year value is invalid" ),
 				( !isValidVatNumber, "The VatNumber value is invalid" ),
 				( !isValidVersion, "The Version value is invalid")
-			};
+			}.Where(x => x.isInvalid);
 		}
 
 		private void ApplyValidations()
