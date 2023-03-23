@@ -71,7 +71,7 @@
                 Version = "2.0"
             };
 
-            var (_, validationResults) = info.GetValidations();
+            var validationResults = info.GetValidations();
 
             validationResults.Should().BeEmpty();
         }
@@ -88,16 +88,16 @@
                 Version = "2.0"
             };
 
-            var (_, validationResults) = info.GetValidations();
+            var validationResults = info.GetValidations();
 
             validationResults.Should().HaveCountGreaterThan(0);
         }
 
         [Theory]
-        [MemberData(nameof(ShouldReturnErrorsValidationEscenaries), MemberType = typeof(MigrationSetExtensionsTests))]
+        [MemberData(nameof(ShouldReturnErrorsValidationScenaries), MemberType = typeof(MigrationSetExtensionsTests))]
         public void ShouldReturnErrorsValidation(IMigrationInfo infoGiven, ValidationResult validationResultExpected)
         {
-            var (_, validationResults) = infoGiven.GetValidations();
+            var validationResults = infoGiven.GetValidations();
 
             validationResults.Should().BeEquivalentTo(new List<IValidationResult> { validationResultExpected });
         }
@@ -114,7 +114,7 @@
                 Version = "1.0"
             };
 
-            var (_, validationResults) = infoGiven.GetValidations();
+            var validationResults = infoGiven.GetValidations();
 
             var validationResultExpected = new List<IValidationResult>()
             {
@@ -1323,7 +1323,7 @@
             result.Should().BeFalse();
         }
         
-        public static TheoryData<IMigrationInfo, ValidationResult> ShouldReturnErrorsValidationEscenaries =>
+        public static TheoryData<IMigrationInfo, ValidationResult> ShouldReturnErrorsValidationScenaries =>
             new TheoryData<IMigrationInfo, ValidationResult>
             {
                 {

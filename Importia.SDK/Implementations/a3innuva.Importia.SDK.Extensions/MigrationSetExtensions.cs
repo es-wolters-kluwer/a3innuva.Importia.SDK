@@ -64,12 +64,10 @@
             return infoValidation.InfoIsValid;
         }
         
-        public static (bool, IEnumerable<IValidationResult>) GetValidations(this IMigrationInfo info)
+        public static IEnumerable<IValidationResult> GetValidations(this IMigrationInfo info)
         {
             var infoValidation = new MigrationInfoValidation(info);
-            var errorValidations = infoValidation.GetErrorValidations().ToList();
-            
-            return (!errorValidations.Any(), errorValidations);
+            return infoValidation.GetErrorValidations();
         }
 
         public static bool ValidateTypeAndContent(this IMigrationSet set)
