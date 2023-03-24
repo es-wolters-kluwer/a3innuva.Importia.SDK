@@ -19,9 +19,9 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 			if (info.IsValid()) return Enumerable.Empty<IValidationResult>();
 
 			var listErrors = BuildErrorMessages()
-				.Select(x => new ValidationResult()
+				.Select(error => new ValidationResult()
 				{
-					Code = x.errorMessage,
+					Code = error,
 					Line = 0,
 					IsValid = false
 				});
@@ -29,7 +29,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 			return listErrors;
 		}
 
-		private IEnumerable<(bool isInvalid, string errorMessage)> BuildErrorMessages()
+		private IEnumerable<string> BuildErrorMessages()
 		{
 			return new List<(bool isInvalid, string errorMessage)>
 			{
@@ -38,7 +38,9 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 				( !info.IsValidYear(), $"The {nameof(IMigrationInfo.Year)} value is invalid" ),
 				( !info.IsValidVatNumber(), $"The {nameof(IMigrationInfo.VatNumber)} value is invalid" ),
 				( !info.IsValidVersion(), $"The {nameof(IMigrationInfo.Version)} value is invalid")
-			}.Where(x => x.isInvalid);
+			}
+				.Where(x => x.isInvalid)
+				.Select(x => x.errorMessage);
 		}
 	}
 }
