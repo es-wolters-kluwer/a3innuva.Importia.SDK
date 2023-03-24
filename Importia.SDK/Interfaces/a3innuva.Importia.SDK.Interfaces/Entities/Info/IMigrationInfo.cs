@@ -37,5 +37,12 @@
         /// Channel Id
         /// </summary>
         string CorrelationChannelId { get; set; }
+
+        bool IsValidOrigin();
+        bool IsValidType();
+        bool IsValidYear();
+        bool IsValidVatNumber();
+        bool IsValidVersion();
+        bool IsValid();
     }
 }

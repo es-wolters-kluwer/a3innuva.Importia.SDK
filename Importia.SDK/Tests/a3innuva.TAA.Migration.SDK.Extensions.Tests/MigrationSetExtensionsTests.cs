@@ -1,5 +1,6 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Extensions.Tests
 {
+    using FluentAssertions.Execution;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -10,7 +11,6 @@
 
     public class MigrationSetExtensionsTests
     {
-
         [Theory(DisplayName = "Validate info")]
         [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.ChartOfAccount, "vatNumber", 0, "2.0", true)]
         [InlineData((MigrationOrigin)1, MigrationType.ChartOfAccount, "vatNumber", 0, "2.0", false)]
@@ -43,13 +43,14 @@
         [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.OutputInvoice, "", 2010, "2.0", false)]
         [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.OutputInvoice, "vatNumber", 0, "2.0", false)]
         [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.OutputInvoice, "vatNumber", 2010, "1.0", false)]
-        public void ValidateInfo(MigrationOrigin origin, MigrationType type, string vatNumber, int year, string version, bool isValid)
+        public void ValidateInfo(MigrationOrigin origin, MigrationType type, string vatNumber, int year, string version,
+            bool isValid)
         {
-            IMigrationInfo info  = new MigrationInfo()
+            IMigrationInfo info = new MigrationInfo()
             {
                 Origin = origin,
-                Type = type, 
-                Year = year, 
+                Type = type,
+                Year = year,
                 VatNumber = vatNumber,
                 Version = version
             };
@@ -254,7 +255,6 @@
 
             result.Should().BeFalse();
         }
-
         
         [Fact(DisplayName = "Validate entities journal succeed")]
         public void Validate_entities_journal_succeed()
