@@ -8,6 +8,12 @@ namespace a3innuva.TAA.Migration.SDK.Extensions.Tests;
 
 public class MigrationInfoExtensionsTests
 {
+	private const string VersionValueErrorMessage = "The Version value is invalid";
+	private const string VatNumberValueErrorMessage = "The VatNumber value is invalid";
+	private const string YearValueErrorMessage = "The Year value is invalid";
+	private const string TypeValueErrorMessage = "The Type value is invalid";
+	private const string OriginValueErrorMessage = "The Origin value is invalid";
+
 	[Fact]
 	public void ShouldReturnTrueWhenInfoIsValid()
 	{
@@ -58,10 +64,10 @@ public class MigrationInfoExtensionsTests
 
 		var validationResultExpected = new List<IValidationResult>()
 		{
-			new ValidationResult { Code = "The Origin value is invalid", IsValid = false, Line = 0 },
-			new ValidationResult { Code = "The Type value is invalid", IsValid = false, Line = 0 },
-			new ValidationResult { Code = "The VatNumber value is invalid", IsValid = false, Line = 0 },
-			new ValidationResult { Code = "The Version value is invalid", IsValid = false, Line = 0 },
+			new ValidationResult { Code = OriginValueErrorMessage, IsValid = false, Line = 0 },
+			new ValidationResult { Code = TypeValueErrorMessage, IsValid = false, Line = 0 },
+			new ValidationResult { Code = VatNumberValueErrorMessage, IsValid = false, Line = 0 },
+			new ValidationResult { Code = VersionValueErrorMessage, IsValid = false, Line = 0 },
 		};
             
 		validationResults.Should().BeEquivalentTo(validationResultExpected);
@@ -90,7 +96,7 @@ public class MigrationInfoExtensionsTests
 				},
 				new ValidationResult
 				{
-					Code = "The Origin value is invalid",
+					Code = OriginValueErrorMessage,
 					Line = 0,
 					IsValid = false
 				}
@@ -106,7 +112,7 @@ public class MigrationInfoExtensionsTests
 				},
 				new ValidationResult()
 				{
-					Code = "The Type value is invalid",
+					Code = TypeValueErrorMessage,
 					Line = 0,
 					IsValid = false
 				}
@@ -122,7 +128,7 @@ public class MigrationInfoExtensionsTests
 				},
 				new ValidationResult()
 				{
-					Code = "The Year value is invalid",
+					Code = YearValueErrorMessage,
 					Line = 0,
 					IsValid = false
 				}
@@ -138,7 +144,7 @@ public class MigrationInfoExtensionsTests
 				},
 				new ValidationResult()
 				{
-					Code = "The VatNumber value is invalid",
+					Code = VatNumberValueErrorMessage,
 					Line = 0,
 					IsValid = false
 				}
@@ -154,7 +160,7 @@ public class MigrationInfoExtensionsTests
 				},
 				new ValidationResult()
 				{
-					Code = "The Version value is invalid",
+					Code = VersionValueErrorMessage,
 					Line = 0,
 					IsValid = false
 				}
