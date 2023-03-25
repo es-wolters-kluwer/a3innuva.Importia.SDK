@@ -8,11 +8,13 @@ namespace a3innuva.TAA.Migration.SDK.Extensions.Tests;
 
 public class MigrationInfoExtensionsTests
 {
-	private const string VersionValueErrorMessage = "The Version value is invalid";
-	private const string VatNumberValueErrorMessage = "The VatNumber value is invalid";
-	private const string YearValueErrorMessage = "The Year value is invalid";
-	private const string TypeValueErrorMessage = "The Type value is invalid";
-	private const string OriginValueErrorMessage = "The Origin value is invalid";
+	private const string VersionValueErrorMessage = "Migration number version erroneous";
+	private const string VatNumberValueErrorMessage = "Vat Number is not defined";
+	private const string YearValueErrorMessage = "Year is not defined";
+	private const string TypeValueUnknownErrorMessage = "Unknown migration type";
+	private const string TypeValueUndefinedErrorMessage = "Migration type is not defined";
+	private const string OriginValueUnknownErrorMessage = "Unknown migration origin";
+	private const string OriginValueUndefinedErrorMessage = "Migration origin is not defined";
 
 	[Fact]
 	public void ShouldReturnTrueWhenInfoIsValid()
@@ -64,8 +66,8 @@ public class MigrationInfoExtensionsTests
 
 		var validationResultExpected = new List<IValidationResult>()
 		{
-			new ValidationResult { Code = OriginValueErrorMessage, IsValid = false, Line = 0 },
-			new ValidationResult { Code = TypeValueErrorMessage, IsValid = false, Line = 0 },
+			new ValidationResult { Code = OriginValueUnknownErrorMessage, IsValid = false, Line = 0 },
+			new ValidationResult { Code = TypeValueUnknownErrorMessage, IsValid = false, Line = 0 },
 			new ValidationResult { Code = VatNumberValueErrorMessage, IsValid = false, Line = 0 },
 			new ValidationResult { Code = VersionValueErrorMessage, IsValid = false, Line = 0 },
 		};
@@ -96,7 +98,7 @@ public class MigrationInfoExtensionsTests
 				},
 				new ValidationResult
 				{
-					Code = OriginValueErrorMessage,
+					Code = OriginValueUndefinedErrorMessage,
 					Line = 0,
 					IsValid = false
 				}
@@ -112,7 +114,23 @@ public class MigrationInfoExtensionsTests
 				},
 				new ValidationResult()
 				{
-					Code = TypeValueErrorMessage,
+					Code = TypeValueUndefinedErrorMessage,
+					Line = 0,
+					IsValid = false
+				}
+			},
+			{
+				new MigrationInfo()
+				{
+					Origin = MigrationOrigin.Eco,
+					Type = (MigrationType) 9, 
+					Year = 2022, 
+					VatNumber = "vatNumber",
+					Version = "2.0"
+				},
+				new ValidationResult()
+				{
+					Code = TypeValueUnknownErrorMessage,
 					Line = 0,
 					IsValid = false
 				}
