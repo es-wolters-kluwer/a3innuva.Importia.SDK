@@ -15,9 +15,17 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
         public string FileName { get; set; }
         public string Version { get; set; }
 
-        public bool IsValidOrigin() => Origin != MigrationOrigin.None && Enum.IsDefined(typeof(MigrationOrigin), Origin);
+        public bool IsValidOrigin() => IsDefinedOrigin() && IsKnowOrigin();
 
-        public bool IsValidType() => Type != MigrationType.None && Enum.IsDefined(typeof(MigrationType), Type);
+        public bool IsKnowOrigin() => Enum.IsDefined(typeof(MigrationOrigin), Origin);
+
+        public bool IsDefinedOrigin() => Origin != MigrationOrigin.None;
+
+        public bool IsValidType() => IsDefinedType() && IsKnowType();
+
+        public bool IsDefinedType() => Type != MigrationType.None;
+
+        public bool IsKnowType() => Enum.IsDefined(typeof(MigrationType), Type);
 
         public bool IsValidYear() => Type == MigrationType.ChartOfAccount ? Year == 0 : Year != 0;
 

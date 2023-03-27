@@ -13,11 +13,13 @@
 
 			var listErrors = new List<IValidationResult>();
 			
-			if (!info.IsValidOrigin()) listErrors.Add(BuildValidationResult($"The {nameof(IMigrationInfo.Origin)} value is invalid"));
-			if (!info.IsValidType()) listErrors.Add(BuildValidationResult($"The {nameof(IMigrationInfo.Type)} value is invalid"));
-			if (!info.IsValidYear()) listErrors.Add(BuildValidationResult($"The {nameof(IMigrationInfo.Year)} value is invalid"));
-			if (!info.IsValidVatNumber()) listErrors.Add(BuildValidationResult($"The {nameof(IMigrationInfo.VatNumber)} value is invalid"));
-			if (!info.IsValidVersion()) listErrors.Add(BuildValidationResult($"The {nameof(IMigrationInfo.Version)} value is invalid"));
+			if (!info.IsKnowOrigin()) listErrors.Add(BuildValidationResult($"Unknown migration {nameof(IMigrationInfo.Origin).ToLower()}"));
+			if (!info.IsDefinedOrigin()) listErrors.Add(BuildValidationResult($"Migration {nameof(IMigrationInfo.Origin).ToLower()} is not defined"));
+			if (!info.IsKnowType()) listErrors.Add(BuildValidationResult($"Unknown migration {nameof(IMigrationInfo.Type).ToLower()}"));
+			if (!info.IsDefinedType()) listErrors.Add(BuildValidationResult($"Migration {nameof(IMigrationInfo.Type).ToLower()} is not defined"));
+			if (!info.IsValidYear()) listErrors.Add(BuildValidationResult($"{nameof(IMigrationInfo.Year)} is not defined"));
+			if (!info.IsValidVatNumber()) listErrors.Add(BuildValidationResult($"Vat Number is not defined"));
+			if (!info.IsValidVersion()) listErrors.Add(BuildValidationResult($"Migration number {nameof(IMigrationInfo.Version).ToLower()} erroneous"));
 
 			return listErrors;
 		}

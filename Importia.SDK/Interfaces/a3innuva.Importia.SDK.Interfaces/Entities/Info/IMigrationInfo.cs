@@ -44,5 +44,9 @@
         bool IsValidVatNumber();
         bool IsValidVersion();
         bool IsValid();
+        bool IsKnowOrigin();
+        bool IsDefinedOrigin();
+        bool IsKnowType();
+        bool IsDefinedType();
     }
 }
