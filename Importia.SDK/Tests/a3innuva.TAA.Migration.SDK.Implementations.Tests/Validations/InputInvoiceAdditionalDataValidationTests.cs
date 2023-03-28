@@ -50,7 +50,7 @@
 
             var errors = this.validation.Validate(entity);
 
-            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Descripción' tiene longitud incorrecta");
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Descripción adicional' tiene longitud incorrecta");
         }
 
         [Fact(DisplayName = "Validate DUA length failed")]

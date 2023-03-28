@@ -791,7 +791,7 @@
                     new InputInvoiceLine()
                     {
                         Id = Guid.NewGuid(),
-                        Line = 1,
+                        Line = 2,
                         BaseAmount = 1210,
                         TaxAmount = 210,
                         Transaction = "OP_INT",
@@ -817,7 +817,7 @@
             IInputInvoice entity2 = new InputInvoice()
             {
                 Id = Guid.NewGuid(),
-                Line = 1,
+                Line = 3,
                 InvoiceDate = DateTime.Now,
                 JournalDate = DateTime.Now,
                 InvoiceNumber = "number",
@@ -829,7 +829,7 @@
                     new InputInvoiceLine()
                     {
                         Id = Guid.NewGuid(),
-                        Line = 1,
+                        Line = 4,
                         BaseAmount = 1210,
                         TaxAmount = 210,
                         Transaction = "OP_INT",
@@ -852,13 +852,18 @@
             
             var validationResultExpected = new List<IValidationResult>()
             {
-                new ValidationResult { Code = "Id", IsValid = false, Line = 0 },
-                new ValidationResult { Code = "El campo 'Importe', obligatorio contenido", IsValid = false, Line = 0 },
-                new ValidationResult { Code = "El campo 'Fecha', obligatorio contenido", IsValid = false, Line = 0 },
-                new ValidationResult { Code = "El campo 'Cuenta bancaria' tiene formato incorrecto", IsValid = false, Line = 0 },
-                new ValidationResult { Code = "El campo 'Descripción de cuenta bancaria', obligatorio contenido", IsValid = false, Line = 0 },
-                new ValidationResult { Code = "El campo 'Descripción de cuenta bancaria' tiene longitud incorrecta", IsValid = false, Line = 0 },
-                new ValidationResult { Code = "El campo 'Origen', obligatorio contenido", IsValid = false, Line = 1 },
+                new ValidationResult { Code = "Id", IsValid = false, Line = 1 },
+                new ValidationResult { Code = "El campo 'Importe', obligatorio contenido", IsValid = false, Line = 1 },
+                new ValidationResult { Code = "El campo 'Fecha', obligatorio contenido", IsValid = false, Line = 1 },
+                new ValidationResult { Code = "El campo 'Cuenta bancaria' tiene formato incorrecto", IsValid = false, Line = 1 },
+                new ValidationResult { Code = "El campo 'Descripción de cuenta bancaria', obligatorio contenido", IsValid = false, Line = 1 },
+                new ValidationResult { Code = "El campo 'Descripción de cuenta bancaria' tiene longitud incorrecta", IsValid = false, Line = 1 },
+                new ValidationResult { Code = "El campo 'Descripción adicional' tiene longitud incorrecta", IsValid = false, Line = 1 },
+                new ValidationResult { Code = "El campo 'Número de DUA' tiene longitud incorrecta", IsValid = false, Line = 1 },
+                new ValidationResult { Code = "No es un tipo de documento válido", IsValid = false, Line = 1 },
+                new ValidationResult { Code = "El campo 'Descripción adicional' tiene longitud incorrecta", IsValid = false, Line = 3 },
+                new ValidationResult { Code = "El campo 'Número de DUA' tiene longitud incorrecta", IsValid = false, Line = 3 },
+                new ValidationResult { Code = "El campo 'Origen', obligatorio contenido", IsValid = false, Line = 3 },
             };
             
             result.errors.Should().BeEquivalentTo(validationResultExpected);

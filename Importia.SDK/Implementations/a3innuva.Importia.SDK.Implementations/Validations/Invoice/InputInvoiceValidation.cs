@@ -12,11 +12,13 @@
         private readonly Regex accountCodeFormat;
         private readonly Regex nifFormat;
         private readonly Regex postalCodeFormat;
+        private readonly InputInvoiceAdditionalDataValidation additionalDataValidation;
 
         public InputInvoiceValidation()
         {
             this.lineValidation = new InputInvoiceLineValidation();
             this.paymentValidation = new PaymentValidation();
+            this.additionalDataValidation = new InputInvoiceAdditionalDataValidation();
             this.accountCodeFormat = new Regex(@"^[1-9]{1}[0-9]*$");
             this.nifFormat = new Regex(@"^[A-Z0-9]*$");
             this.postalCodeFormat = new Regex(@"^[0-9]{5}$");
@@ -63,6 +65,7 @@
             }
 
             ValidateMaturities(entity, errors);
+            ValidateAdditionalData(entity, errors);
 
             var entityErrors = base.Validate(entity);
 
@@ -76,15 +79,25 @@
             foreach (var item in entity.Maturities)
             {
                 var result = paymentValidation.Validate(item);
-
-                var resultErrors = result.Where(x => !x.IsValid);
-                errors.AddRange(resultErrors);
+                var listErrors = result.Where(x => !x.IsValid).Select(error =>
+                {
+                    error.Line = entity.Line;
+                    return error;
+                });
+                errors.AddRange(listErrors);
             }
         }
 
-        private void ValidateAdditionalData(IInputInvoice entity, List<IValidationResult> errors)
+        private void ValidateAdditionalData(IInputInvoice inputInvoice, List<IValidationResult> errors)
         {
-            if (entity.AdditionalData == null) return;
+            if (inputInvoice.AdditionalData == null) return;
+            var result = additionalDataValidation.Validate(inputInvoice.AdditionalData);
+            var listErrors = result.Where(x => !x.IsValid).Select(error =>
+            {
+                error.Line = inputInvoice.Line;
+                return error;
+            });
+            errors.AddRange(listErrors);
         }
 
         private bool ValidateVatNumber(string input)
