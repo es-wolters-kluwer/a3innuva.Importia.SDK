@@ -9,10 +9,10 @@
     {
         private readonly IValidation<IInputInvoiceLine> lineValidation;
         private readonly IValidation<IPayment> paymentValidation;
+        private readonly IValidation<IInputInvoiceAdditionalData> additionalDataValidation;
         private readonly Regex accountCodeFormat;
         private readonly Regex nifFormat;
         private readonly Regex postalCodeFormat;
-        private readonly InputInvoiceAdditionalDataValidation additionalDataValidation;
 
         public InputInvoiceValidation()
         {
@@ -73,15 +73,15 @@
             return errors;
         }
 
-        private void ValidateMaturities(IInputInvoice entity, List<IValidationResult> errors)
+        private void ValidateMaturities(IInputInvoice inputInvoice, List<IValidationResult> errors)
         {
-            if (entity.Maturities == null) return;
-            foreach (var item in entity.Maturities)
+            if (inputInvoice.Maturities == null) return;
+            foreach (var item in inputInvoice.Maturities)
             {
                 var result = paymentValidation.Validate(item);
                 var listErrors = result.Where(x => !x.IsValid).Select(error =>
                 {
-                    error.Line = entity.Line;
+                    error.Line = error.Line == 0 ? inputInvoice.Line : error.Line;
                     return error;
                 });
                 errors.AddRange(listErrors);
@@ -94,7 +94,7 @@
             var result = additionalDataValidation.Validate(inputInvoice.AdditionalData);
             var listErrors = result.Where(x => !x.IsValid).Select(error =>
             {
-                error.Line = inputInvoice.Line;
+                error.Line = error.Line == 0 ? inputInvoice.Line : error.Line;
                 return error;
             });
             errors.AddRange(listErrors);

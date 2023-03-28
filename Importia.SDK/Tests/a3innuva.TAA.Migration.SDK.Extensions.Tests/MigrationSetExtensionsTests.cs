@@ -802,7 +802,8 @@
                 {
                     Id = Guid.NewGuid(),
                     TypeOfDocument = "CED",
-                    InitialNumberOfDocument = "Z"
+                    InitialNumberOfDocument = "Z",
+                    Line = 6
                 },
                 Maturities = new []
                 {
@@ -847,9 +848,6 @@
 
             var result = set.IsValid();
 
-            result.errors.Any().Should().BeTrue();
-            result.isValid.Should().BeFalse();
-            
             var validationResultExpected = new List<IValidationResult>()
             {
                 new ValidationResult { Code = "Id", IsValid = false, Line = 1 },
@@ -858,14 +856,16 @@
                 new ValidationResult { Code = "El campo 'Cuenta bancaria' tiene formato incorrecto", IsValid = false, Line = 1 },
                 new ValidationResult { Code = "El campo 'Descripción de cuenta bancaria', obligatorio contenido", IsValid = false, Line = 1 },
                 new ValidationResult { Code = "El campo 'Descripción de cuenta bancaria' tiene longitud incorrecta", IsValid = false, Line = 1 },
-                new ValidationResult { Code = "El campo 'Descripción adicional' tiene longitud incorrecta", IsValid = false, Line = 1 },
-                new ValidationResult { Code = "El campo 'Número de DUA' tiene longitud incorrecta", IsValid = false, Line = 1 },
-                new ValidationResult { Code = "No es un tipo de documento válido", IsValid = false, Line = 1 },
+                new ValidationResult { Code = "El campo 'Descripción adicional' tiene longitud incorrecta", IsValid = false, Line = 6 },
+                new ValidationResult { Code = "El campo 'Número de DUA' tiene longitud incorrecta", IsValid = false, Line = 6 },
+                new ValidationResult { Code = "No es un tipo de documento válido", IsValid = false, Line = 6 },
                 new ValidationResult { Code = "El campo 'Descripción adicional' tiene longitud incorrecta", IsValid = false, Line = 3 },
                 new ValidationResult { Code = "El campo 'Número de DUA' tiene longitud incorrecta", IsValid = false, Line = 3 },
                 new ValidationResult { Code = "El campo 'Origen', obligatorio contenido", IsValid = false, Line = 3 },
             };
-            
+
+            result.errors.Any().Should().BeTrue();
+            result.isValid.Should().BeFalse();
             result.errors.Should().BeEquivalentTo(validationResultExpected);
         }
 
@@ -1110,19 +1110,32 @@
                     new OutputInvoiceLine()
                     {
                         Id = Guid.NewGuid(),
-                        Line = 1,
+                        Line = 2,
                         BaseAmount = 1210,
                         TaxAmount = 210,
                         Transaction = "OP_INT",
                     }
                 }.ToArray(),
-                Source = "source"
+                Source = "source",
+                Maturities = new []
+                {
+                    new Charge
+                    {
+                        Id = Guid.NewGuid(),
+                        BankAccount = "AccountInvalid",
+                        Line = 3
+                    }
+                },
+                AdditionalData = new OutputInvoiceAdditionalData
+                {
+                    TypeOfDocument = "InvalidType"
+                }
             };
 
             IOutputInvoice entity2 = new OutputInvoice()
             {
                 Id = Guid.NewGuid(),
-                Line = 1,
+                Line = 4,
                 InvoiceDate = DateTime.Now,
                 JournalDate = DateTime.Now,
                 InvoiceNumber = "number",
@@ -1134,21 +1147,42 @@
                     new OutputInvoiceLine()
                     {
                         Id = Guid.NewGuid(),
-                        Line = 1,
+                        Line = 5,
                         BaseAmount = 1210,
                         TaxAmount = 210,
                         Transaction = "OP_INT",
                     }
                 }.ToArray(),
-                //Source = "source"
+                AdditionalData = new OutputInvoiceAdditionalData
+                {
+                    TypeOfDocument = "InvalidType",
+                    Line = 9
+                }
             };
 
             set.Entities = new IMigrationEntity[2]{entity1,entity2};
 
             var result = set.IsValid();
-
+            
+            var validationResultExpected = new List<IValidationResult>()
+            {
+                new ValidationResult { Code = "El campo 'Importe', obligatorio contenido", IsValid = false, Line = 3 },
+                new ValidationResult { Code = "El campo 'Fecha', obligatorio contenido", IsValid = false, Line = 3 },
+                new ValidationResult { Code = "El campo 'Cuenta bancaria' tiene formato incorrecto", IsValid = false, Line = 3 },
+                new ValidationResult { Code = "El campo 'Descripción de cuenta bancaria', obligatorio contenido", IsValid = false, Line = 3 },
+                new ValidationResult { Code = "El campo 'Descripción de cuenta bancaria' tiene longitud incorrecta", IsValid = false, Line = 3 },
+                new ValidationResult { Code = "Id", IsValid = false, Line = 1 },
+                new ValidationResult { Code = "El campo 'Descripción adicional' tiene longitud incorrecta", IsValid = false, Line = 1 },
+                new ValidationResult { Code = "No es un tipo de documento válido", IsValid = false, Line = 1 },
+                new ValidationResult { Code = "Id", IsValid = false, Line = 9 },
+                new ValidationResult { Code = "El campo 'Descripción adicional' tiene longitud incorrecta", IsValid = false, Line = 9 },
+                new ValidationResult { Code = "No es un tipo de documento válido", IsValid = false, Line = 9 },
+                new ValidationResult { Code = "El campo 'Origen', obligatorio contenido", IsValid = false, Line = 4 },
+            };
+            
             result.errors.Any().Should().BeTrue();
             result.isValid.Should().BeFalse();
+            result.errors.Should().BeEquivalentTo(validationResultExpected);
         }
 
         [Fact(DisplayName = "Validate content and type outputInvoice succeed")]
