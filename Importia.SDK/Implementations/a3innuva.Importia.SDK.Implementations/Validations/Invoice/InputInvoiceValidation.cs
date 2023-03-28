@@ -52,7 +52,7 @@
 
         public override IEnumerable<IValidationResult> Validate(IInputInvoice entity)
         {
-            List<IValidationResult> errors = new List<IValidationResult>();
+            var errors = new List<IValidationResult>();
 
             foreach (var item in entity.Lines)
             {
@@ -62,21 +62,29 @@
                 errors.AddRange(resultErrors);
             }
 
-            if (entity.Maturities != null)
-            {
-                foreach (var item in entity.Maturities)
-                {
-                    var result = paymentValidation.Validate(item);
-
-                    var resultErrors = result.Where(x => !x.IsValid);
-                    errors.AddRange(resultErrors);
-                }
-            }
+            ValidateMaturities(entity, errors);
 
             var entityErrors = base.Validate(entity);
 
             errors.AddRange(entityErrors);
             return errors;
+        }
+
+        private void ValidateMaturities(IInputInvoice entity, List<IValidationResult> errors)
+        {
+            if (entity.Maturities == null) return;
+            foreach (var item in entity.Maturities)
+            {
+                var result = paymentValidation.Validate(item);
+
+                var resultErrors = result.Where(x => !x.IsValid);
+                errors.AddRange(resultErrors);
+            }
+        }
+
+        private void ValidateAdditionalData(IInputInvoice entity, List<IValidationResult> errors)
+        {
+            if (entity.AdditionalData == null) return;
         }
 
         private bool ValidateVatNumber(string input)
