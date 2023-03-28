@@ -9,6 +9,7 @@
     {
         private readonly IValidation<IOutputInvoiceLine> lineValidation;
         private readonly IValidation<ICharge> chargeValidation;
+        private readonly IValidation<IOutputInvoiceAdditionalData> additionalDataValidation;
         private readonly Regex accountCodeFormat;
         private readonly Regex nifFormat;
         private readonly Regex postalCodeFormat;
@@ -17,6 +18,7 @@
         {
             this.lineValidation = new OutputInvoiceLineValidation();
             this.chargeValidation = new ChargeValidation();
+            this.additionalDataValidation = new OutputInvoiceAdditionalDataValidation();
             this.accountCodeFormat = new Regex(@"^[1-9]{1}[0-9]*$");
             this.nifFormat = new Regex(@"^[A-Z0-9]*$");
             this.postalCodeFormat = new Regex(@"^[0-9]{5}$");
@@ -62,21 +64,42 @@
                 errors.AddRange(resultErrors);
             }
 
-            if (entity.Maturities != null)
-            {
-                foreach (var item in entity.Maturities)
-                {
-                    var result = chargeValidation.Validate(item);
-
-                    var resultErrors = result.Where(x => !x.IsValid);
-                    errors.AddRange(resultErrors);
-                }
-            }
+            ValidateMaturities(entity, errors);
+            ValidateAdditionalData(entity, errors);
 
             var entityErrors = base.Validate(entity);
 
             errors.AddRange(entityErrors);
             return errors;
+        }
+
+        private void ValidateMaturities(IOutputInvoice outputInvoice, List<IValidationResult> errors)
+        {
+            if (outputInvoice.Maturities == null) return;
+            foreach (var item in outputInvoice.Maturities)
+            {
+                var result = chargeValidation.Validate(item);
+
+                var listErrors = result.Where(x => !x.IsValid).Select(error =>
+                {
+                    error.Line = error.Line == 0 ? outputInvoice.Line : error.Line;
+                    return error;
+                });
+                errors.AddRange(listErrors);
+            }
+        }
+
+        private void ValidateAdditionalData(IOutputInvoice outputInvoice, List<IValidationResult> errors)
+        {
+            if (outputInvoice.AdditionalData == null) return;
+            var result = additionalDataValidation.Validate(outputInvoice.AdditionalData);
+
+            var listErrors = result.Where(x => !x.IsValid).Select(error =>
+            {
+                error.Line = error.Line == 0 ? outputInvoice.Line : error.Line;
+                return error;
+            });
+            errors.AddRange(listErrors);
         }
 
         private bool ValidateVatNumber(string input)
