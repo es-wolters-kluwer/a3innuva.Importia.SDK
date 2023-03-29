@@ -16,11 +16,7 @@
             this.CreateRule(x => this.ValidateFundamental(x.Fundamental), this.ReplaceInMessage("No es un tipo de clave válida"));
         }
 
-        private bool ValidateDescription(string description)
-        {
-            if (string.IsNullOrEmpty(description)) return true;
-            return description.Length <= 500;
-        }
+        private bool ValidateDescription(string description) => string.IsNullOrEmpty(description) || description.Length <= 500;
 
         private bool ValidateTypeOfDocument(string input) => string.IsNullOrEmpty(input) || TypeOfDocumentAdditionalData.ItExistForOutput(input);
 
