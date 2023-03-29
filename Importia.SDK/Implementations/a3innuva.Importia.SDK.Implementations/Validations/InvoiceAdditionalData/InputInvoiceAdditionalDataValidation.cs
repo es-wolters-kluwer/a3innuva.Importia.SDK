@@ -7,7 +7,7 @@
         {
             this.CreateRule(x => this.Validate(x.Id), "Id");
 
-            this.CreateRule(x => this.ValidateDescription(x, x.Description), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Descripción adicional'"));
+            this.CreateRule(x => this.ValidateDescription(x.Description), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Descripción adicional'"));
 
             this.CreateRule(x => this.ValidateDuaDocument(x.DuaDocumentId), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Número de DUA'"));
 
@@ -18,7 +18,7 @@
             this.CreateRule(x => this.ValidateFundamental(x.Fundamental), this.ReplaceInMessage("No es un tipo de clave válida"));
         }
 
-        private bool ValidateDescription(IInputInvoiceAdditionalData x, string description)
+        private bool ValidateDescription(string description)
         {
             if (string.IsNullOrEmpty(description)) return true;
             return description.Length <= 500;
