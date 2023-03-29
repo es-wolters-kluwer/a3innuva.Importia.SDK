@@ -7,9 +7,9 @@
         {
             this.CreateRule(x => this.Validate(x.Id), "Id");
 
-            this.CreateRule(x => x.Description?.Length <= 500, this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Descripción adicional'"));
+            this.CreateRule(x => this.ValidateDescription(x, x.Description), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Descripción adicional'"));
 
-            this.CreateRule(x => x.DuaDocumentId?.Length <= 18, this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Número de DUA'"));
+            this.CreateRule(x => this.ValidateDuaDocument(x.DuaDocumentId), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Número de DUA'"));
 
             this.CreateRule(x => this.ValidateNullable(x.InitialNumberOfDocument, 60), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Número de documento inicial'"));
             this.CreateRule(x => this.ValidateNullable(x.LastNumberOfDocument, 60), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Número de documento final'"));
@@ -18,20 +18,20 @@
             this.CreateRule(x => this.ValidateFundamental(x.Fundamental), this.ReplaceInMessage("No es un tipo de clave válida"));
         }
 
-        private bool ValidateTypeOfDocument(string input)
+        private bool ValidateDescription(IInputInvoiceAdditionalData x, string description)
         {
-            if (string.IsNullOrEmpty(input))
-                return true;
-
-            return TypeOfDocumentAdditionalData.ItExistForInput(input);
+            if (string.IsNullOrEmpty(description)) return true;
+            return description.Length <= 500;
         }
 
-        private bool ValidateFundamental(string input)
+        private bool ValidateDuaDocument(string duaDocumentId)
         {
-            if (string.IsNullOrEmpty(input))
-                return true;
-
-            return FundamentalAdditionalData.ItExistForInput(input);
+            if (string.IsNullOrEmpty(duaDocumentId)) return true;
+            return duaDocumentId.Length <= 18;
         }
+
+        private bool ValidateTypeOfDocument(string input) => string.IsNullOrEmpty(input) || TypeOfDocumentAdditionalData.ItExistForInput(input);
+
+        private bool ValidateFundamental(string input) => string.IsNullOrEmpty(input) || FundamentalAdditionalData.ItExistForInput(input);
     }
 }

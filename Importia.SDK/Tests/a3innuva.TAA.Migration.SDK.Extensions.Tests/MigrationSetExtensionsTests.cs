@@ -856,11 +856,7 @@
                 new ValidationResult { Code = "El campo 'Cuenta bancaria' tiene formato incorrecto", IsValid = false, Line = 1 },
                 new ValidationResult { Code = "El campo 'Descripción de cuenta bancaria', obligatorio contenido", IsValid = false, Line = 1 },
                 new ValidationResult { Code = "El campo 'Descripción de cuenta bancaria' tiene longitud incorrecta", IsValid = false, Line = 1 },
-                new ValidationResult { Code = "El campo 'Descripción adicional' tiene longitud incorrecta", IsValid = false, Line = 6 },
-                new ValidationResult { Code = "El campo 'Número de DUA' tiene longitud incorrecta", IsValid = false, Line = 6 },
                 new ValidationResult { Code = "No es un tipo de documento válido", IsValid = false, Line = 6 },
-                new ValidationResult { Code = "El campo 'Descripción adicional' tiene longitud incorrecta", IsValid = false, Line = 3 },
-                new ValidationResult { Code = "El campo 'Número de DUA' tiene longitud incorrecta", IsValid = false, Line = 3 },
                 new ValidationResult { Code = "El campo 'Origen', obligatorio contenido", IsValid = false, Line = 3 },
             };
 
@@ -1172,10 +1168,8 @@
                 new ValidationResult { Code = "El campo 'Descripción de cuenta bancaria', obligatorio contenido", IsValid = false, Line = 3 },
                 new ValidationResult { Code = "El campo 'Descripción de cuenta bancaria' tiene longitud incorrecta", IsValid = false, Line = 3 },
                 new ValidationResult { Code = "Id", IsValid = false, Line = 1 },
-                new ValidationResult { Code = "El campo 'Descripción adicional' tiene longitud incorrecta", IsValid = false, Line = 1 },
                 new ValidationResult { Code = "No es un tipo de documento válido", IsValid = false, Line = 1 },
                 new ValidationResult { Code = "Id", IsValid = false, Line = 9 },
-                new ValidationResult { Code = "El campo 'Descripción adicional' tiene longitud incorrecta", IsValid = false, Line = 9 },
                 new ValidationResult { Code = "No es un tipo de documento válido", IsValid = false, Line = 9 },
                 new ValidationResult { Code = "El campo 'Origen', obligatorio contenido", IsValid = false, Line = 4 },
             };
