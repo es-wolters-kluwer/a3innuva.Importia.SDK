@@ -21,7 +21,6 @@
             this.CreateRule(x => this.ValidateTransaction(x.Transaction), this.ReplaceInMessage("No es una operación valida"));
             this.CreateRule(x => this.ValidateWithHolding(x.WithHolding), this.ReplaceInMessage("No es una retención valida"));
             this.CreateRule(x => this.ValidatePercentage(x.WithHoldingPercentage), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Porcentaje de retención'"));
-            this.CreateRule(x => this.ValidateTypeTaxCode(x.TaxCode), this.ReplaceInMessage(ValidationMessages.InvalidValue, "'Código IVA'"));
         }
 
         private bool ValidateTransaction(string input)
@@ -52,13 +51,5 @@
 
             return this.accountCodeFormat.IsMatch(input);
         }
-
-		private bool ValidateTypeTaxCode(string input)
-		{
-			if (string.IsNullOrEmpty(input))
-				return true;
-
-			return TypeOfTaxInputInvoice.ItExist(input);
-		}
-	}
+    }
 }
