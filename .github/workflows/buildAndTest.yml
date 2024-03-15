@@ -31,6 +31,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore --framework net6.0 /p:Version=$GitVersion_SemVer /p:FileVersion=$GitVersion_SemVer /p:AssemblyVersion=$GitVersion_MajorMinorPatch
+      run: dotnet build --configuration Release --no-restore --framework net8.0 /p:Version=$GitVersion_SemVer /p:FileVersion=$GitVersion_SemVer /p:AssemblyVersion=$GitVersion_MajorMinorPatch
     - name: Test
       run: dotnet test --no-build --no-restore --verbosity normal --configuration Release 
