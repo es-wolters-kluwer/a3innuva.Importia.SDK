@@ -103,12 +103,6 @@ stages:
           projects: a3innuva.Importia.SDK.sln
           arguments: '--filter "FullyQualifiedName~.tests"  -c $(BuildConfiguration) --no-build --no-restore --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover'
           testRunTitle: 'BackendTests'
-
-      - script: 'dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.6'
-        displayName: 'Install ReportGenerator tool'
-        
-      - script: 'reportgenerator -reports:**/coverage.opencover.xml -targetdir:$(Agent.TempDirectory) -reporttypes:"Cobertura"'
-        displayName: 'Create reports'
             
       - task: SonarQubeAnalyze@5
         displayName: 'SonarQube analyze'
@@ -118,9 +112,3 @@ stages:
         displayName: 'SonarQube publish'
         inputs:
           pollingTimeoutSec: '300'
-
-      - task: PublishCodeCoverageResults@1
-        displayName: 'Publish code coverage'
-        inputs:
-          codeCoverageTool: 'Cobertura'
-          summaryFileLocation: '$(Agent.TempDirectory)/*.xml'
