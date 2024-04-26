@@ -65,6 +65,13 @@ stages:
           script: |
             Write-Host "Versioning to: $(GitVersion.SemVer)"
           failOnStderr: true
+
+      - task: JavaToolInstaller@0
+        displayName: 'Install Java'
+        inputs:
+          versionSpec: '17'
+          jdkArchitectureOption: 'x64'
+          jdkSourceOption: 'PreInstalled'
       
       - task: SonarQubePrepare@5
         displayName: 'Prepare SonarQube Analysis'
