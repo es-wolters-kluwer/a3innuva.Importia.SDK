@@ -56,7 +56,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore --framework net6.0
+      run: dotnet build --configuration Release --no-restore --framework net8.0
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
