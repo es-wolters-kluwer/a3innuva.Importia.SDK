@@ -46,6 +46,10 @@
         /// </summary>
         string CorrectiveInvoiceNumber { get; set; }
         /// <summary>
+        /// Corrective invoice date, for corrective invoices is mandatory
+        /// </summary>
+        DateTime? CorrectiveInvoiceDate { get; set; }
+        /// <summary>
         /// Third party postal code, mandatory if name and postalCode wa informed [0-5]
         /// </summary>
         string PostalCode { get; set; }
