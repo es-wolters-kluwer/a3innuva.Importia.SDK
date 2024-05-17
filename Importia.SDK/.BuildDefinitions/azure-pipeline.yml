@@ -17,7 +17,7 @@ variables:
   domain: 'importia'
   BuildConfiguration: 'Release'
   BuildPlatform: 'any cpu'
-  netCoreVersion: 'net6.0'
+  netCoreVersion: 'net8.0'
 
 trigger:
   branches:
