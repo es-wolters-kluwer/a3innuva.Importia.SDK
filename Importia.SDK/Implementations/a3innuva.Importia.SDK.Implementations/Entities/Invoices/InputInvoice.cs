@@ -23,6 +23,7 @@
         public string PartnerAccount { get; set; }
         public bool IsCorrective { get; set; }
         public string CorrectiveInvoiceNumber { get; set; }
+        public DateTime? CorrectiveInvoiceDate { get; set; }
         public string PostalCode { get; set; }
         public string CountryCode { get; set; }
         public int VatType { get; set; }
