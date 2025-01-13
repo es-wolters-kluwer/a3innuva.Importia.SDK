@@ -46,12 +46,12 @@ stages:
       - checkout: self
         clean: true
 
-      - task: gitversion/setup@0
+      - task: gitversion/setup@3
         displayName: 'Install GitTools'
         inputs:
           versionSpec: '5.x'
 
-      - task: gitversion/execute@0
+      - task: gitversion/execute@3
         displayName: 'Execute Git version'
         inputs:
           useConfigFile: true
@@ -65,19 +65,12 @@ stages:
           script: |
             Write-Host "Versioning to: $(GitVersion.SemVer)"
           failOnStderr: true
-
-      - task: JavaToolInstaller@0
-        displayName: 'Install Java'
-        inputs:
-          versionSpec: '17'
-          jdkArchitectureOption: 'x64'
-          jdkSourceOption: 'PreInstalled'
       
-      - task: SonarQubePrepare@5
+      - task: SonarQubePrepare@7
         displayName: 'Prepare SonarQube Analysis'
         inputs:
           SonarQube: 'SonarQube - Github'
-          scannerMode: 'MSBuild'
+          scannerMode: 'dotnet'
           projectKey: $(SonarQubeProjectName)
           projectName: $(SonarQubeProjectName)
           projectVersion : $(GitVersion.SemVer)
@@ -87,6 +80,12 @@ stages:
             sonar.sources=$(Agent.BuildDirectory)/Importia.SDK
             sonar.tests=$(Agent.BuildDirectory)/Importia.SDK/Tests
             sonar.log.level=INFO
+
+      - task: UseDotNet@2
+        displayName: 'Use donet'
+        inputs:
+          packageType: 'sdk'
+          version: '9.x'
 
       - task: DotNetCoreCLI@2
         displayName: 'dotnet restore'
@@ -111,11 +110,6 @@ stages:
           arguments: '--filter "FullyQualifiedName~.tests"  -c $(BuildConfiguration) --no-build --no-restore --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover'
           testRunTitle: 'BackendTests'
             
-      - task: SonarQubeAnalyze@5
+      - task: SonarQubeAnalyze@7
         displayName: 'SonarQube analyze'
         continueOnError: false
-        
-      - task: SonarQubePublish@5
-        displayName: 'SonarQube publish'
-        inputs:
-          pollingTimeoutSec: '300'
