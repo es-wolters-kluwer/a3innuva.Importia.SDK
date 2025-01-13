@@ -1,23 +1,9 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 pool:
-  # Agente de Azure:
   name: Azure Pipelines
-# Agente de WKE:
-#  name: Newpol-AgentsDEV
+
 
 variables:
-  ## Constants
-  domain: 'importia'
   BuildConfiguration: 'Release'
-  BuildPlatform: 'any cpu'
-  netCoreVersion: 'net8.0'
 
 trigger:
   branches:
@@ -25,17 +11,10 @@ trigger:
       - principal
 
 stages:
-
-##################
-##  Stage_SonarQube_Analysis
-##################
-- stage: 'Stage_SonarQube_Analysis'
+- stage: 'SonarQube_Analysis'
   condition: and(eq(variables['runSonarQube'], 'true'), succeeded())
   jobs:
  
-  ##################
-  ##  Job_SonarQube_analysis
-  ##################
   - job: Job_SonarQube_analysis
     displayName: 'SonarQube Analysis'
     condition: eq(variables['runSonarQube'], 'true')
@@ -57,14 +36,6 @@ stages:
           useConfigFile: true
           configFilePath: 'GitVersion.yml'
           versionSpec: '5.x'
-
-      - task: PowerShell@2
-        displayName: 'Set Version'
-        inputs:
-          targetType: 'inline'
-          script: |
-            Write-Host "Versioning to: $(GitVersion.SemVer)"
-          failOnStderr: true
       
       - task: SonarQubePrepare@7
         displayName: 'Prepare SonarQube Analysis'
@@ -77,9 +48,10 @@ stages:
           extraProperties: |
             sonar.cs.vstest.reportsPaths=$(Agent.TempDirectory)/*.trx
             sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/coverage.opencover.xml
-            sonar.sources=$(Agent.BuildDirectory)/Importia.SDK
-            sonar.tests=$(Agent.BuildDirectory)/Importia.SDK/Tests
             sonar.log.level=INFO
+            sonar.exclusions=**/bin/**/*, **/obj/**/*, **/*.yml, **/*.yaml
+            sonar.dotnet.excludeTestProjects=true
+            sonar.projectBaseDir=$(Agent.BuildDirectory)
 
       - task: UseDotNet@2
         displayName: 'Use donet'
@@ -108,7 +80,7 @@ stages:
           command: 'test'
           projects: a3innuva.Importia.SDK.sln
           arguments: '--filter "FullyQualifiedName~.tests"  -c $(BuildConfiguration) --no-build --no-restore --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover'
-          testRunTitle: 'BackendTests'
+          testRunTitle: 'Tests'
             
       - task: SonarQubeAnalyze@7
         displayName: 'SonarQube analyze'
