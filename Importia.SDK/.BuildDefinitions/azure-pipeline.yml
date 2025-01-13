@@ -56,9 +56,12 @@ stages:
           extraProperties: |
             sonar.cs.vstest.reportsPaths=$(Agent.TempDirectory)/*.trx
             sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/coverage.opencover.xml
-            sonar.sources=$(Agent.BuildDirectory)/Importia.SDK
-            sonar.tests=$(Agent.BuildDirectory)/Importia.SDK/Tests
             sonar.log.level=INFO
+            sonar.exclusions=**/bin/**/*, **/obj/**/*, **/*.yml, **/*.yaml
+            sonar.dotnet.excludeTestProjects=true
+            sonar.projectBaseDir=$(Agent.BuildDirectory)
+            sonar.scm.provider=git
+
 
       - task: UseDotNet@2
         displayName: 'Use donet'
