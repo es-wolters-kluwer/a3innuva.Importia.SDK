@@ -1,5 +1,6 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Implementations
 {
+    using System;
     using a3innuva.TAA.Migration.SDK.Interfaces;
     using System.Text.RegularExpressions;
 

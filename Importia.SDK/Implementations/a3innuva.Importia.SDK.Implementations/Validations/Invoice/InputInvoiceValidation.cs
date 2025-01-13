@@ -1,5 +1,6 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Implementations
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -19,9 +20,9 @@
             this.lineValidation = new InputInvoiceLineValidation();
             this.paymentValidation = new PaymentValidation();
             this.additionalDataValidation = new InputInvoiceAdditionalDataValidation();
-            this.accountCodeFormat = new Regex(@"^[1-9]{1}[0-9]*$");
-            this.nifFormat = new Regex(@"^[A-Z0-9]*$");
-            this.postalCodeFormat = new Regex(@"^[0-9]{5}$");
+            this.accountCodeFormat = new Regex(@"^[1-9]{1}[0-9]*$", RegexOptions.Compiled);
+            this.nifFormat = new Regex(@"^[A-Z0-9]*$", RegexOptions.Compiled);
+            this.postalCodeFormat = new Regex(@"^[0-9]{5}$", RegexOptions.Compiled);
         }
 
         protected override void SetupValidations()

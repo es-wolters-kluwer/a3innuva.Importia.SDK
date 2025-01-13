@@ -47,7 +47,7 @@ stages:
           projectVersion : $(GitVersion.SemVer)
           extraProperties: |
             sonar.cs.vstest.reportsPaths=$(Agent.TempDirectory)/*.trx
-            sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/coverage.opencover.xml
+            sonar.cs.opencover.reportsPaths=$(Agent.BuildDirectory)/**/coverage.opencover.xml
             sonar.log.level=INFO
             sonar.exclusions=**/bin/**/*, **/obj/**/*, **/*.yml, **/*.yaml
             sonar.dotnet.excludeTestProjects=true
