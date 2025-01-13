@@ -20,9 +20,9 @@
             this.lineValidation = new InputInvoiceLineValidation();
             this.paymentValidation = new PaymentValidation();
             this.additionalDataValidation = new InputInvoiceAdditionalDataValidation();
-            this.accountCodeFormat = new Regex(@"^[1-9]{1}[0-9]*$", RegexOptions.Compiled);
-            this.nifFormat = new Regex(@"^[A-Z0-9]*$", RegexOptions.Compiled);
-            this.postalCodeFormat = new Regex(@"^[0-9]{5}$", RegexOptions.Compiled);
+            this.accountCodeFormat = new Regex(@"^[1-9]{1}[0-9]*$", RegexOptions.Compiled, TimeSpan.FromSeconds(5));
+            this.nifFormat = new Regex(@"^[A-Z0-9]*$", RegexOptions.Compiled, TimeSpan.FromSeconds(5));
+            this.postalCodeFormat = new Regex(@"^[0-9]{5}$", RegexOptions.Compiled, TimeSpan.FromSeconds(5));
         }
 
         protected override void SetupValidations()

@@ -9,7 +9,7 @@
         private readonly Regex accountCodeFormat;
         public InputInvoiceLineValidation()
         {
-            this.accountCodeFormat = new Regex(@"^[1-9]{1}[0-9]*$", RegexOptions.Compiled);
+            this.accountCodeFormat = new Regex(@"^[1-9]{1}[0-9]*$", RegexOptions.Compiled, TimeSpan.FromSeconds(5));
         }
 
         protected override void SetupValidations()
