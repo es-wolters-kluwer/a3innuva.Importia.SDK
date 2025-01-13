@@ -58,6 +58,7 @@
             "PGPF_CFP",
             "AGR_GYP",
             "AGR_AYF",
+            "OTRAS_RET"
         };
         
         private static readonly List<string> WithHoldingsInput= new List<string>()
@@ -114,6 +115,7 @@
             "PGPF_CFP",
             "AGR_GYP",
             "AGR_AYF",
+            "OTRAS_RET"
         };
 
 
