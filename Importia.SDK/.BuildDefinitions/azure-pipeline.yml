@@ -52,8 +52,6 @@ stages:
             sonar.exclusions=**/bin/**/*, **/obj/**/*, **/*.yml, **/*.yaml
             sonar.dotnet.excludeTestProjects=true
             sonar.projectBaseDir=$(Agent.BuildDirectory)
-            sonar.scm.provider=git
-
 
       - task: UseDotNet@2
         displayName: 'Use donet'
