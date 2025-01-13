@@ -81,6 +81,12 @@ stages:
             sonar.tests=$(Agent.BuildDirectory)/Importia.SDK/Tests
             sonar.log.level=INFO
 
+      - task: UseDotNet@2
+        displayName: 'Use donet'
+        inputs:
+          packageType: 'sdk'
+          version: '9.x'
+
       - task: DotNetCoreCLI@2
         displayName: 'dotnet restore'
         inputs:
