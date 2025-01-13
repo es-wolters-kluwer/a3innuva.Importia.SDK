@@ -1,23 +1,9 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 pool:
-  # Agente de Azure:
   name: Azure Pipelines
-# Agente de WKE:
-#  name: Newpol-AgentsDEV
+
 
 variables:
-  ## Constants
-  domain: 'importia'
   BuildConfiguration: 'Release'
-  BuildPlatform: 'any cpu'
-  netCoreVersion: 'net8.0'
 
 trigger:
   branches:
@@ -25,17 +11,10 @@ trigger:
       - principal
 
 stages:
-
-##################
-##  Stage_SonarQube_Analysis
-##################
-- stage: 'Stage_SonarQube_Analysis'
+- stage: 'SonarQube_Analysis'
   condition: and(eq(variables['runSonarQube'], 'true'), succeeded())
   jobs:
  
-  ##################
-  ##  Job_SonarQube_analysis
-  ##################
   - job: Job_SonarQube_analysis
     displayName: 'SonarQube Analysis'
     condition: eq(variables['runSonarQube'], 'true')
@@ -108,7 +87,7 @@ stages:
           command: 'test'
           projects: a3innuva.Importia.SDK.sln
           arguments: '--filter "FullyQualifiedName~.tests"  -c $(BuildConfiguration) --no-build --no-restore --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover'
-          testRunTitle: 'BackendTests'
+          testRunTitle: 'Tests'
             
       - task: SonarQubeAnalyze@7
         displayName: 'SonarQube analyze'
