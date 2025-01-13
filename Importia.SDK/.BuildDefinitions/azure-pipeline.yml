@@ -36,14 +36,6 @@ stages:
           useConfigFile: true
           configFilePath: 'GitVersion.yml'
           versionSpec: '5.x'
-
-      - task: PowerShell@2
-        displayName: 'Set Version'
-        inputs:
-          targetType: 'inline'
-          script: |
-            Write-Host "Versioning to: $(GitVersion.SemVer)"
-          failOnStderr: true
       
       - task: SonarQubePrepare@7
         displayName: 'Prepare SonarQube Analysis'
