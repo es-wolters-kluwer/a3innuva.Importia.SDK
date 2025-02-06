@@ -12,37 +12,37 @@
     public class MigrationSetExtensionsTests
     {
         [Theory(DisplayName = "Validate info")]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.ChartOfAccount, "vatNumber", 0, "2.0", true)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.ChartOfAccount, "vatNumber", 0, "2.0", true)]
         [InlineData((MigrationOrigin)1, MigrationType.ChartOfAccount, "vatNumber", 0, "2.0", false)]
         [InlineData(MigrationOrigin.None, MigrationType.ChartOfAccount, "vatNumber", 0, "2.0", false)]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.None, "vatNumber", 0, "2.0", false)]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.ChartOfAccount, "", 0, "2.0", false)]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.ChartOfAccount, "vatNumber", 10, "2.0", false)]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.ChartOfAccount, "vatNumber", 0, "1.0", false)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.None, "vatNumber", 0, "2.0", false)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.ChartOfAccount, "", 0, "2.0", false)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.ChartOfAccount, "vatNumber", 10, "2.0", false)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.ChartOfAccount, "vatNumber", 0, "1.0", false)]
 
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.Journal, "vatNumber", 2010, "2.0", true)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.Journal, "vatNumber", 2010, "2.0", true)]
         [InlineData((MigrationOrigin)1, MigrationType.Journal, "vatNumber", 2010, "2.0", false)]
         [InlineData(MigrationOrigin.None, MigrationType.Journal, "vatNumber", 2010, "2.0", false)]
         [InlineData(MigrationOrigin.A3InnuvaFactura, MigrationType.None, "vatNumber", 2010, "2.0", false)]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.Journal, "", 2010, "2.0", false)]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.Journal, "vatNumber", 0, "2.0", false)]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.Journal, "vatNumber", 2010, "1.0", false)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.Journal, "", 2010, "2.0", false)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.Journal, "vatNumber", 0, "2.0", false)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.Journal, "vatNumber", 2010, "1.0", false)]
 
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.InputInvoice, "vatNumber", 2010, "2.0", true)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.InputInvoice, "vatNumber", 2010, "2.0", true)]
         [InlineData((MigrationOrigin)1, MigrationType.InputInvoice, "vatNumber", 2010, "2.0", false)]
         [InlineData(MigrationOrigin.None, MigrationType.InputInvoice, "vatNumber", 2010, "2.0", false)]
         [InlineData(MigrationOrigin.Extern, MigrationType.None, "vatNumber", 2010, "2.0", false)]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.InputInvoice, "", 2010, "2.0", false)]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.InputInvoice, "vatNumber", 0, "2.0", false)]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.InputInvoice, "vatNumber", 2010, "1.0", false)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.InputInvoice, "", 2010, "2.0", false)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.InputInvoice, "vatNumber", 0, "2.0", false)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.InputInvoice, "vatNumber", 2010, "1.0", false)]
 
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.OutputInvoice, "vatNumber", 2010, "2.0", true)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.OutputInvoice, "vatNumber", 2010, "2.0", true)]
         [InlineData((MigrationOrigin)1, MigrationType.OutputInvoice, "vatNumber", 2010, "2.0", false)]
         [InlineData(MigrationOrigin.None, MigrationType.OutputInvoice, "vatNumber", 2010, "2.0", false)]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.None, "vatNumber", 2010, "2.0", false)]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.OutputInvoice, "", 2010, "2.0", false)]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.OutputInvoice, "vatNumber", 0, "2.0", false)]
-        [InlineData(MigrationOrigin.A3ASESORnom, MigrationType.OutputInvoice, "vatNumber", 2010, "1.0", false)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.None, "vatNumber", 2010, "2.0", false)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.OutputInvoice, "", 2010, "2.0", false)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.OutputInvoice, "vatNumber", 0, "2.0", false)]
+        [InlineData(MigrationOrigin.Suenlace, MigrationType.OutputInvoice, "vatNumber", 2010, "1.0", false)]
         public void ValidateInfo(MigrationOrigin origin, MigrationType type, string vatNumber, int year, string version,
             bool isValid)
         {
@@ -66,7 +66,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 0,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.ChartOfAccount,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -107,7 +107,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 0,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.ChartOfAccount,
                     VatNumber = "vatNumber",
                     Version = "1.0"
@@ -148,7 +148,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 0,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.ChartOfAccount,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -189,7 +189,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 0,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.ChartOfAccount,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -229,7 +229,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 0,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.ChartOfAccount,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -264,7 +264,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 2010,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.Journal,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -353,7 +353,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 0,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.Journal,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -442,7 +442,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 2010,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.Journal,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -531,7 +531,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 2010,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.Journal,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -619,7 +619,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 2010,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.Journal,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -698,7 +698,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 2010,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.InputInvoice,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -769,7 +769,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 2010,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.InputInvoice,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -873,7 +873,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 2010,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.InputInvoice,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -943,7 +943,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 2010,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.InputInvoice,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -1013,7 +1013,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 2010,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.OutputInvoice,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -1084,7 +1084,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 2010,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.OutputInvoice,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -1187,7 +1187,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 2010,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.OutputInvoice,
                     VatNumber = "vatNumber",
                     Version = "2.0"
@@ -1257,7 +1257,7 @@
                 Info = new MigrationInfo()
                 {
                     Year = 2010,
-                    Origin = MigrationOrigin.A3ASESORnom,
+                    Origin = MigrationOrigin.Suenlace,
                     Type = MigrationType.OutputInvoice,
                     VatNumber = "vatNumber",
                     Version = "2.0"
