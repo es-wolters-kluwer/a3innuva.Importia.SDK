@@ -29,7 +29,7 @@ namespace a3innuva.TAA.Migration.SDK.Serialization.Tests
         [Fact(DisplayName = "Check number bindings")]
         public void Check_number_bindings()
         {
-            this.binder.KnownTypes.Count.Should().Be(25);
+            this.binder.KnownTypes.Count.Should().Be(27);
         }
 
         [Theory(DisplayName = "Check IMigrationEntity implementations are bindex")]
