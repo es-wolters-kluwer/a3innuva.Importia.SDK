@@ -25,6 +25,7 @@
             "EXPORT",
             "EXPORTASIM",
             "PEN_CYM",
+            "SER_CYM",
             "ISP_TRANS",
             "EXE_SIND",
             "EXE_SIND_ART25",
