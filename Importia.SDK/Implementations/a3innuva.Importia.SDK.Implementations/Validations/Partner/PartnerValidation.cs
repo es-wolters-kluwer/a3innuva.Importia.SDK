@@ -16,6 +16,7 @@
         {
             this.CreateRule(x => this.Validate(x.Id), "Id");
             this.CreateRule(x => this.ValidateNullable(x.CounterPart, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Contrapartida'"));
+            this.CreateRule(x => this.ValidateAccountFormat(x.CounterPart), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Contrapartida'"));
             this.CreateRule(x => x.BankAccount == null || x.BankAccount.Length <= 20, this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Cuenta bancaria'"));
             this.CreateRule(x => x.BankAccount == null || this.accountCodeFormat.IsMatch(x.BankAccount), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta bancaria'"));
             this.CreateRule(x => this.Validate(x.Transaction), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Operación'"));
@@ -37,6 +38,14 @@
                 return true;
 
             return WithHoldings.ItExistForOutput(input);
+        }
+
+        private bool ValidateAccountFormat(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return true;
+
+            return this.accountCodeFormat.IsMatch(input);
         }
     }
 }
