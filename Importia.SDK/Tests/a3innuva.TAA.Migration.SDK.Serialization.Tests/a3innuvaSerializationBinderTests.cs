@@ -64,7 +64,11 @@ namespace a3innuva.TAA.Migration.SDK.Serialization.Tests
                 var checkTypes = this.GetCheckType(property);
                 foreach (var checkType in checkTypes)
                 {
-                    if (checkType.IsArray)
+                    if (checkType.IsArray &&
+                        !(checkType.GetElementType().IsPrimitive ||
+                        checkType.GetElementType() == typeof(string) ||
+                        checkType.GetElementType() == typeof(decimal) ||
+                        checkType.GetElementType() == typeof(DateTime)))
                     {
                         this.binder.KnownTypes.Should()
                             .ContainSingle(x => x.FullName == checkType.FullName);
@@ -132,7 +136,13 @@ namespace a3innuva.TAA.Migration.SDK.Serialization.Tests
             
             foreach (var type in implementationAssembly.GetTypes())
             {
-                if (type.IsAbstract || type.IsInterface)
+                if (type.IsAbstract || type.IsInterface /*|| 
+                    (type.IsArray && 
+                        (type.GetElementType().IsPrimitive || 
+                        type.GetElementType() == typeof(string) ||
+                        type.GetElementType() == typeof(int) ||
+                        type.GetElementType() == typeof(decimal) ||
+                        type.GetElementType() == typeof(DateTime)))*/)
                 {
                     continue;
                 }

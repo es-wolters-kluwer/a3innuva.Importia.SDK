@@ -37,7 +37,7 @@
         public void Validate_bank_account_numeric_failed(string input)
         {
             IPartner entity = this.CreateEntity();
-            entity.BankAccount = input;
+            entity.MaturitiesAccountCode = input;
 
             var errors = this.validation.Validate(entity);
 
@@ -48,7 +48,7 @@
         public void Validate_bank_account_length_failed()
         {
             IPartner entity = this.CreateEntity();
-            entity.BankAccount = "123456789012345678901";
+            entity.MaturitiesAccountCode = "123456789012345678901";
 
             var errors = this.validation.Validate(entity);
 
@@ -59,7 +59,7 @@
         public void Validate_empty_transaction_failed()
         {
             IPartner entity = this.CreateEntity();
-            entity.Transaction = String.Empty;
+            entity.TransactionCode = String.Empty;
 
             var errors = this.validation.Validate(entity);
 
@@ -70,7 +70,7 @@
         public void Validate_bad_transaction_failed()
         {
             IPartner entity = this.CreateEntity();
-            entity.Transaction = "op";
+            entity.TransactionCode = "op";
 
             var errors = this.validation.Validate(entity);
 
@@ -81,7 +81,7 @@
         public void Validate_withHolding_succed()
         {
             IPartner entity = this.CreateEntity();
-            entity.WithHolding = "CMO_ORDO";
+            entity.WithHoldingCode = "CMO_ORDO";
 
             var errors = this.validation.Validate(entity).ToList();
 
@@ -95,7 +95,7 @@
         public void Validate_account_numeric_failed(string input)
         {
             IPartner entity = this.CreateEntity();
-            entity.CounterPart = input;
+            entity.CounterPartAccountCode = input;
 
             var errors = this.validation.Validate(entity);
 
@@ -106,7 +106,7 @@
         public void Validate_account_length_failed()
         {
             IPartner entity = this.CreateEntity();
-            entity.CounterPart = "123456789012345678901";
+            entity.CounterPartAccountCode = "123456789012345678901";
 
             var errors = this.validation.Validate(entity);
 
@@ -118,9 +118,9 @@
             return new Partner()
             {
                 Id = Guid.NewGuid(),
-                BankAccount = "43001101",
-                Transaction = "OP_INT",
-                CounterPart = "77000000"
+                MaturitiesAccountCode = "43001101",
+                TransactionCode = "OP_INT",
+                CounterPartAccountCode = "77000000"
             };
         }
     }

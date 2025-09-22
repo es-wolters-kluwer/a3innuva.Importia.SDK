@@ -15,13 +15,13 @@
         protected override void SetupValidations()
         {
             this.CreateRule(x => this.Validate(x.Id), "Id");
-            this.CreateRule(x => this.ValidateNullable(x.CounterPart, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Contrapartida'"));
-            this.CreateRule(x => this.ValidateAccountFormat(x.CounterPart), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Contrapartida'"));
-            this.CreateRule(x => x.BankAccount == null || x.BankAccount.Length <= 20, this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Cuenta bancaria'"));
-            this.CreateRule(x => x.BankAccount == null || this.accountCodeFormat.IsMatch(x.BankAccount), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta bancaria'"));
-            this.CreateRule(x => this.Validate(x.Transaction), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Operación'"));
-            this.CreateRule(x => this.ValidateTransaction(x.Transaction), this.ReplaceInMessage("No es una operación valida"));
-            this.CreateRule(x => this.ValidateWithHolding(x.WithHolding), this.ReplaceInMessage("No es una retención valida"));
+            this.CreateRule(x => this.ValidateNullable(x.CounterPartAccountCode, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Contrapartida'"));
+            this.CreateRule(x => this.ValidateAccountFormat(x.CounterPartAccountCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Contrapartida'"));
+            this.CreateRule(x => x.MaturitiesAccountCode == null || x.MaturitiesAccountCode.Length <= 20, this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Cuenta bancaria'"));
+            this.CreateRule(x => x.MaturitiesAccountCode == null || this.accountCodeFormat.IsMatch(x.MaturitiesAccountCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta bancaria'"));
+            this.CreateRule(x => this.Validate(x.TransactionCode), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Operación'"));
+            this.CreateRule(x => this.ValidateTransaction(x.TransactionCode), this.ReplaceInMessage("No es una operación valida"));
+            this.CreateRule(x => this.ValidateWithHolding(x.WithHoldingCode), this.ReplaceInMessage("No es una retención valida"));
 		}
         
         private bool ValidateTransaction(string input)
