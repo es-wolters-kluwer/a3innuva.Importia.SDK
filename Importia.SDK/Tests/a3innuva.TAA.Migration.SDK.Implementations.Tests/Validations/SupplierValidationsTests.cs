@@ -6,17 +6,17 @@
     using a3innuva.TAA.Migration.SDK.Interfaces;
     using Xunit;
 
-    [Trait("Unit test", "PartnerValidations")]
-    public class PartnerValidationsTests
+    [Trait("Unit test", "SupplierValidations")]
+    public class SupplierValidationsTests
     {
-        private PartnerValidation validation;
+        private SupplierValidation validation;
 
-        public PartnerValidationsTests()
+        public SupplierValidationsTests()
         {
-            this.validation = new PartnerValidation();
+            this.validation = new SupplierValidation();
         }
 
-        ~PartnerValidationsTests()
+        ~SupplierValidationsTests()
         {
             this.validation = null;
         }
@@ -120,7 +120,10 @@
                 Id = Guid.NewGuid(),
                 MaturitiesAccountCode = "43001101",
                 TransactionCode = "OP_INT",
-                CounterPartAccountCode = "77000000"
+                CounterPartAccountCode = "77000000",
+                TradeName = "My company",
+                MaturitiesPeriodicity = new[] { 2, 0, 0, 0, 0, 0 },
+                Taxation = Taxation.State
             };
         }
     }
