@@ -28,6 +28,5 @@
         public decimal? WithHoldingAmount { get; set; }
         public string Transaction { get; set; }
         public string WithHolding { get; set; }
-        public IPartner Partner { get; set; }
     }
 }

@@ -62,7 +62,6 @@
         /// WithHolding code. Go to valid withHolding codes
         /// </summary>
         string WithHolding { get; set; }
-        IPartner Partner { get; set; }
 
     }
 }

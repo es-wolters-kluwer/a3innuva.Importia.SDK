@@ -1,6 +1,5 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Extensions
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using a3innuva.TAA.Migration.SDK.Implementations;
@@ -23,8 +22,9 @@
             {
                 case MigrationType.ChartOfAccount:
                     {
-                        var validation = new AccountValidation();
-                        return Validate(validation, set.Entities.Cast<IAccount>(), isValidInfo);
+                        var accountValidation = new AccountValidation();
+                        var accountEntity = set.Entities.Cast<IAccount>();
+                        return Validate(accountValidation, accountEntity, isValidInfo);
                     }
                 case MigrationType.Journal:
                     {
@@ -80,9 +80,26 @@
         {
             List<IValidationResult> errors = new List<IValidationResult>();
 
+            var supplierValidation = new SupplierValidation();
+            var clientValidation = new ClientValidation();
             foreach (var item in items)
             {
-                var result = validator.Validate(item);
+                var result = new List<IValidationResult>(validator.Validate(item));
+                if (typeof(T) == typeof(IAccount))
+                {
+                    var account = (IAccount)item;
+                    if (account.IsAPartner() && account.Partner != null)
+                    {
+                        if (account.Partner.MaturitiesAccountCode.StartsWith("700"))
+                        {
+                            result.AddRange(supplierValidation.Validate(account.Partner));
+                        }
+                        else
+                        {
+                            result.AddRange(clientValidation.Validate(account.Partner));
+                        }
+                    }
+                }
 
                 if (result.Any())
                     errors.AddRange(result.Where(x => !x.IsValid));
