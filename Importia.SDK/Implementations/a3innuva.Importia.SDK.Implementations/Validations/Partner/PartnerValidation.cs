@@ -32,7 +32,7 @@
             this.CreateRule(x => this.Validate(x.TransactionCode), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Operación'"));
             this.CreateRule(x => this.ValidateTransaction(x.TransactionCode), this.ReplaceInMessage("No es una operación valida"));
             this.CreateRule(x => this.ValidateWithHolding(x.WithHoldingCode), this.ReplaceInMessage("No es una retención valida"));
-            this.CreateRule(x => this.Validate(x.MaturitiesPeriodicity), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Periodificación'"));
+            //this.CreateRule(x => this.Validate(x.MaturitiesPeriodicity), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Periodificación'"));
             this.CreateRule(x => this.Validate(x.MaturitiesPeriodicity) && this.ValidatePeriodicity(x.MaturitiesPeriodicity), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Periodificación'"));
 		}
 
@@ -76,6 +76,8 @@
 
         private bool ValidatePeriodicity(int[] periodicity)
         {
+            if (periodicity is null) return true;
+
             var allBiggerOrEqualThanZero = true;
             var anyBiggerThanZero = false;
             foreach (int num in periodicity)

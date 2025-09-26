@@ -22,5 +22,6 @@
             return this.Code;
         }
         public string Source { get; set; }
+        public IPartner Partner { get; set; }
     }
 }

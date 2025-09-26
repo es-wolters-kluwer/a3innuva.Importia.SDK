@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using a3innuva.TAA.Migration.SDK.Implementations;
 using a3innuva.TAA.Migration.SDK.Interfaces;
@@ -136,13 +135,7 @@ namespace a3innuva.TAA.Migration.SDK.Serialization.Tests
             
             foreach (var type in implementationAssembly.GetTypes())
             {
-                if (type.IsAbstract || type.IsInterface /*|| 
-                    (type.IsArray && 
-                        (type.GetElementType().IsPrimitive || 
-                        type.GetElementType() == typeof(string) ||
-                        type.GetElementType() == typeof(int) ||
-                        type.GetElementType() == typeof(decimal) ||
-                        type.GetElementType() == typeof(DateTime)))*/)
+                if (type.IsAbstract || type.IsInterface)
                 {
                     continue;
                 }

@@ -33,5 +33,6 @@
         /// Third party vatNumber type, optional [0,8]
         /// </summary>
         int VatType { get; set; }
+        IPartner Partner { get; set; }
     }
 }
