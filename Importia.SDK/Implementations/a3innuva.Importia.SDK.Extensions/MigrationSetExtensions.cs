@@ -88,7 +88,7 @@
                 if (typeof(T) == typeof(IAccount))
                 {
                     var account = (IAccount)item;
-                    if (account.IsAPartner() && account.Partner != null)
+                    if ((account.IsAPartner() || account.Partner.IsAPartner()) && account.Partner != null)
                     {
                         if (account.Partner.MaturitiesAccountCode.StartsWith("700"))
                         {
