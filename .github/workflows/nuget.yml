@@ -1,8 +1,5 @@
 name: Publish nuget
-on: 
-    push:
-        branches:
-            - 'feature/524908_partner_contract'
+on: [workflow_dispatch]
 jobs:
   Publish:
 
