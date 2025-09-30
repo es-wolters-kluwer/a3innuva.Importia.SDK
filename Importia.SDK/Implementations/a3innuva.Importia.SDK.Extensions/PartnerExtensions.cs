@@ -16,7 +16,7 @@
 
         public static bool HasName(this IPartner source)
         {
-            return !string.IsNullOrEmpty(source.TradeName);
+            return !string.IsNullOrEmpty(source?.TradeName);
         }
 
         public static bool IsAPerson(this IPartner source)
