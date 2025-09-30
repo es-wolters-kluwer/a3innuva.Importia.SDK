@@ -1,10 +1,6 @@
 name: Publish nuget push
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - feature/*
-      - bug/*
 jobs:
   Publish:
 
