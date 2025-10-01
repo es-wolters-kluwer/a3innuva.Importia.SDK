@@ -90,7 +90,7 @@
                     var account = (IAccount)item;
                     if ((account.IsAPartner() || account.Partner.IsAPartner()) && account.Partner != null)
                     {
-                        if (account.Partner.MaturitiesAccountCode.StartsWith("700"))
+                        if ((account.Partner.MaturitiesAccountCode ?? account.Code).StartsWith("700"))
                         {
                             result.AddRange(supplierValidation.Validate(account.Partner));
                         }

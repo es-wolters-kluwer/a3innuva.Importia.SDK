@@ -2,10 +2,11 @@
 {
     public interface IPartner : IMigrationEntity
     {
+        int VatType { get; set; }
         string TradeName { get; set; }
         string VatNumber { get; set; }
         string PostalCode { get; set; }
-        string CountryId { get; set; }
+        string CountryCode { get; set; }
         Taxation Taxation { get; set; }
         bool HasSurchage { get; set; }
         string CounterPartAccountCode { get; set; }

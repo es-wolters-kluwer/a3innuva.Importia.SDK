@@ -12,10 +12,11 @@
         {
             return String.Empty;
         }
+        public int VatType { get; set; }
         public string TradeName { get; set; }
         public string VatNumber { get; set; }
         public string PostalCode { get; set; }
-        public string CountryId { get; set; }
+        public string CountryCode { get; set; }
         public Taxation Taxation { get; set; }
         public bool HasSurchage { get; set; }
         public string CounterPartAccountCode { get; set; }
