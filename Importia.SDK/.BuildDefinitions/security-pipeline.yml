@@ -12,6 +12,7 @@ resources:
       type: git
       name: WKE Cross Components/Wke.Pipelines
       trigger: none
+      ref: feature/debugsetup
 
 pool:
   name: Azure Pipelines
