@@ -53,6 +53,11 @@ stages:
               echo "##vso[task.setvariable variable=gitMajorMinorVersion;isOutput=true]$(GitVersion.MajorMinorPatch)"
               echo "##vso[task.setvariable variable=gitAssemblySemVer;isOutput=true]$(GitVersion.AssemblySemVer)"     
             name: SetupVars
+
+          - script: |
+                echo "##vso[task.setVariable variable=path;isOutput=true]$(Agent.BuildDirectory)"
+            displayName: Set artifactsPath
+            name: artifactsPathCheck
               
   - template: /build/templates/backend/security/template-blackduck-net-base.yaml@pipelines
     parameters:
