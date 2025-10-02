@@ -25,12 +25,10 @@ variables:
 
 stages:
   - stage: 'Setup'
-    condition: and(eq(variables['runSonarQube'], 'true'), succeeded())
     jobs:
 
-      - job: Job_SonarQube_analysis
-        displayName: 'SonarQube Analysis'
-        condition: eq(variables['runSonarQube'], 'true')
+      - job: Setup
+        displayName: 'Setup'
         pool:
           vmImage: 'ubuntu-latest'
         
