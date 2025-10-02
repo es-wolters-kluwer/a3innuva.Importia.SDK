@@ -28,8 +28,8 @@ variables:
 stages:
   - template: /build/templates/backend/security/template-blackduck.yml@pipelines
     parameters:
-      gitDir: '$(Build.SourcesDirectory)/a3innuva.Importia.SDK'
-      nugetConfigPath: 'a3innuva.Importia.SDK/NuGet.Config'
+      gitDir: '$(Build.SourcesDirectory)/es-wolters-kluwer/a3innuva.Importia.SDK'
+      nugetConfigPath: 'es-wolters-kluwer/a3innuva.Importia.SDK/NuGet.Config'
       artifactsPath: '$(Agent.BuildDirectory)'
       bit: $(Bit)
       projectName: $(ProjectName)
