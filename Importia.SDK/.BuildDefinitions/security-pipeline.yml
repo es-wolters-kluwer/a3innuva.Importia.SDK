@@ -24,7 +24,7 @@ variables:
   BuildConfiguration: 'Release'
 
 stages:
-  - stage: 'SonarQube_Analysis'
+  - stage: 'Setup'
     condition: and(eq(variables['runSonarQube'], 'true'), succeeded())
     jobs:
 
