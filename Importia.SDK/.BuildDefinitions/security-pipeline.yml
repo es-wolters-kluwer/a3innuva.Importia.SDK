@@ -29,19 +29,19 @@ stages:
   - template: /build/templates/backend/security/template-blackduck.yml@pipelines
     parameters:
       gitDir: '$(Build.SourcesDirectory)/a3innuva.Importia.SDK'
-      nugetConfigPath: 'es-wolters-kluwer/a3innuva.Importia.SDK/NuGet.Config'
+      nugetConfigPath: 'nuget.config'
       artifactsPath: '$(Agent.BuildDirectory)'
       bit: $(Bit)
       projectName: $(ProjectName)
-      excludeFolders: '$(Agent.BuildDirectory)/a3innuva.Importia.SDK/Tests'
+      excludeFolders: '$(Agent.BuildDirectory)/Importia.SDK/Tests'
       buildAndRestoreSteps:
         - template: /build/tasks/dotnet-restore.yml@pipelines
           parameters:
-            slnPath: 'a3innuva.Importia.SDK/*.sln'
-            nugetConfigPath: 'a3innuva.Importia.SDK/NuGet.Config'
+            slnPath: 'a3innuva.Importia.SDK.sln'
+            nugetConfigPath: 'nuget.config'
         - template: /build/tasks/dotnet-build.yml@pipelines
           parameters:
-            slnPath: 'a3innuva.Importia.SDK/*.sln'
+            slnPath: 'a3innuva.Importia.SDK.sln'
             outputDirectory: '$(Agent.BuildDirectory)'
   - template: /build/templates/backend/security/template-checkmarx.yml@pipelines
     parameters:
