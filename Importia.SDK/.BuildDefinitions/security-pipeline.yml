@@ -56,7 +56,7 @@ stages:
               echo "##vso[task.setvariable variable=gitAssemblySemVer;isOutput=true]$(GitVersion.AssemblySemVer)"     
             name: SetupVars
               
-  - template: template-blackduck-net-base.yaml
+  - template: template-blackduck-net-base.yaml@pipelines
     parameters:
       blackDuckService: 'BlackDuck v10'
       projectName: $(ProjectName)
