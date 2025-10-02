@@ -34,6 +34,7 @@
             this.CreateRule(x => this.ValidateWithHolding(x.WithHoldingCode), this.ReplaceInMessage("No es una retención valida"));
             //this.CreateRule(x => this.Validate(x.MaturitiesPeriodicity), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Periodificación'"));
             this.CreateRule(x => this.Validate(x.MaturitiesPeriodicity) && this.ValidatePeriodicity(x.MaturitiesPeriodicity), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Periodificación'"));
+            this.CreateRule(x => this.ValidateVatType(x.VatType), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Tipo de documento'"));
 		}
 
         public abstract bool ValidateTransaction(string input);
@@ -94,6 +95,11 @@
             }
 
             return allBiggerOrEqualThanZero && anyBiggerThanZero;
+        }
+
+        private bool ValidateVatType(int vatType)
+        {
+            return vatType >= 0 && vatType <= 8;
         }
     }
 }
