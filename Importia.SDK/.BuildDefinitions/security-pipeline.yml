@@ -12,7 +12,6 @@ resources:
       type: git
       name: WKE Cross Components/Wke.Pipelines
       trigger: none
-      ref: feature/debugsetup
 
 pool:
   name: Azure Pipelines
@@ -25,23 +24,68 @@ variables:
   BuildConfiguration: 'Release'
 
 stages:
-  - template: /build/templates/backend/security/template-blackduck.yml@pipelines
+  - stage: 'SonarQube_Analysis'
+    condition: and(eq(variables['runSonarQube'], 'true'), succeeded())
+    jobs:
+
+      - job: Job_SonarQube_analysis
+        displayName: 'SonarQube Analysis'
+        condition: eq(variables['runSonarQube'], 'true')
+        pool:
+          vmImage: 'ubuntu-latest'
+        
+        steps:
+          - checkout: self
+            clean: true
+
+          - task: gitversion/setup@3
+            displayName: 'Install GitTools'
+            inputs:
+              versionSpec: '5.x'
+
+          - task: gitversion/execute@3
+            displayName: 'Execute Git version'
+            inputs:
+              useConfigFile: true
+              configFilePath: 'GitVersion.yml'
+              versionSpec: '5.x'
+
+          - bash: |
+              echo "##vso[task.setvariable variable=gitSemVersion;isOutput=true]$(GitVersion.SemVer)"
+              echo "##vso[task.setvariable variable=gitMajorMinorVersion;isOutput=true]$(GitVersion.MajorMinorPatch)"
+              echo "##vso[task.setvariable variable=gitAssemblySemVer;isOutput=true]$(GitVersion.AssemblySemVer)"     
+            name: SetupVars
+              
+  - template: template-blackduck-net-base.yaml
     parameters:
-      gitDir: '$(Build.SourcesDirectory)/a3innuva.Importia.SDK'
-      nugetConfigPath: 'nuget.config'
-      artifactsPath: '$(Agent.BuildDirectory)'
-      bit: $(Bit)
+      blackDuckService: 'BlackDuck v10'
       projectName: $(ProjectName)
+      nugetConfigPath: 'nuget.config'
       excludeFolders: '$(Agent.BuildDirectory)/Importia.SDK/Tests'
-      buildAndRestoreSteps:
-        - template: /build/tasks/dotnet-restore.yml@pipelines
-          parameters:
-            slnPath: 'a3innuva.Importia.SDK.sln'
-            nugetConfigPath: 'nuget.config'
-        - template: /build/tasks/dotnet-build.yml@pipelines
-          parameters:
-            slnPath: 'a3innuva.Importia.SDK.sln'
-            outputDirectory: '$(Agent.BuildDirectory)'
+      excludeModules: '$(Agent.BuildDirectory)/Importia.SDK/Tests'
+      bit: $(Bit)
+      restoreSteps:
+        - task: UseDotNet@2
+          displayName: 'Use donet'
+          inputs:
+            packageType: 'sdk'
+            version: '9.x'
+
+        - task: DotNetCoreCLI@2
+          displayName: 'dotnet restore'
+          inputs:
+            command: 'restore'
+            projects: 'a3innuva.Importia.SDK.sln'
+            noCache: true
+            verbosityRestore: 'normal'
+
+        - task: DotNetCoreCLI@2
+          displayName: 'dotnet build'
+          inputs:
+            command: 'build'
+            projects: 'a3innuva.Importia.SDK.sln'
+            arguments: '--configuration $(BuildConfiguration) --no-restore'
+            
   - template: /build/templates/backend/security/template-checkmarx.yml@pipelines
     parameters:
       bit: $(Bit)
