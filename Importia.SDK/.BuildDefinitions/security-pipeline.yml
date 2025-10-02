@@ -22,8 +22,6 @@ pool:
 variables:
   ## Constants
   BuildConfiguration: 'Release'
-  ProjectName: 'es_wke_newpol_importia_sdk'
-  Bit: '41800001986'
 
 stages:
   - template: /build/templates/backend/security/template-blackduck.yml@pipelines
