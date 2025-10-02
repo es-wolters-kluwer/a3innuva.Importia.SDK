@@ -1,3 +1,5 @@
+trigger: none
+
 schedules:
   - cron: '45 07 * * 0'
     displayName: Weekly BlackDuck Scan
