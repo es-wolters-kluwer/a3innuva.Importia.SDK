@@ -33,7 +33,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".BuildDefinitions", ".BuildDefinitions", "{837178D6-4E45-4F6B-B949-13E5330D88EF}"
 	ProjectSection(SolutionItems) = preProject
 		Importia.SDK\.BuildDefinitions\azure-pipeline.yml = Importia.SDK\.BuildDefinitions\azure-pipeline.yml
-		security-pipeline.yml = security-pipeline.yml
+		Importia.SDK\.BuildDefinitions\security-pipeline.yml = Importia.SDK\.BuildDefinitions\security-pipeline.yml
 	EndProjectSection
 EndProject
 Global
