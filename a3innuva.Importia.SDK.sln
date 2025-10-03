@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\buildAndTest.yml = .github\workflows\buildAndTest.yml
 		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
+		.github\workflows\nuget.yml = .github\workflows\nuget.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a3innuva.Importia.SDK.Interfaces", "Importia.SDK\Interfaces\a3innuva.Importia.SDK.Interfaces\a3innuva.Importia.SDK.Interfaces.csproj", "{02D227FF-4C9A-444E-9805-80D093483A7E}"
