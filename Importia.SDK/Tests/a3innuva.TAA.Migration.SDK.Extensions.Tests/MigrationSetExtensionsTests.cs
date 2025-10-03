@@ -1,6 +1,5 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Extensions.Tests
 {
-    using FluentAssertions.Execution;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -56,6 +55,207 @@
             };
 
             info.IsValid().Should().Be(isValid);
+        }
+
+        [Fact(DisplayName = "Validate entities account succeed with Partner")]
+        public void Validate_entities_partner_succeed()
+        {
+            IMigrationSet set = new MigrationSet()
+            {
+                Info = new MigrationInfo()
+                {
+                    Year = 0,
+                    Origin = MigrationOrigin.Suenlace,
+                    Type = MigrationType.ChartOfAccount,
+                    VatNumber = "vatNumber",
+                    Version = "2.0"
+                },
+            };
+
+            Partner partner1 = new Partner()
+            {
+                TradeName = "Partner 1",
+                Id = Guid.NewGuid(),
+                Line = 1,
+                Taxation = Taxation.State,
+                TransactionCode = "OP_INT",
+                WithHoldingCode = "OTRAS_RET",
+                MaturitiesPeriodicity = new int[] { 1, 2, 3, 0, 0, 0 },
+                VatType = 1
+            };
+
+            Account account1 = new Account()
+            {
+                Code = "4301",
+                Description = "desc",
+                Id = Guid.NewGuid(),
+                Line = 1,
+                Source = "scr",
+                Partner = partner1
+            };
+
+            Partner partner2 = new Partner()
+            {
+                TradeName = "Partner 2",
+                Id = Guid.NewGuid(),
+                Line = 2,
+                Taxation = Taxation.CanaryIsland,
+                TransactionCode = "OP_INT",
+                WithHoldingCode = "OTRAS_RET",
+                MaturitiesPeriodicity = new int[] { 4, 5, 6, 0, 0, 0 },
+                VatType = 2
+            };
+
+            Account account2 = new Account()
+            {
+                Code = "4300",
+                Description = "desc",
+                Id = Guid.NewGuid(),
+                Line = 2,
+                Source = "scr",
+                Partner = partner2
+            };
+
+            set.Entities = new IMigrationEntity[2] { account1, account2 };
+
+            var result = set.IsValid();
+
+            result.errors.Any().Should().BeFalse();
+            result.isValid.Should().BeTrue();
+        }
+
+        [Fact(DisplayName = "Validate entities account bad info failed with Partner")]
+        public void Validate_entities_partner_bad_info_failed()
+        {
+            IMigrationSet set = new MigrationSet()
+            {
+                Info = new MigrationInfo()
+                {
+                    Year = 0,
+                    Origin = MigrationOrigin.Suenlace,
+                    Type = MigrationType.ChartOfAccount,
+                    VatNumber = "vatNumber",
+                    Version = "1.0"
+                },
+            };
+
+            Partner partner1 = new Partner()
+            {
+                TradeName = "Partner 1",
+                Id = Guid.NewGuid(),
+                Line = 1,
+                Taxation = Taxation.State,
+                TransactionCode = "OP_INT",
+                WithHoldingCode = "OTRAS_RET",
+                MaturitiesPeriodicity = new int[] { 1, 2, 3, 0, 0, 0 },
+                VatType = 1
+            };
+
+            Account account1 = new Account()
+            {
+                Code = "4301",
+                Description = "desc",
+                Id = Guid.NewGuid(),
+                Line = 1,
+                Source = "scr",
+                Partner = partner1
+            };
+
+            Partner partner2 = new Partner()
+            {
+                TradeName = "Partner 2",
+                Id = Guid.NewGuid(),
+                Line = 2,
+                Taxation = Taxation.CanaryIsland,
+                TransactionCode = "OP_INT",
+                WithHoldingCode = "OTRAS_RET",
+                MaturitiesPeriodicity = new int[] { 4, 5, 6, 0, 0, 0 },
+                VatType = 2
+            };
+
+            Account account2 = new Account()
+            {
+                Code = "4300",
+                Description = "desc",
+                Id = Guid.NewGuid(),
+                Line = 2,
+                Source = "scr",
+                Partner = partner2
+            };
+
+            set.Entities = new IMigrationEntity[2] { account1, account2 };
+
+            var result = set.IsValid();
+
+            result.errors.Any().Should().BeFalse();
+            result.isValid.Should().BeFalse();
+        }
+
+        [Fact(DisplayName = "Validate entities account failed with Partner")]
+        public void Validate_entities_partner_failed()
+        {
+            IMigrationSet set = new MigrationSet()
+            {
+                Info = new MigrationInfo()
+                {
+                    Year = 0,
+                    Origin = MigrationOrigin.Suenlace,
+                    Type = MigrationType.ChartOfAccount,
+                    VatNumber = "vatNumber",
+                    Version = "2.0"
+                },
+            };
+
+            Partner partner1 = new Partner()
+            {
+                TradeName = "Partner 1",
+                Id = Guid.NewGuid(),
+                Line = 1,
+                Taxation = Taxation.State,
+                TransactionCode = "OP1",
+                WithHoldingCode = "WH1",
+                MaturitiesPeriodicity = new int[] { 1, 2, 3 },
+                VatType = 1
+            };
+
+            Account account1 = new Account()
+            {
+                Code = "4301",
+                Description = "desc",
+                Id = Guid.NewGuid(),
+                Line = 1,
+                Source = "scr",
+                Partner = partner1
+            };
+
+            Partner partner2 = new Partner()
+            {
+                TradeName = "Partner 2",
+                Id = Guid.NewGuid(),
+                Line = 2,
+                Taxation = Taxation.CanaryIsland,
+                TransactionCode = "OP2",
+                WithHoldingCode = "WH2",
+                MaturitiesPeriodicity = new int[] { 4, 5, 6 },
+                VatType = 2
+            };
+
+            Account account2 = new Account()
+            {
+                Code = "4300",
+                Description = "desc",
+                Id = Guid.NewGuid(),
+                Line = 2,
+                Source = "scr",
+                Partner = partner2
+            };
+
+            set.Entities = new IMigrationEntity[2] { account1, account2 };
+
+            var result = set.IsValid();
+
+            result.errors.Any().Should().BeTrue();
+            result.isValid.Should().BeFalse();
         }
 
         [Fact(DisplayName = "Validate entities account succeed")]
