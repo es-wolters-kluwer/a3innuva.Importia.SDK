@@ -1,0 +1,49 @@
+schedules:
+  - cron: '45 07 * * 0'
+    displayName: Weekly BlackDuck Scan
+    always: true
+    branches:
+      include:
+        - develop
+
+resources:
+  repositories:
+    - repository: pipelines
+      type: git
+      name: WKE Cross Components/Wke.Pipelines
+      trigger: none
+
+pool:
+  name: Azure Pipelines
+  vmImage: "ubuntu-latest"
+  demands:
+    - Java
+
+variables:
+  ## Constants
+  BuildConfiguration: 'Release'
+  ProjectName: 'es_wke_newpol_importia_sdk'
+  Bit: '41800001986'
+
+stages:
+  - template: /build/templates/backend/security/template-blackduck.yml@pipelines
+    parameters:
+      gitDir: '$(Build.SourcesDirectory)/a3innuva.Importia.SDK'
+      nugetConfigPath: 'a3innuva.Importia.SDK/NuGet.Config'
+      artifactsPath: '$(Agent.BuildDirectory)'
+      bit: $(Bit)
+      projectName: $(ProjectName)
+      excludeFolders: '$(Agent.BuildDirectory)/a3innuva.Importia.SDK/Tests'
+      buildAndRestoreSteps:
+        - template: /build/tasks/dotnet-restore.yml@pipelines
+          parameters:
+            slnPath: 'a3innuva.Importia.SDK/*.sln'
+            nugetConfigPath: 'a3innuva.Importia.SDK/NuGet.Config'
+        - template: /build/tasks/dotnet-build.yml@pipelines
+          parameters:
+            slnPath: 'a3innuva.Importia.SDK/*.sln'
+            outputDirectory: '$(Agent.BuildDirectory)'
+  - template: /build/templates/backend/security/template-checkmarx.yml@pipelines
+    parameters:
+      bit: $(Bit)
+      projectName: $(ProjectName)

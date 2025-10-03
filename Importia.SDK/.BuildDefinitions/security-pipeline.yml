@@ -1,0 +1,97 @@
+trigger: none
+
+schedules:
+  - cron: '45 07 * * 0'
+    displayName: Weekly BlackDuck Scan
+    always: true
+    branches:
+      include:
+        - develop
+
+resources:
+  repositories:
+    - repository: pipelines
+      type: git
+      name: WKE Cross Components/Wke.Pipelines
+      trigger: none
+
+pool:
+  name: Azure Pipelines
+  vmImage: "ubuntu-latest"
+  demands:
+    - Java
+
+variables:
+  ## Constants
+  BuildConfiguration: 'Release'
+
+stages:
+  - stage: 'Setup'
+    jobs:
+
+      - job: Setup
+        displayName: 'Setup'
+        pool:
+          vmImage: 'ubuntu-latest'
+        
+        steps:
+          - checkout: self
+            clean: true
+
+          - task: gitversion/setup@3
+            displayName: 'Install GitTools'
+            inputs:
+              versionSpec: '5.x'
+
+          - task: gitversion/execute@3
+            displayName: 'Execute Git version'
+            inputs:
+              useConfigFile: true
+              configFilePath: 'GitVersion.yml'
+              versionSpec: '5.x'
+
+          - bash: |
+              echo "##vso[task.setvariable variable=gitSemVersion;isOutput=true]$(GitVersion.SemVer)"
+              echo "##vso[task.setvariable variable=gitMajorMinorVersion;isOutput=true]$(GitVersion.MajorMinorPatch)"
+              echo "##vso[task.setvariable variable=gitAssemblySemVer;isOutput=true]$(GitVersion.AssemblySemVer)"     
+            name: SetupVars
+
+          - script: |
+                echo "##vso[task.setVariable variable=path;isOutput=true]$(Agent.BuildDirectory)"
+            displayName: Set artifactsPath
+            name: artifactsPathCheck
+              
+  - template: /build/templates/backend/security/template-blackduck-net-base.yaml@pipelines
+    parameters:
+      blackDuckService: 'BlackDuck v10'
+      projectName: $(ProjectName)
+      nugetConfigPath: 'nuget.config'
+      excludeFolders: '$(Agent.BuildDirectory)/Importia.SDK/Tests'
+      excludeModules: '$(Agent.BuildDirectory)/Importia.SDK/Tests'
+      bit: $(Bit)
+      restoreSteps:
+        - task: UseDotNet@2
+          displayName: 'Use donet'
+          inputs:
+            packageType: 'sdk'
+            version: '9.x'
+
+        - task: DotNetCoreCLI@2
+          displayName: 'dotnet restore'
+          inputs:
+            command: 'restore'
+            projects: 'a3innuva.Importia.SDK.sln'
+            noCache: true
+            verbosityRestore: 'normal'
+
+        - task: DotNetCoreCLI@2
+          displayName: 'dotnet build'
+          inputs:
+            command: 'build'
+            projects: 'a3innuva.Importia.SDK.sln'
+            arguments: '--configuration $(BuildConfiguration) --no-restore'
+            
+  - template: /build/templates/backend/security/template-checkmarx.yml@pipelines
+    parameters:
+      bit: $(Bit)
+      projectName: $(ProjectName)
