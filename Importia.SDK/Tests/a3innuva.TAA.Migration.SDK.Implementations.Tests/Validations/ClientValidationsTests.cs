@@ -121,7 +121,7 @@
                 MaturitiesAccountCode = "43001101",
                 TransactionCode = "OP_INT",
                 CounterPartAccountCode = "77000000",
-                TradeName = "My company",
+                Name = "My company",
                 MaturitiesPeriodicity = new[] { 2, 0, 0, 0, 0, 0 },
                 Taxation = Taxation.State
             };

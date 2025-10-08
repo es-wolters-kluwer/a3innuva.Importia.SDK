@@ -13,7 +13,7 @@
             return String.Empty;
         }
         public int VatType { get; set; }
-        public string TradeName { get; set; }
+        public string Name { get; set; }
         public string VatNumber { get; set; }
         public string PostalCode { get; set; }
         public string CountryCode { get; set; }

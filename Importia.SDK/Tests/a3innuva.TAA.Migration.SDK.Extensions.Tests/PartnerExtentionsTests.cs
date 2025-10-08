@@ -37,7 +37,7 @@
         public void HasName_true()
         {
             var entity = this.GetEntity();
-            entity.TradeName = "name";
+            entity.Name = "name";
 
             entity.HasName().Should().BeTrue();
         }
@@ -71,7 +71,7 @@
         public void IsAPerson_only_with_name_false()
         {
             var entity = this.GetEntity();
-            entity.TradeName = "name";
+            entity.Name = "name";
 
             entity.IsAPerson().Should().BeFalse();
         }
@@ -90,7 +90,7 @@
         {
             var entity = this.GetEntity();
             entity.VatNumber = "vatNumber";
-            entity.TradeName = "name";
+            entity.Name = "name";
 
             entity.IsAPerson().Should().BeTrue();
         }
@@ -108,7 +108,7 @@
         public void IsAPartner_true()
         {
             var entity = this.GetEntity();
-            entity.TradeName = "name";
+            entity.Name = "name";
 
             entity.IsAPartner().Should().BeTrue();
         }

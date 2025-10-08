@@ -74,7 +74,7 @@
 
             Partner partner1 = new Partner()
             {
-                TradeName = "Partner 1",
+                Name = "Partner 1",
                 Id = Guid.NewGuid(),
                 Line = 1,
                 Taxation = Taxation.State,
@@ -96,7 +96,7 @@
 
             Partner partner2 = new Partner()
             {
-                TradeName = "Partner 2",
+                Name = "Partner 2",
                 Id = Guid.NewGuid(),
                 Line = 2,
                 Taxation = Taxation.CanaryIsland,
@@ -141,7 +141,7 @@
 
             Partner partner1 = new Partner()
             {
-                TradeName = "Partner 1",
+                Name = "Partner 1",
                 Id = Guid.NewGuid(),
                 Line = 1,
                 Taxation = Taxation.State,
@@ -163,7 +163,7 @@
 
             Partner partner2 = new Partner()
             {
-                TradeName = "Partner 2",
+                Name = "Partner 2",
                 Id = Guid.NewGuid(),
                 Line = 2,
                 Taxation = Taxation.CanaryIsland,
@@ -208,7 +208,7 @@
 
             Partner partner1 = new Partner()
             {
-                TradeName = "Partner 1",
+                Name = "Partner 1",
                 Id = Guid.NewGuid(),
                 Line = 1,
                 Taxation = Taxation.State,
@@ -230,7 +230,7 @@
 
             Partner partner2 = new Partner()
             {
-                TradeName = "Partner 2",
+                Name = "Partner 2",
                 Id = Guid.NewGuid(),
                 Line = 2,
                 Taxation = Taxation.CanaryIsland,

@@ -3,7 +3,7 @@
     public interface IPartner : IMigrationEntity
     {
         int VatType { get; set; }
-        string TradeName { get; set; }
+        string Name { get; set; }
         string VatNumber { get; set; }
         string PostalCode { get; set; }
         string CountryCode { get; set; }

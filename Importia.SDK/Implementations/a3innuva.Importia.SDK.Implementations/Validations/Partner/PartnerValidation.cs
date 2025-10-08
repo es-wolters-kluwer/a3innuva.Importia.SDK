@@ -19,7 +19,7 @@
         protected override void SetupValidations()
         {
             this.CreateRule(x => this.Validate(x.Id), "Id");
-            this.CreateRule(x => this.Validate(x.TradeName), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Compañia'"));
+            this.CreateRule(x => this.Validate(x.Name), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Compañia'"));
             this.CreateRule(x => this.Validate(x.Taxation),
                 this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Tributación'"));
             this.CreateRule(x => this.ValidateNullable(x.VatNumber, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'NIF'"));
