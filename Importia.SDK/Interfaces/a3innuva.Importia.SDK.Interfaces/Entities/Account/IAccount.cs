@@ -18,27 +18,27 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <summary>
         /// Third party fiscal name, must be informed if vatNumber or postalCode was informed [0-255]
         /// </summary>
-        [Obsolete("This property is deprecated, please use Partner property instead.")]
+        [Obsolete("This property will be deprecated on 31 January, please use Partner property instead.")]
         string Name { get; set; }
         /// <summary>
         /// Third party fiscal document, must be informed if name or postalCode was informed [0-20]
         /// </summary>
-        [Obsolete("his property is deprecated, please use Partner property instead.")]
+        [Obsolete("This property will be deprecated on 31 January, please use Partner property instead.")]
         string VatNumber { get; set; }
         /// <summary>
         /// Third party postal code, mandatory if name and postalCode wa informed [0-5]
         /// </summary>
-        [Obsolete("his property is deprecated, please use Partner property instead.")]
+        [Obsolete("This property will be deprecated on 31 January, please use Partner property instead.")]
         string PostalCode { get; set; }
         /// <summary>
         /// Country code on format ISO 3166-1 alpha-2, optional
         /// </summary>
-        [Obsolete("his property is deprecated, please use Partner property instead.")]
+        [Obsolete("This property will be deprecated on 31 January, please use Partner property instead.")]
         string CountryCode { get; set; }
         /// <summary>
         /// Third party vatNumber type, optional [0,8]
         /// </summary>
-        [Obsolete("his property is deprecated, please use Partner property instead.")]
+        [Obsolete("his property will be deprecated on 31 January, please use Partner property instead.")]
         int VatType { get; set; }
         IPartner Partner { get; set; }
     }
