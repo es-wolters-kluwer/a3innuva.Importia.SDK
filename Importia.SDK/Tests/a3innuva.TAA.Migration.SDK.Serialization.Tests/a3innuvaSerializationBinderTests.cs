@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using a3innuva.TAA.Migration.SDK.Implementations;
 using a3innuva.TAA.Migration.SDK.Interfaces;
@@ -29,7 +28,7 @@ namespace a3innuva.TAA.Migration.SDK.Serialization.Tests
         [Fact(DisplayName = "Check number bindings")]
         public void Check_number_bindings()
         {
-            this.binder.KnownTypes.Count.Should().Be(25);
+            this.binder.KnownTypes.Count.Should().Be(27);
         }
 
         [Theory(DisplayName = "Check IMigrationEntity implementations are bindex")]
@@ -64,7 +63,11 @@ namespace a3innuva.TAA.Migration.SDK.Serialization.Tests
                 var checkTypes = this.GetCheckType(property);
                 foreach (var checkType in checkTypes)
                 {
-                    if (checkType.IsArray)
+                    if (checkType.IsArray &&
+                        !(checkType.GetElementType().IsPrimitive ||
+                        checkType.GetElementType() == typeof(string) ||
+                        checkType.GetElementType() == typeof(decimal) ||
+                        checkType.GetElementType() == typeof(DateTime)))
                     {
                         this.binder.KnownTypes.Should()
                             .ContainSingle(x => x.FullName == checkType.FullName);
