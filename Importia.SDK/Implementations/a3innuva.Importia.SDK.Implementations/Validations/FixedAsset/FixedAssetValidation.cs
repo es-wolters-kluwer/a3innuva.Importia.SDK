@@ -16,6 +16,7 @@
 
         public FixedAssetValidation()
         {
+            this.depreciationQuotaValidation = new DepreciationQuotaValidation();
             this.accountCodeFormat = new Regex(@"^[1-9]{1}[0-9]*$", RegexOptions.Compiled, TimeSpan.FromSeconds(5));
             this.nifFormat = new Regex(@"^[A-Z0-9]*$", RegexOptions.Compiled, TimeSpan.FromSeconds(5));
             this.postalCodeFormat = new Regex(@"^[0-9]{5}$", RegexOptions.Compiled, TimeSpan.FromSeconds(5));
@@ -62,13 +63,11 @@
 
             this.CreateRule(x => this.Validate(x.IdentificationAssetEndDate), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Fecha de operación'"));
 
+            this.CreateRule(x => this.Validate(x.RepaymentDataPercentageDepreciation), this.ReplaceInMessage(ValidationMessages.Mandatory, "'% amortización contable'"));
             this.CreateRule(x => this.ValidateNullablePercentage(x.RepaymentDataPercentageDepreciation), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'% amortización contable'"));
 
-            this.CreateRule(x => this.ValidatePercentageOrYears(x.RepaymentDataPercentageDepreciation, x.RepaymentDataDepreciationYears), "% amortización contable o vida util debe estar informado");
-
+            this.CreateRule(x => this.Validate(x.RepaymentDataPercentageFiscalDepreciation), this.ReplaceInMessage(ValidationMessages.Mandatory, "'% amortización fiscal'"));
             this.CreateRule(x => this.ValidateNullablePercentage(x.RepaymentDataPercentageFiscalDepreciation), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'% amortización fiscal'"));
-
-            this.CreateRule(x => this.ValidatePercentageOrYears(x.RepaymentDataPercentageFiscalDepreciation, x.RepaymentDataFiscalDepreciationYears), "% amortización fiscal o vida util debe estar informado");
 
             this.CreateRule(x => this.Validate(x.RepaymentDataAssetStartDate), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Fecha de inicio de amortización'"));
 
@@ -129,11 +128,6 @@
         private bool ValidateRetirementReason(int? input)
         {
             return input == null || (input >= 1 && input <= 7);
-        }
-
-        private bool ValidatePercentageOrYears(decimal percentage, decimal years)
-        {
-            return percentage != 0 || years != 0;
         }
 
         private bool ValidateDepreciationQuotas(IEnumerable<IDepreciationQuota> depreciationQuotas)

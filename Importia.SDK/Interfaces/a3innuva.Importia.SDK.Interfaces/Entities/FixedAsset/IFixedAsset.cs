@@ -254,14 +254,6 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         decimal RepaymentDataPercentageDepreciation { get; set; }
         
         /// <summary>
-        /// Gets or sets the accounting depreciation period in years.
-        /// </summary>
-        /// <value>
-        /// The number of years over which the asset will be depreciated for accounting purposes.
-        /// </value>
-        decimal RepaymentDataDepreciationYears { get; set; }
-        
-        /// <summary>
         /// Gets or sets the tax depreciation percentage or useful life.
         /// This field is mandatory and must be between 0 and 100.
         /// </summary>
@@ -269,14 +261,6 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// The annual depreciation percentage for tax purposes.
         /// </value>
         decimal RepaymentDataPercentageFiscalDepreciation { get; set; }
-        
-        /// <summary>
-        /// Gets or sets the fiscal depreciation period in years.
-        /// </summary>
-        /// <value>
-        /// The number of years over which the asset will be depreciated for tax purposes.
-        /// </value>
-        decimal RepaymentDataFiscalDepreciationYears { get; set; }
         
         /// <summary>
         /// Gets or sets the collection of depreciation quotas for this asset.

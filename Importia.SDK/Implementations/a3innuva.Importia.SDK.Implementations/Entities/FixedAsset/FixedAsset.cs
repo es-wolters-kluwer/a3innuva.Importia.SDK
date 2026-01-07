@@ -36,9 +36,7 @@
         public DateTime RepaymentDataAssetStartDate { get; set; }
         public decimal? RepaymentDataResidualValue { get; set; }
         public decimal RepaymentDataPercentageDepreciation { get; set; }
-        public decimal RepaymentDataDepreciationYears { get; set; }
         public decimal RepaymentDataPercentageFiscalDepreciation { get; set; }
-        public decimal RepaymentDataFiscalDepreciationYears { get; set; }
         public IEnumerable<IDepreciationQuota> DepreciationQuotas { get; set; }
         public Guid Id { get; set; }
         public int Line { get; set; }
