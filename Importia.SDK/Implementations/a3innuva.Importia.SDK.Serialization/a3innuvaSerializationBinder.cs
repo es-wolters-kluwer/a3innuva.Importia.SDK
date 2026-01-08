@@ -29,6 +29,7 @@
             typeof(a3innuva.TAA.Migration.SDK.Implementations.Estimation),
             typeof(a3innuva.TAA.Migration.SDK.Implementations.Partner),
             typeof(a3innuva.TAA.Migration.SDK.Implementations.FixedAsset),
+            typeof(a3innuva.TAA.Migration.SDK.Implementations.DepreciationQuota),
 
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IMigrationEntity[]),
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IInputInvoiceLine[]),
