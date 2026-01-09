@@ -31,7 +31,6 @@
             this.CreateRule(x => this.accountCodeFormat.IsMatch(x.IdentificationAccountCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta de inmovilizado'"));
 
             this.CreateRule(x => this.Validate(x.IdentificationTypeOfGood), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Tipo de bien'"));
-            this.CreateRule(x => this.ValidateTypeOfGood(x.IdentificationTypeOfGood), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Tipo de documento'"));
 
             this.CreateRule(x => this.Validate(x.IdentificationDescription), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Literal'"));
 
@@ -70,8 +69,6 @@
             this.CreateRule(x => this.ValidateNullablePercentage(x.RepaymentDataPercentageFiscalDepreciation), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'% amortización fiscal'"));
 
             this.CreateRule(x => this.Validate(x.RepaymentDataAssetStartDate), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Fecha de inicio de amortización'"));
-
-            this.CreateRule(x => this.ValidateRetirementReason(x.IdentificationRetirementReason), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Tipo de documento'"));
 
             this.CreateRule(x => this.ValidateDepreciationQuotas(x.DepreciationQuotas), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Plan de amortización'"));
         }
@@ -115,19 +112,9 @@
             return input >= 0 && input <= 8;
         }
 
-        private bool ValidateTypeOfGood(int input)
-        {
-            return input >= 0 && input <= 4;
-        }
-
         private bool ValidateNullablePercentage(decimal? input)
         {
             return input == null || (input >= 0 && input <= 100);
-        }
-
-        private bool ValidateRetirementReason(int? input)
-        {
-            return input == null || (input >= 1 && input <= 7);
         }
 
         private bool ValidateDepreciationQuotas(IEnumerable<IDepreciationQuota> depreciationQuotas)
