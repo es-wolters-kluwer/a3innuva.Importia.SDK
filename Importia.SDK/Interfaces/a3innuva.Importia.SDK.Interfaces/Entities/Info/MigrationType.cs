@@ -8,6 +8,8 @@
         OutputInvoice = 3,
         InputInvoice = 4,
         Activity = 5,
-        Channel = 6
+        Channel = 6,
+
+        FixedAsset = 8,
     }
 }
