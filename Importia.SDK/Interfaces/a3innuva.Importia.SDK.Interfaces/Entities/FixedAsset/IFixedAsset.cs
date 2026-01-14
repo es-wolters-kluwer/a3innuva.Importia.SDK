@@ -266,8 +266,8 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// Gets or sets the collection of depreciation quotas for this asset.
         /// </summary>
         /// <value>
-        /// An enumerable collection of <see cref="IDepreciationQuota"/> objects representing the depreciation schedule.
+        /// An enumerable collection of <see cref="IFixedAssetDepreciationQuota"/> objects representing the depreciation schedule.
         /// </value>
-        IEnumerable<IDepreciationQuota> DepreciationQuotas { get; set; }
+        IEnumerable<IFixedAssetDepreciationQuota> DepreciationQuotas { get; set; }
     }
 }

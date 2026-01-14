@@ -5,7 +5,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
     /// <summary>
     /// Represents a depreciation quota for a fixed asset, containing both accounting and fiscal depreciation amounts for a specific period.
     /// </summary>
-    public interface IDepreciationQuota : IMigrationEntity
+    public interface IFixedAssetDepreciationQuota : IMigrationEntity
     {
         /// <summary>
         /// Gets or sets the accounting year for which this depreciation quota applies.

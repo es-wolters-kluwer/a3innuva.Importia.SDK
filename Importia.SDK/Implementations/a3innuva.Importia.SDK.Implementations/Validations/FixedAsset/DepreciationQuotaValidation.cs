@@ -3,7 +3,7 @@
     using a3innuva.TAA.Migration.SDK.Interfaces;
 
 
-    public class DepreciationQuotaValidation : Validation<IDepreciationQuota>
+    public class DepreciationQuotaValidation : Validation<IFixedAssetDepreciationQuota>
     {
 
         protected override void SetupValidations()

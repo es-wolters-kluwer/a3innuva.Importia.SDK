@@ -9,7 +9,7 @@
 
     public class FixedAssetValidation : Validation<IFixedAsset>
     {
-        private readonly IValidation<IDepreciationQuota> depreciationQuotaValidation;
+        private readonly IValidation<IFixedAssetDepreciationQuota> depreciationQuotaValidation;
         private readonly Regex accountCodeFormat;
         private readonly Regex nifFormat;
         private readonly Regex postalCodeFormat;
@@ -31,6 +31,7 @@
             this.CreateRule(x => this.accountCodeFormat.IsMatch(x.IdentificationAccountCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta de inmovilizado'"));
 
             this.CreateRule(x => this.Validate(x.IdentificationTypeOfGood), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Tipo de bien'"));
+            this.CreateRule(x => this.ValidateTypeOfGood(x.IdentificationTypeOfGood), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Tipo de bien'"));
 
             this.CreateRule(x => this.Validate(x.IdentificationDescription), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Literal'"));
 
@@ -61,6 +62,8 @@
             this.CreateRule(x => this.ValidateNullablePercentage(x.IdentificationProrateAmountValue), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Prorrata aplicada'"));
 
             this.CreateRule(x => this.Validate(x.IdentificationAssetEndDate), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Fecha de operación'"));
+
+            this.CreateRule(x => this.ValidateRetirementReason(x.IdentificationRetirementReason), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Motivo de baja'"));
 
             this.CreateRule(x => this.Validate(x.RepaymentDataPercentageDepreciation), this.ReplaceInMessage(ValidationMessages.Mandatory, "'% amortización contable'"));
             this.CreateRule(x => this.ValidateNullablePercentage(x.RepaymentDataPercentageDepreciation), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'% amortización contable'"));
@@ -117,7 +120,7 @@
             return input == null || (input >= 0 && input <= 100);
         }
 
-        private bool ValidateDepreciationQuotas(IEnumerable<IDepreciationQuota> depreciationQuotas)
+        private bool ValidateDepreciationQuotas(IEnumerable<IFixedAssetDepreciationQuota> depreciationQuotas)
         {
             return depreciationQuotas != null && depreciationQuotas.Any();
         }
@@ -128,6 +131,16 @@
                 return true;
 
             return this.accountCodeFormat.IsMatch(input);
+        }
+
+        private bool ValidateTypeOfGood(int input)
+        {
+            return input >= 0 && input <= 4;
+        }
+
+        private bool ValidateRetirementReason(int? input)
+        {
+            return input == null || (input >= 1 && input <= 7);
         }
     }
 }

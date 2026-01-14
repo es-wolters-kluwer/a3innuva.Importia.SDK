@@ -6,7 +6,7 @@
     /// <summary>
     /// Account entity
     /// </summary>
-    public class DepreciationQuota : IDepreciationQuota
+    public class FixedAssetDepreciationQuota : IFixedAssetDepreciationQuota
     {
         public int AccountingYear { get; set; }
         public decimal AccountingQuotaAmount { get; set; }

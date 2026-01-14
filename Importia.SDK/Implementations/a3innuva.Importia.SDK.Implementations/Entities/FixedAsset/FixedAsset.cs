@@ -37,7 +37,7 @@
         public decimal? RepaymentDataResidualValue { get; set; }
         public decimal RepaymentDataPercentageDepreciation { get; set; }
         public decimal RepaymentDataPercentageFiscalDepreciation { get; set; }
-        public IEnumerable<IDepreciationQuota> DepreciationQuotas { get; set; }
+        public IEnumerable<IFixedAssetDepreciationQuota> DepreciationQuotas { get; set; }
         public Guid Id { get; set; }
         public int Line { get; set; }
         public string Source { get; set; }
