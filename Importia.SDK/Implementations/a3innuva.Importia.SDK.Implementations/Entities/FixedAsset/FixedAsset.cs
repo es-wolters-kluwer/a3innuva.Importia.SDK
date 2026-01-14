@@ -44,7 +44,7 @@
 
         public string Identity()
         {
-            throw new NotImplementedException();
+            return this.IdentificationDescription;
         }
     }
 }

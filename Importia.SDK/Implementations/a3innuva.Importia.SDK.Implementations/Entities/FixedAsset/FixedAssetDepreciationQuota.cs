@@ -18,7 +18,7 @@
 
         public string Identity()
         {
-            throw new NotImplementedException();
+            return String.Empty;
         }
     }
 }

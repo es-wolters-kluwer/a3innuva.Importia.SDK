@@ -8,8 +8,6 @@
 
         protected override void SetupValidations()
         {
-            this.CreateRule(x => this.Validate(x.Id), "Id");
-
             this.CreateRule(x => this.Validate(x.AccountingYear), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Ejercicio contable'"));
             this.CreateRule(x => this.Validate(x.AccountingQuotaAmount), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Cuota contable'"));
             this.CreateRule(x => this.Validate(x.FiscalQuotaAmount), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Cuota fiscal'"));
