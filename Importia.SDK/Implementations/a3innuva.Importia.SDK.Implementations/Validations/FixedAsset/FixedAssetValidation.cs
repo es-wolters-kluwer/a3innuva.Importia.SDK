@@ -57,7 +57,7 @@
 
             this.CreateRule(x => this.Validate(x.IdentificationAcquisitionValue), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Valor de adquisición'"));
 
-            this.CreateRule(x => this.Validate(x.IdentificationInvoiceNumber, 60), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Número de factura'"));
+            this.CreateRule(x => this.ValidateNullable(x.IdentificationInvoiceNumber, 60), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Número de factura'"));
 
             this.CreateRule(x => this.ValidateNullablePercentage(x.IdentificationProrateAmountValue), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Prorrata aplicada'"));
 
