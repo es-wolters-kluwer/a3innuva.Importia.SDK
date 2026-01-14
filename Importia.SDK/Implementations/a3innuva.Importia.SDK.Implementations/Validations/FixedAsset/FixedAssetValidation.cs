@@ -35,10 +35,10 @@
             this.CreateRule(x => this.Validate(x.IdentificationDescription), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Literal'"));
 
             this.CreateRule(x => this.ValidateNullable(x.IdentificationAccumulatedDepreciationAccountCode, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Cuenta de amortización acumulada'"));
-            this.CreateRule(x => this.accountCodeFormat.IsMatch(x.IdentificationAccumulatedDepreciationAccountCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta de amortización acumulada'"));
+            this.CreateRule(x => this.ValidateAccountFormat(x.IdentificationAccumulatedDepreciationAccountCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta de amortización acumulada'"));
 
             this.CreateRule(x => this.ValidateNullable(x.IdentificationEndowmentAccountCode, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Cuenta de dotación'"));
-            this.CreateRule(x => this.accountCodeFormat.IsMatch(x.IdentificationAccumulatedDepreciationAccountCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta de dotación'"));
+            this.CreateRule(x => this.ValidateAccountFormat(x.IdentificationAccumulatedDepreciationAccountCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta de dotación'"));
 
             this.CreateRule(x => this.ValidateNullable(x.IdentificationVatNumber, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'NIF'"));
             this.CreateRule(x => this.ValidateVatNumber(x.IdentificationVatNumber), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'NIF'"));
@@ -46,7 +46,7 @@
             this.CreateRule(x => this.ValidateNullable(x.IdentificationPartnerName, 255), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Nombre de cliente'"));
 
             this.CreateRule(x => this.ValidateNullable(x.IdentificationPartnerAccount, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Cuenta de proveedor'"));
-            this.CreateRule(x => this.accountCodeFormat.IsMatch(x.IdentificationPartnerAccount), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta de proveedor'"));
+            this.CreateRule(x => this.ValidateAccountFormat(x.IdentificationPartnerAccount), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta de proveedor'"));
 
             this.CreateRule(x => this.ValidateVatType(x.IdentificationVatType), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Tipo de documento'"));
             this.CreateRule(x => this.ValidatePostalCode(x.IdentificationPostalCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Código postal'"));
@@ -120,6 +120,14 @@
         private bool ValidateDepreciationQuotas(IEnumerable<IDepreciationQuota> depreciationQuotas)
         {
             return depreciationQuotas != null && depreciationQuotas.Any();
+        }
+
+        private bool ValidateAccountFormat(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return true;
+
+            return this.accountCodeFormat.IsMatch(input);
         }
     }
 }
