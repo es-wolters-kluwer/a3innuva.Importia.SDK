@@ -20,6 +20,15 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         string IdentificationAccountCode { get; set; }
         
         /// <summary>
+        /// Gets or sets the description of the fixed asset account.
+        /// This field provides additional context for the account code.
+        /// </summary>
+        /// <value>
+        /// The textual description of the fixed asset account.
+        /// </value>
+        string IdentificationAccountDescription { get; set; }
+
+        /// <summary>
         /// Gets or sets the type of good/asset.
         /// This field is mandatory.
         /// </summary>
@@ -62,7 +71,16 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// The account code for accumulated depreciation, or <c>null</c> if not specified.
         /// </value>
         string IdentificationAccumulatedDepreciationAccountCode { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets the description of the accumulated depreciation account.
+        /// This field provides additional context for the accumulated depreciation account code.
+        /// </summary>
+        /// <value>
+        /// The textual description of the accumulated depreciation account.
+        /// </value>
+        string IdentificationAccumulatedDepreciationAccountDescription { get; set; }
+
         /// <summary>
         /// Gets or sets the depreciation provision/endowment account code.
         /// This field is optional and must be between 6 and 20 characters if specified.
@@ -71,6 +89,15 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// The account code for depreciation provision, or <c>null</c> if not specified.
         /// </value>
         string IdentificationEndowmentAccountCode { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the description of the depreciation provision/endowment account.
+        /// This field provides additional context for the endowment account code.
+        /// </summary>
+        /// <value>
+        /// The textual description of the depreciation provision/endowment account.
+        /// </value>
+        string IdentificationEndowmentAccountDescription { get; set; }
 
         // Datos de la compra / adquisición
         /// <summary>

@@ -29,6 +29,7 @@
             this.CreateRule(x => this.Validate(x.IdentificationAccountCode), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Cuenta de inmovilizado'"));
             this.CreateRule(x => this.Validate(x.IdentificationAccountCode, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Cuenta de inmovilizado'"));
             this.CreateRule(x => this.accountCodeFormat.IsMatch(x.IdentificationAccountCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta de inmovilizado'"));
+            this.CreateRule(x => this.ValidateNullable(x.IdentificationAccountDescription, 255), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Descripcion cuenta de inmovilizado'"));
 
             this.CreateRule(x => this.Validate(x.IdentificationTypeOfGood), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Tipo de bien'"));
             this.CreateRule(x => this.ValidateTypeOfGood(x.IdentificationTypeOfGood), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Tipo de bien'"));
@@ -37,9 +38,11 @@
 
             this.CreateRule(x => this.ValidateNullable(x.IdentificationAccumulatedDepreciationAccountCode, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Cuenta de amortización acumulada'"));
             this.CreateRule(x => this.ValidateAccountFormat(x.IdentificationAccumulatedDepreciationAccountCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta de amortización acumulada'"));
+            this.CreateRule(x => this.ValidateNullable(x.IdentificationAccumulatedDepreciationAccountDescription, 255), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Descripcion cuenta de amortización acumulada'"));
 
             this.CreateRule(x => this.ValidateNullable(x.IdentificationEndowmentAccountCode, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Cuenta de dotación'"));
-            this.CreateRule(x => this.ValidateAccountFormat(x.IdentificationAccumulatedDepreciationAccountCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta de dotación'"));
+            this.CreateRule(x => this.ValidateAccountFormat(x.IdentificationEndowmentAccountCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Cuenta de dotación'"));
+            this.CreateRule(x => this.ValidateNullable(x.IdentificationEndowmentAccountDescription, 255), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Descripcion cuenta de amortización acumulada'"));
 
             this.CreateRule(x => this.ValidateNullable(x.IdentificationVatNumber, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'NIF'"));
             this.CreateRule(x => this.ValidateVatNumber(x.IdentificationVatNumber), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'NIF'"));

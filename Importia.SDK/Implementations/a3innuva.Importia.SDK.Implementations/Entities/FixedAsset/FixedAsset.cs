@@ -41,6 +41,9 @@
         public Guid Id { get; set; }
         public int Line { get; set; }
         public string Source { get; set; }
+        public string IdentificationAccountDescription { get; set; }
+        public string IdentificationAccumulatedDepreciationAccountDescription { get; set; }
+        public string IdentificationEndowmentAccountDescription { get; set; }
 
         public string Identity()
         {
