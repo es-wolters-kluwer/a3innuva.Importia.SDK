@@ -69,8 +69,10 @@
             this.CreateRule(x => this.ValidateRetirementReason(x.IdentificationRetirementReason), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Motivo de baja'"));
 
             this.CreateRule(x => this.Validate(x.RepaymentDataDepreciationYears), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Vida útil amortización contable'"));
-
+            this.CreateRule(x => this.ValidatNotNegative(x.RepaymentDataDepreciationYears), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Vida útil amortización contable'"));
+            
             this.CreateRule(x => this.Validate(x.RepaymentDataFiscalDepreciationYears), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Vida útil amortización fiscal'"));
+            this.CreateRule(x => this.ValidatNotNegative(x.RepaymentDataFiscalDepreciationYears), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Vida útil amortización fiscal'"));
 
             this.CreateRule(x => this.Validate(x.RepaymentDataAssetStartDate), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Fecha de inicio de amortización'"));
 
@@ -142,6 +144,11 @@
         private bool ValidateRetirementReason(int? input)
         {
             return input == null || (input >= 1 && input <= 7);
+        }
+
+        private bool ValidatNotNegative(int? input)
+        {
+            return input > 0;
         }
     }
 }
