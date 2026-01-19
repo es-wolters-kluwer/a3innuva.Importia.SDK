@@ -35,8 +35,8 @@
         public int? IdentificationRetirementReason { get; set; }
         public DateTime RepaymentDataAssetStartDate { get; set; }
         public decimal? RepaymentDataResidualValue { get; set; }
-        public decimal RepaymentDataPercentageDepreciation { get; set; }
-        public decimal RepaymentDataPercentageFiscalDepreciation { get; set; }
+        public int RepaymentDataDepreciationYears { get; set; }
+        public int RepaymentDataFiscalDepreciationYears { get; set; }
         public IEnumerable<IFixedAssetDepreciationQuota> DepreciationQuotas { get; set; }
         public Guid Id { get; set; }
         public int Line { get; set; }

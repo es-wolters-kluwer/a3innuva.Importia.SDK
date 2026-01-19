@@ -68,11 +68,9 @@
 
             this.CreateRule(x => this.ValidateRetirementReason(x.IdentificationRetirementReason), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Motivo de baja'"));
 
-            this.CreateRule(x => this.Validate(x.RepaymentDataPercentageDepreciation), this.ReplaceInMessage(ValidationMessages.Mandatory, "'% amortización contable'"));
-            this.CreateRule(x => this.ValidateNullablePercentage(x.RepaymentDataPercentageDepreciation), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'% amortización contable'"));
+            this.CreateRule(x => this.Validate(x.RepaymentDataDepreciationYears), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Vida útil amortización contable'"));
 
-            this.CreateRule(x => this.Validate(x.RepaymentDataPercentageFiscalDepreciation), this.ReplaceInMessage(ValidationMessages.Mandatory, "'% amortización fiscal'"));
-            this.CreateRule(x => this.ValidateNullablePercentage(x.RepaymentDataPercentageFiscalDepreciation), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'% amortización fiscal'"));
+            this.CreateRule(x => this.Validate(x.RepaymentDataFiscalDepreciationYears), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Vida útil amortización fiscal'"));
 
             this.CreateRule(x => this.Validate(x.RepaymentDataAssetStartDate), this.ReplaceInMessage(ValidationMessages.Mandatory, "'Fecha de inicio de amortización'"));
 

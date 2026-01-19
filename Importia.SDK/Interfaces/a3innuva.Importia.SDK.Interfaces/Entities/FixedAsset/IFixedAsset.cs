@@ -272,22 +272,22 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         decimal? RepaymentDataResidualValue { get; set; }
         
         /// <summary>
-        /// Gets or sets the accounting depreciation percentage or useful life.
-        /// This field is mandatory and must be between 0 and 100.
+        /// Gets or sets the number of years for accounting depreciation.
+        /// This field is mandatory.
         /// </summary>
         /// <value>
-        /// The annual depreciation percentage for accounting purposes.
+        /// The useful life of the asset in years for accounting purposes.
         /// </value>
-        decimal RepaymentDataPercentageDepreciation { get; set; }
-        
+        int RepaymentDataDepreciationYears { get; set; }
+
         /// <summary>
-        /// Gets or sets the tax depreciation percentage or useful life.
-        /// This field is mandatory and must be between 0 and 100.
+        /// Gets or sets the number of years for fiscal/tax depreciation.
+        /// This field is mandatory.
         /// </summary>
         /// <value>
-        /// The annual depreciation percentage for tax purposes.
+        /// The useful life of the asset in years for tax/fiscal purposes.
         /// </value>
-        decimal RepaymentDataPercentageFiscalDepreciation { get; set; }
+        int RepaymentDataFiscalDepreciationYears { get; set; }
         
         /// <summary>
         /// Gets or sets the collection of depreciation quotas for this asset.
