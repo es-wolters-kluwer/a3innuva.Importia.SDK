@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Linq;
 using FluentAssertions;
 using Xunit;
@@ -72,7 +72,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
 
             var errors = this.validation.Validate(entity);
 
-            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Inicio de periodo de amortizaciÛn', obligatorio contenido");
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Inicio de periodo de amortizaci√≥n', obligatorio contenido");
         }
 
         [Fact(DisplayName = "Validate EndDate required failed")]
@@ -83,7 +83,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
 
             var errors = this.validation.Validate(entity);
 
-            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Fin de periodo de amortizaciÛn', obligatorio contenido");
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Fin de periodo de amortizaci√≥n', obligatorio contenido");
         }
 
         private IFixedAssetDepreciationQuota CreateEntity()

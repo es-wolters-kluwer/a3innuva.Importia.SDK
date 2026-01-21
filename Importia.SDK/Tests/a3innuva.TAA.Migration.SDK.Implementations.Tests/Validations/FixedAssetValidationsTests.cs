@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -71,12 +71,12 @@ namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
                 IdentificationAccountDescription = "Cuenta activo",
                 IdentificationTypeOfGood = 1,
                 IdentificationIdentifier = "FA-001",
-                IdentificationDescription = "Equipo inform·tico",
+                IdentificationDescription = "Equipo inform√°tico",
                 IdentificationIsCapitalAsset = false,
                 IdentificationAccumulatedDepreciationAccountCode = "680000",
-                IdentificationAccumulatedDepreciationAccountDescription = "AmortizaciÛn acumulada",
+                IdentificationAccumulatedDepreciationAccountDescription = "Amortizaci√≥n acumulada",
                 IdentificationEndowmentAccountCode = "781000",
-                IdentificationEndowmentAccountDescription = "DotaciÛn",
+                IdentificationEndowmentAccountDescription = "Dotaci√≥n",
                 IdentificationAcquisitionDate = DateTime.UtcNow.AddYears(-1),
                 IdentificationAcquisitionValue = 5000m,
                 IdentificationInvoiceNumber = "INV-123",
