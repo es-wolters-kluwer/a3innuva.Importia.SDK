@@ -47,10 +47,15 @@
                         return Validate(validation, set.Entities.Cast<IActivity>(), isValidInfo);
                     }
                 case MigrationType.Channel:
-                {
-                    var validation = new ChannelValidation();
-                    return Validate(validation, set.Entities.Cast<IChannel>(), isValidInfo);
-                }
+                    {
+                        var validation = new ChannelValidation();
+                        return Validate(validation, set.Entities.Cast<IChannel>(), isValidInfo);
+                    }
+                case MigrationType.FixedAsset:
+                    {
+                        var validation = new FixedAssetValidation();
+                        return Validate(validation, set.Entities.Cast<IFixedAsset>(), isValidInfo);
+                    }
                 case MigrationType.None:
                     return (false, errors);
                 default:
@@ -70,6 +75,8 @@
                     return set.Entities.ToList().TrueForAll(x => x.GetType() == typeof(InputInvoice));
                 case MigrationType.OutputInvoice:
                     return set.Entities.ToList().TrueForAll(x => x.GetType() == typeof(OutputInvoice));
+                case MigrationType.FixedAsset:
+                    return set.Entities.ToList().TrueForAll(x => x.GetType() == typeof(FixedAsset));
                 default:
                     return false;
             }

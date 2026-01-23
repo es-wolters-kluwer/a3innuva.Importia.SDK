@@ -28,6 +28,8 @@
             typeof(a3innuva.TAA.Migration.SDK.Implementations.Channel),
             typeof(a3innuva.TAA.Migration.SDK.Implementations.Estimation),
             typeof(a3innuva.TAA.Migration.SDK.Implementations.Partner),
+            typeof(a3innuva.TAA.Migration.SDK.Implementations.FixedAsset),
+            typeof(a3innuva.TAA.Migration.SDK.Implementations.FixedAssetDepreciationQuota),
 
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IMigrationEntity[]),
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IInputInvoiceLine[]),
@@ -38,7 +40,8 @@
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IActivity[]),
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IChannel[]),
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IEstimation[]),
-            typeof(a3innuva.TAA.Migration.SDK.Interfaces.IPartner[])
+            typeof(a3innuva.TAA.Migration.SDK.Interfaces.IPartner[]),
+            typeof(a3innuva.TAA.Migration.SDK.Interfaces.IFixedAssetDepreciationQuota[])
         };
 
         public Type BindToType(string assemblyName, string typeName)

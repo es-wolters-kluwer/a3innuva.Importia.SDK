@@ -8,6 +8,12 @@
         OutputInvoice = 3,
         InputInvoice = 4,
         Activity = 5,
-        Channel = 6
+        Channel = 6,
+        // Tipo 7 reservado o pendiente de definir. Si se requiere, agregar aquí:
+        // Example:
+        // SomeType = 7,
+
+        FixedAsset = 8,
+
     }
 }
