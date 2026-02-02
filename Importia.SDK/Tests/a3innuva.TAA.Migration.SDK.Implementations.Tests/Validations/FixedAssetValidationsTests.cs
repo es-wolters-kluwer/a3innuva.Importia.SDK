@@ -60,6 +60,96 @@ namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
             errors.Should().Contain(x => !x.IsValid);
         }
 
+        [Fact(DisplayName = "Validate fails with retirement invoice number and no sale reason")]
+        public void Validate_fails_with_retirement_invoice_number_and_no_sale_reason()
+        {
+            var entity = this.CreateEntity();
+
+            entity.RetirementReason = null; // No sale reason
+            entity.RetirementInvoiceNumber = "123";
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            // We expect at least one validation error when quotas are invalid
+            errors.Count.Should().BeGreaterThan(0);
+            errors.Should().Contain(x => !x.IsValid);
+        }
+
+        [Fact(DisplayName = "Validate fails with retirement disposal value and no sale reason")]
+        public void Validate_fails_with_retirement_disposal_value_and_no_sale_reason()
+        {
+            var entity = this.CreateEntity();
+
+            entity.RetirementReason = null; // No sale reason
+            entity.RetirementDisposalValue = 1000m;
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            // We expect at least one validation error when quotas are invalid
+            errors.Count.Should().BeGreaterThan(0);
+            errors.Should().Contain(x => !x.IsValid);
+        }
+
+        [Fact(DisplayName = "Validate fails with retirement base amount and no sale reason")]
+        public void Validate_fails_with_retirement_base_amount_and_no_sale_reason()
+        {
+            var entity = this.CreateEntity();
+
+            entity.RetirementReason = null; // No sale reason
+            entity.RetirementBaseAmount = 500m;
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            // We expect at least one validation error when quotas are invalid
+            errors.Count.Should().BeGreaterThan(0);
+            errors.Should().Contain(x => !x.IsValid);
+        }
+
+        [Fact(DisplayName = "Validate fails with retirement tax code and no sale reason")]
+        public void Validate_fails_with_retirement_tax_code_and_no_sale_reason()
+        {
+            var entity = this.CreateEntity();
+
+            entity.RetirementReason = null; // No sale reason
+            entity.RetirementTaxCode = "TC01";
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            // We expect at least one validation error when quotas are invalid
+            errors.Count.Should().BeGreaterThan(0);
+            errors.Should().Contain(x => !x.IsValid);
+        }
+
+        [Fact(DisplayName = "Validate fails with retirement tax amount and no sale reason")]
+        public void Validate_fails_with_retirement_tax_amount_and_no_sale_reason()
+        {
+            var entity = this.CreateEntity();
+
+            entity.RetirementReason = null; // No sale reason
+            entity.RetirementTaxAmount = 100m;
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            // We expect at least one validation error when quotas are invalid
+            errors.Count.Should().BeGreaterThan(0);
+            errors.Should().Contain(x => !x.IsValid);
+        }
+
+        [Fact(DisplayName = "Validate fails with retirement is exempt and no sale reason")]
+        public void Validate_fails_with_retirement_is_exempt_and_no_sale_reason()
+        {
+            var entity = this.CreateEntity();
+
+            entity.RetirementReason = null; // No sale reason
+            entity.RetirementIsExempt = true;
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            // We expect at least one validation error when quotas are invalid
+            errors.Count.Should().BeGreaterThan(0);
+            errors.Should().Contain(x => !x.IsValid);
+        }
+
         private IFixedAsset CreateEntity()
         {
             return new FixedAssetTest
@@ -67,37 +157,37 @@ namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
                 Id = Guid.NewGuid(),
                 Line = 1,
                 Source = "extern",
-                IdentificationAccountCode = "600000",
-                IdentificationAccountDescription = "Cuenta activo",
-                IdentificationTypeOfGood = 1,
-                IdentificationIdentifier = "FA-001",
-                IdentificationDescription = "Equipo informático",
-                IdentificationIsCapitalAsset = false,
-                IdentificationAccumulatedDepreciationAccountCode = "680000",
-                IdentificationAccumulatedDepreciationAccountDescription = "Amortización acumulada",
-                IdentificationEndowmentAccountCode = "781000",
-                IdentificationEndowmentAccountDescription = "Dotación",
-                IdentificationAcquisitionDate = DateTime.UtcNow.AddYears(-1),
-                IdentificationAcquisitionValue = 5000m,
-                IdentificationInvoiceNumber = "INV-123",
-                IdentificationPartnerName = "Proveedor S.L.",
-                IdentificationVatNumber = "B12345678",
-                IdentificationPartnerAccount = "430000",
-                IdentificationPostalCode = "28001",
-                IdentificationVatType = 1,
-                IdentificationCountryCode = "ES",
-                IdentificationBaseAmount = 4200m,
-                IdentificationTaxCode = "TC01",
-                IdentificationTaxAmount = 800m,
-                IdentificationProrateApply = false,
-                IdentificationProrateAmountValue = null,
-                IdentificationDeductibleAmountValue = null,
-                IdentificationAssetEndDate = null,
-                IdentificationRetirementReason = null,
-                RepaymentDataAssetStartDate = DateTime.UtcNow.AddMonths(-11),
-                RepaymentDataResidualValue = 200m,
-                RepaymentDataDepreciationYears = 5,
-                RepaymentDataFiscalDepreciationYears = 5,
+                AccountCode = "600000",
+                AccountDescription = "Cuenta activo",
+                TypeOfGood = 1,
+                Identifier = "FA-001",
+                Description = "Equipo informático",
+                IsCapitalAsset = false,
+                AccumulatedDepreciationAccountCode = "680000",
+                AccumulatedDepreciationAccountDescription = "Amortización acumulada",
+                EndowmentAccountCode = "781000",
+                EndowmentAccountDescription = "Dotación",
+                AcquisitionDate = DateTime.UtcNow.AddYears(-1),
+                AcquisitionValue = 5000m,
+                AcquisitionInvoiceNumber = "INV-123",
+                AcquisitionPartnerName = "Proveedor S.L.",
+                AcquisitionVatNumber = "B12345678",
+                AcquisitionPartnerAccount = "430000",
+                AcquisitionPostalCode = "28001",
+                AcquisitionVatType = 1,
+                AcquisitionCountryCode = "ES",
+                AcquisitionBaseAmount = 4200m,
+                AcquisitionTaxCode = "TC01",
+                AcquisitionTaxAmount = 800m,
+                AcquisitionProrateApply = false,
+                AcquisitionProrateAmount = null,
+                AcquisitionDeductibleAmount = null,
+                AssetEndDate = null,
+                RetirementReason = 2,
+                AssetStartDate = DateTime.UtcNow.AddMonths(-11),
+                DepreciationResidualValue = 200m,
+                DepreciationYears = 5,
+                DepreciationFiscalYears = 5,
                 DepreciationQuotas = new IFixedAssetDepreciationQuota[]
                 {
                     new DepreciationQuotaTest
@@ -122,37 +212,43 @@ namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
 
             public string Source { get; set; }
 
-            public string IdentificationAccountCode { get; set; }
-            public string IdentificationAccountDescription { get; set; }
-            public int IdentificationTypeOfGood { get; set; }
-            public string IdentificationIdentifier { get; set; }
-            public string IdentificationDescription { get; set; }
-            public bool IdentificationIsCapitalAsset { get; set; }
-            public string IdentificationAccumulatedDepreciationAccountCode { get; set; }
-            public string IdentificationAccumulatedDepreciationAccountDescription { get; set; }
-            public string IdentificationEndowmentAccountCode { get; set; }
-            public string IdentificationEndowmentAccountDescription { get; set; }
-            public DateTime IdentificationAcquisitionDate { get; set; }
-            public decimal IdentificationAcquisitionValue { get; set; }
-            public string IdentificationInvoiceNumber { get; set; }
-            public string IdentificationPartnerName { get; set; }
-            public string IdentificationVatNumber { get; set; }
-            public string IdentificationPartnerAccount { get; set; }
-            public string IdentificationPostalCode { get; set; }
-            public int IdentificationVatType { get; set; }
-            public string IdentificationCountryCode { get; set; }
-            public decimal? IdentificationBaseAmount { get; set; }
-            public string IdentificationTaxCode { get; set; }
-            public decimal? IdentificationTaxAmount { get; set; }
-            public bool IdentificationProrateApply { get; set; }
-            public decimal? IdentificationProrateAmountValue { get; set; }
-            public decimal? IdentificationDeductibleAmountValue { get; set; }
-            public DateTime? IdentificationAssetEndDate { get; set; }
-            public int? IdentificationRetirementReason { get; set; }
-            public DateTime RepaymentDataAssetStartDate { get; set; }
-            public decimal? RepaymentDataResidualValue { get; set; }
-            public int RepaymentDataDepreciationYears { get; set; }
-            public int RepaymentDataFiscalDepreciationYears { get; set; }
+            public string AccountCode { get; set; }
+            public string AccountDescription { get; set; }
+            public int TypeOfGood { get; set; }
+            public string Identifier { get; set; }
+            public string Description { get; set; }
+            public bool IsCapitalAsset { get; set; }
+            public string AccumulatedDepreciationAccountCode { get; set; }
+            public string AccumulatedDepreciationAccountDescription { get; set; }
+            public string EndowmentAccountCode { get; set; }
+            public string EndowmentAccountDescription { get; set; }
+            public DateTime AcquisitionDate { get; set; }
+            public decimal AcquisitionValue { get; set; }
+            public string AcquisitionInvoiceNumber { get; set; }
+            public string AcquisitionPartnerName { get; set; }
+            public string AcquisitionVatNumber { get; set; }
+            public string AcquisitionPartnerAccount { get; set; }
+            public string AcquisitionPostalCode { get; set; }
+            public int AcquisitionVatType { get; set; }
+            public string AcquisitionCountryCode { get; set; }
+            public decimal? AcquisitionBaseAmount { get; set; }
+            public string AcquisitionTaxCode { get; set; }
+            public decimal? AcquisitionTaxAmount { get; set; }
+            public bool AcquisitionProrateApply { get; set; }
+            public decimal? AcquisitionProrateAmount { get; set; }
+            public decimal? AcquisitionDeductibleAmount { get; set; }
+            public DateTime? AssetEndDate { get; set; }
+            public int? RetirementReason { get; set; }
+            public string RetirementInvoiceNumber { get; set; }
+            public decimal? RetirementDisposalValue { get; set; }
+            public decimal? RetirementBaseAmount { get; set; }
+            public string RetirementTaxCode { get; set; }
+            public decimal? RetirementTaxAmount { get; set; }
+            public bool RetirementIsExempt { get; set; }
+            public DateTime AssetStartDate { get; set; }
+            public decimal? DepreciationResidualValue { get; set; }
+            public int DepreciationYears { get; set; }
+            public int DepreciationFiscalYears { get; set; }
             public IEnumerable<IFixedAssetDepreciationQuota> DepreciationQuotas { get; set; }
 
             public string Identity() => $"{Id}";

@@ -17,7 +17,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The account code identifying the fixed asset in the chart of accounts.
         /// </value>
-        string IdentificationAccountCode { get; set; }
+        string AccountCode { get; set; }
         
         /// <summary>
         /// Gets or sets the description of the fixed asset account.
@@ -26,7 +26,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The textual description of the fixed asset account.
         /// </value>
-        string IdentificationAccountDescription { get; set; }
+        string AccountDescription { get; set; }
 
         /// <summary>
         /// Gets or sets the type of good/asset.
@@ -35,7 +35,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The classification type of the asset.
         /// </value>
-        int IdentificationTypeOfGood { get; set; }
+        int TypeOfGood { get; set; }
         
         /// <summary>
         /// Gets or sets the asset identifier.
@@ -44,7 +44,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// A unique identifier for the asset, or <c>null</c> if not specified.
         /// </value>
-        string IdentificationIdentifier { get; set; }
+        string Identifier { get; set; }
         
         /// <summary>
         /// Gets or sets the asset description.
@@ -53,7 +53,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// A textual description of the asset.
         /// </value>
-        string IdentificationDescription { get; set; }
+        string Description { get; set; }
         
         /// <summary>
         /// Gets or sets a value indicating whether this is an investment/capital asset.
@@ -61,7 +61,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// <c>true</c> if this is a capital asset; otherwise, <c>false</c>.
         /// </value>
-        bool IdentificationIsCapitalAsset { get; set; }
+        bool IsCapitalAsset { get; set; }
         
         /// <summary>
         /// Gets or sets the accumulated depreciation account code.
@@ -70,7 +70,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The account code for accumulated depreciation, or <c>null</c> if not specified.
         /// </value>
-        string IdentificationAccumulatedDepreciationAccountCode { get; set; }
+        string AccumulatedDepreciationAccountCode { get; set; }
 
         /// <summary>
         /// Gets or sets the description of the accumulated depreciation account.
@@ -79,7 +79,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The textual description of the accumulated depreciation account.
         /// </value>
-        string IdentificationAccumulatedDepreciationAccountDescription { get; set; }
+        string AccumulatedDepreciationAccountDescription { get; set; }
 
         /// <summary>
         /// Gets or sets the depreciation provision/endowment account code.
@@ -88,7 +88,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The account code for depreciation provision, or <c>null</c> if not specified.
         /// </value>
-        string IdentificationEndowmentAccountCode { get; set; }
+        string EndowmentAccountCode { get; set; }
         
         /// <summary>
         /// Gets or sets the description of the depreciation provision/endowment account.
@@ -97,7 +97,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The textual description of the depreciation provision/endowment account.
         /// </value>
-        string IdentificationEndowmentAccountDescription { get; set; }
+        string EndowmentAccountDescription { get; set; }
 
         // Datos de la compra / adquisición
         /// <summary>
@@ -107,7 +107,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The date when the asset was acquired.
         /// </value>
-        DateTime IdentificationAcquisitionDate { get; set; }
+        DateTime AcquisitionDate { get; set; }
         
         /// <summary>
         /// Gets or sets the acquisition value of the asset.
@@ -116,7 +116,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The total value paid for acquiring the asset.
         /// </value>
-        decimal IdentificationAcquisitionValue { get; set; }
+        decimal AcquisitionValue { get; set; }
         
         /// <summary>
         /// Gets or sets the invoice number associated with the acquisition.
@@ -125,27 +125,27 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The invoice number, or <c>null</c> if not specified.
         /// </value>
-        string IdentificationInvoiceNumber { get; set; }
+        string AcquisitionInvoiceNumber { get; set; }
         
         /// <summary>
         /// Gets or sets the third party fiscal name.
-        /// Must be informed if <see cref="IdentificationVatNumber"/> or <see cref="IdentificationPostalCode"/> is specified.
+        /// Must be informed if <see cref="AcquisitionVatNumber"/> or <see cref="AcquisitionPostalCode"/> is specified.
         /// Maximum length is 255 characters.
         /// </summary>
         /// <value>
         /// The legal/fiscal name of the vendor or supplier.
         /// </value>
-        string IdentificationPartnerName { get; set; }
+        string AcquisitionPartnerName { get; set; }
         
         /// <summary>
         /// Gets or sets the third party fiscal document/VAT number.
-        /// Must be informed if <see cref="IdentificationPartnerName"/> or <see cref="IdentificationPostalCode"/> is specified.
+        /// Must be informed if <see cref="AcquisitionPartnerName"/> or <see cref="AcquisitionPostalCode"/> is specified.
         /// Maximum length is 20 characters.
         /// </summary>
         /// <value>
         /// The VAT number or tax identification number of the vendor.
         /// </value>
-        string IdentificationVatNumber { get; set; }
+        string AcquisitionVatNumber { get; set; }
         
         /// <summary>
         /// Gets or sets the third party account code.
@@ -154,22 +154,22 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The account code for the vendor/supplier in the chart of accounts.
         /// </value>
-        string IdentificationPartnerAccount { get; set; }
+        string AcquisitionPartnerAccount { get; set; }
         
         /// <summary>
         /// Gets or sets the third party postal code.
-        /// Mandatory if <see cref="IdentificationPartnerName"/> and <see cref="IdentificationVatNumber"/> are informed.
+        /// Mandatory if <see cref="AcquisitionPartnerName"/> and <see cref="AcquisitionVatNumber"/> are informed.
         /// Maximum length is 5 characters.
         /// </summary>
         /// <value>
         /// The postal code of the vendor's address.
         /// </value>
-        string IdentificationPostalCode { get; set; }
+        string AcquisitionPostalCode { get; set; }
 
         /// <summary>
         /// Third party vatNumber type, optional [0,8]
         /// </summary>
-        int IdentificationVatType { get; set; }
+        int AcquisitionVatType { get; set; }
 
         /// <summary>
         /// Gets or sets the country code in ISO 3166-1 alpha-2 format.
@@ -178,7 +178,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// A two-letter country code (e.g., "ES", "US"), or <c>null</c> if not specified.
         /// </value>
-        string IdentificationCountryCode { get; set; }
+        string AcquisitionCountryCode { get; set; }
         
         /// <summary>
         /// Gets or sets the base amount for VAT calculation.
@@ -187,7 +187,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The taxable base amount, or <c>null</c> if not specified.
         /// </value>
-        decimal? IdentificationBaseAmount { get; set; }
+        decimal? AcquisitionBaseAmount { get; set; }
         
         /// <summary>
         /// Gets or sets the VAT tax code.
@@ -196,7 +196,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The tax code identifier, or <c>null</c> if not specified.
         /// </value>
-        string IdentificationTaxCode { get; set; }
+        string AcquisitionTaxCode { get; set; }
         
         /// <summary>
         /// Gets or sets the VAT amount.
@@ -205,7 +205,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The total VAT amount, or <c>null</c> if not specified.
         /// </value>
-        decimal? IdentificationTaxAmount { get; set; }
+        decimal? AcquisitionTaxAmount { get; set; }
         
         /// <summary>
         /// Gets or sets a value indicating whether pro-rata should be applied.
@@ -213,7 +213,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// <c>true</c> if pro-rata deduction rules apply; otherwise, <c>false</c>.
         /// </value>
-        bool IdentificationProrateApply { get; set; }
+        bool AcquisitionProrateApply { get; set; }
         
         /// <summary>
         /// Gets or sets the pro-rata percentage applied.
@@ -222,7 +222,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The pro-rata percentage, or <c>null</c> if not applicable.
         /// </value>
-        decimal? IdentificationProrateAmountValue { get; set; }
+        decimal? AcquisitionProrateAmount { get; set; }
         
         /// <summary>
         /// Gets or sets the deductible VAT amount.
@@ -231,7 +231,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The amount of VAT that can be deducted, or <c>null</c> if not specified.
         /// </value>
-        decimal? IdentificationDeductibleAmountValue { get; set; }
+        decimal? AcquisitionDeductibleAmount { get; set; }
 
         // Datos de baja
         /// <summary>
@@ -241,7 +241,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The date when the asset was retired or deregistered, or <c>null</c> if still active.
         /// </value>
-        DateTime? IdentificationAssetEndDate { get; set; }
+        DateTime? AssetEndDate { get; set; }
         
         /// <summary>
         /// Gets or sets the deregistration reason code.
@@ -250,7 +250,60 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The reason code for asset retirement, or <c>null</c> if not specified.
         /// </value>
-        int? IdentificationRetirementReason { get; set; }
+        int? RetirementReason { get; set; }
+
+        /// <summary>
+        /// Gets or sets the invoice number associated with the asset retirement/disposal.
+        /// This field is optional.
+        /// </summary>
+        /// <value>
+        /// The invoice number related to the disposal transaction, or <c>null</c> if not specified.
+        /// </value>
+        string RetirementInvoiceNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the disposal value of the asset at retirement.
+        /// This field is optional and must be in format X.XX if specified.
+        /// </summary>
+        /// <value>
+        /// The amount received from the disposal/sale of the asset, or <c>null</c> if not specified.
+        /// </value>
+        decimal? RetirementDisposalValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets the base amount for VAT calculation on the retirement transaction.
+        /// This field is optional and must be in format X.XX if specified.
+        /// </summary>
+        /// <value>
+        /// The taxable base amount for the disposal, or <c>null</c> if not specified.
+        /// </value>
+        decimal? RetirementBaseAmount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the VAT tax code applied to the retirement transaction.
+        /// This field is optional.
+        /// </summary>
+        /// <value>
+        /// The tax code identifier for the disposal, or <c>null</c> if not specified.
+        /// </value>
+        string RetirementTaxCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the VAT amount applied to the retirement transaction.
+        /// This field is optional and must be in format X.XX if specified.
+        /// </summary>
+        /// <value>
+        /// The total VAT amount on the disposal, or <c>null</c> if not specified.
+        /// </value>
+        decimal? RetirementTaxAmount { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the retirement transaction is exempt from VAT.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if the disposal is VAT exempt; otherwise, <c>false</c>.
+        /// </value>
+        bool RetirementIsExempt { get; set; }
 
         // Datos de amortización
         /// <summary>
@@ -260,7 +313,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The date when depreciation begins for this asset.
         /// </value>
-        DateTime RepaymentDataAssetStartDate { get; set; }
+        DateTime AssetStartDate { get; set; }
         
         /// <summary>
         /// Gets or sets the residual value of the asset.
@@ -269,7 +322,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The estimated value remaining at the end of the asset's useful life, or <c>null</c> if not specified.
         /// </value>
-        decimal? RepaymentDataResidualValue { get; set; }
+        decimal? DepreciationResidualValue { get; set; }
         
         /// <summary>
         /// Gets or sets the number of years for accounting depreciation.
@@ -278,7 +331,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The useful life of the asset in years for accounting purposes.
         /// </value>
-        int RepaymentDataDepreciationYears { get; set; }
+        int DepreciationYears { get; set; }
 
         /// <summary>
         /// Gets or sets the number of years for fiscal/tax depreciation.
@@ -287,7 +340,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The useful life of the asset in years for tax/fiscal purposes.
         /// </value>
-        int RepaymentDataFiscalDepreciationYears { get; set; }
+        int DepreciationFiscalYears { get; set; }
         
         /// <summary>
         /// Gets or sets the collection of depreciation quotas for this asset.
