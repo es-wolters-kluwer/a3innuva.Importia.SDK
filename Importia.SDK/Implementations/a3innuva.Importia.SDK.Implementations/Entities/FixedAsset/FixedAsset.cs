@@ -9,45 +9,51 @@
     /// </summary>
     public class FixedAsset : IFixedAsset
     {
-        public string IdentificationAccountCode { get; set; }
-        public int IdentificationTypeOfGood { get; set; }
-        public string IdentificationIdentifier { get; set; }
-        public string IdentificationDescription { get; set; }
-        public bool IdentificationIsCapitalAsset { get; set; }
-        public string IdentificationAccumulatedDepreciationAccountCode { get; set; }
-        public string IdentificationEndowmentAccountCode { get; set; }
-        public DateTime IdentificationAcquisitionDate { get; set; }
-        public decimal IdentificationAcquisitionValue { get; set; }
-        public string IdentificationInvoiceNumber { get; set; }
-        public string IdentificationPartnerName { get; set; }
-        public string IdentificationVatNumber { get; set; }
-        public string IdentificationPartnerAccount { get; set; }
-        public string IdentificationPostalCode { get; set; }
-        public string IdentificationCountryCode { get; set; }
-        public int IdentificationVatType { get; set; }
-        public decimal? IdentificationBaseAmount { get; set; }
-        public string IdentificationTaxCode { get; set; }
-        public decimal? IdentificationTaxAmount { get; set; }
-        public bool IdentificationProrateApply { get; set; }
-        public decimal? IdentificationProrateAmountValue { get; set; }
-        public decimal? IdentificationDeductibleAmountValue { get; set; }
-        public DateTime? IdentificationAssetEndDate { get; set; }
-        public int? IdentificationRetirementReason { get; set; }
-        public DateTime RepaymentDataAssetStartDate { get; set; }
-        public decimal? RepaymentDataResidualValue { get; set; }
-        public int RepaymentDataDepreciationYears { get; set; }
-        public int RepaymentDataFiscalDepreciationYears { get; set; }
+        public string AccountCode { get; set; }
+        public int TypeOfGood { get; set; }
+        public string Identifier { get; set; }
+        public string Description { get; set; }
+        public bool IsCapitalAsset { get; set; }
+        public string AccumulatedDepreciationAccountCode { get; set; }
+        public string EndowmentAccountCode { get; set; }
+        public DateTime AcquisitionDate { get; set; }
+        public decimal AcquisitionValue { get; set; }
+        public string AcquisitionInvoiceNumber { get; set; }
+        public string AcquisitionPartnerName { get; set; }
+        public string AcquisitionVatNumber { get; set; }
+        public string AcquisitionPartnerAccount { get; set; }
+        public string AcquisitionPostalCode { get; set; }
+        public string AcquisitionCountryCode { get; set; }
+        public int AcquisitionVatType { get; set; }
+        public decimal? AcquisitionBaseAmount { get; set; }
+        public string AcquisitionTaxCode { get; set; }
+        public decimal? AcquisitionTaxAmount { get; set; }
+        public bool AcquisitionProrateApply { get; set; }
+        public decimal? AcquisitionProrateAmount { get; set; }
+        public decimal? AcquisitionDeductibleAmount { get; set; }
+        public DateTime? AssetEndDate { get; set; }
+        public int? RetirementReason { get; set; }
+        public string RetirementInvoiceNumber { get; set; }
+        public decimal? RetirementDisposalValue { get; set; }
+        public decimal? RetirementBaseAmount { get; set; }
+        public string RetirementTaxCode { get; set; }
+        public decimal? RetirementTaxAmount { get; set; }
+        public bool RetirementIsExempt { get; set; }
+        public DateTime AssetStartDate { get; set; }
+        public decimal? DepreciationResidualValue { get; set; }
+        public int DepreciationYears { get; set; }
+        public int DepreciationFiscalYears { get; set; }
         public IEnumerable<IFixedAssetDepreciationQuota> DepreciationQuotas { get; set; }
         public Guid Id { get; set; }
         public int Line { get; set; }
         public string Source { get; set; }
-        public string IdentificationAccountDescription { get; set; }
-        public string IdentificationAccumulatedDepreciationAccountDescription { get; set; }
-        public string IdentificationEndowmentAccountDescription { get; set; }
+        public string AccountDescription { get; set; }
+        public string AccumulatedDepreciationAccountDescription { get; set; }
+        public string EndowmentAccountDescription { get; set; }
 
         public string Identity()
         {
-            return this.IdentificationDescription;
+            return this.Description;
         }
     }
 }
