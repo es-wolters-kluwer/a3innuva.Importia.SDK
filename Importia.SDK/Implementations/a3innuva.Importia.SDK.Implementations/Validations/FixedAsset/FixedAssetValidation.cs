@@ -153,7 +153,7 @@
             return input == null || (input >= 1 && input <= 7);
         }
 
-        private bool ValidatNotNegative(int? input)
+        private bool ValidatNotNegative(decimal? input)
         {
             return input > 0;
         }

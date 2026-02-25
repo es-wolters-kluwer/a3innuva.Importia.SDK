@@ -331,7 +331,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The useful life of the asset in years for accounting purposes.
         /// </value>
-        int DepreciationYears { get; set; }
+        decimal DepreciationYears { get; set; }
 
         /// <summary>
         /// Gets or sets the number of years for fiscal/tax depreciation.
@@ -340,7 +340,7 @@ namespace a3innuva.TAA.Migration.SDK.Interfaces
         /// <value>
         /// The useful life of the asset in years for tax/fiscal purposes.
         /// </value>
-        int DepreciationFiscalYears { get; set; }
+        decimal DepreciationFiscalYears { get; set; }
         
         /// <summary>
         /// Gets or sets the collection of depreciation quotas for this asset.
