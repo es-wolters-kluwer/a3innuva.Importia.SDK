@@ -41,8 +41,8 @@
         public bool RetirementIsExempt { get; set; }
         public DateTime AssetStartDate { get; set; }
         public decimal? DepreciationResidualValue { get; set; }
-        public int DepreciationYears { get; set; }
-        public int DepreciationFiscalYears { get; set; }
+        public decimal DepreciationYears { get; set; }
+        public decimal DepreciationFiscalYears { get; set; }
         public IEnumerable<IFixedAssetDepreciationQuota> DepreciationQuotas { get; set; }
         public Guid Id { get; set; }
         public int Line { get; set; }
