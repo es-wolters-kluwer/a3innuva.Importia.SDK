@@ -1,5 +1,4 @@
-﻿using a3innuva.TAA.Migration.SDK.Interfaces.Entities.Journal;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace a3innuva.TAA.Migration.SDK.Interfaces
 {

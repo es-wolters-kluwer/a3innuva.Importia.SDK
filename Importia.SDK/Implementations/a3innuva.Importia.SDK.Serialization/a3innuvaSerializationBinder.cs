@@ -1,9 +1,9 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Serialization
 {
+    using Newtonsoft.Json.Serialization;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Newtonsoft.Json.Serialization;
 
     public class a3innuvaSerializationBinder: ISerializationBinder
     {
@@ -16,6 +16,8 @@
             typeof(a3innuva.TAA.Migration.SDK.Implementations.InputInvoiceLine),
             typeof(a3innuva.TAA.Migration.SDK.Implementations.Journal),
             typeof(a3innuva.TAA.Migration.SDK.Implementations.JournalLine),
+            typeof(a3innuva.TAA.Migration.SDK.Implementations.AnalyticDistribution),
+            typeof(a3innuva.TAA.Migration.SDK.Implementations.AnalyticDistributionDetail),
             typeof(a3innuva.TAA.Migration.SDK.Implementations.MigrationInfo),
             typeof(a3innuva.TAA.Migration.SDK.Implementations.MigrationSet),
             typeof(a3innuva.TAA.Migration.SDK.Implementations.OutputInvoice),
@@ -34,6 +36,8 @@
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IMigrationEntity[]),
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IInputInvoiceLine[]),
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IJournalLine[]),
+            typeof(a3innuva.TAA.Migration.SDK.Interfaces.IAnalyticDistribution[]),
+            typeof(a3innuva.TAA.Migration.SDK.Interfaces.IAnalyticDistributionDetail[]),
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IOutputInvoiceLine[]),
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.IPayment[]),
             typeof(a3innuva.TAA.Migration.SDK.Interfaces.ICharge[]),

@@ -1,8 +1,8 @@
 namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
 {
+    using a3innuva.TAA.Migration.SDK.Interfaces;
     using FluentAssertions;
     using System.Collections.Generic;
-    using a3innuva.TAA.Migration.SDK.Interfaces.Entities.Journal;
     using Xunit;
 
     [Trait("Unit test", "AnalyticDistributionValidation")]

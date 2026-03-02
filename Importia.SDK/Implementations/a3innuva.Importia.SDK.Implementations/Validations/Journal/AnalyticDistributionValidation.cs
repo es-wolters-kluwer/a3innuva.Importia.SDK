@@ -1,10 +1,9 @@
 namespace a3innuva.TAA.Migration.SDK.Implementations
 {
+    using a3innuva.TAA.Migration.SDK.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using a3innuva.TAA.Migration.SDK.Interfaces;
-    using a3innuva.TAA.Migration.SDK.Interfaces.Entities.Journal;
 
     public class AnalyticDistributionValidation
     {

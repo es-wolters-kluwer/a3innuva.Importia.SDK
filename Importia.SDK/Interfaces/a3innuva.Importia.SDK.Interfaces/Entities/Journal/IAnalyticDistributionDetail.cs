@@ -1,4 +1,4 @@
-namespace a3innuva.TAA.Migration.SDK.Interfaces.Entities.Journal
+namespace a3innuva.TAA.Migration.SDK.Interfaces
 {
     /// <summary>
     /// Analytic distribution detail
