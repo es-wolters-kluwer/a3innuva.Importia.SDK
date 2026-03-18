@@ -1,8 +1,9 @@
-﻿namespace a3innuva.TAA.Migration.SDK.Implementations
-{
-    using System;
-    using a3innuva.TAA.Migration.SDK.Interfaces;
+﻿using a3innuva.TAA.Migration.SDK.Interfaces;
+using System;
+using System.Collections.Generic;
 
+namespace a3innuva.TAA.Migration.SDK.Implementations
+{
     public class JournalLine : IJournalLine
     {
         public string Number { get; set; }
@@ -18,5 +19,9 @@
         {
             return $"{this.Number}";
         }
+        /// <summary>
+        /// Analytic distributions
+        /// </summary>
+        public IEnumerable<IAnalyticDistribution> AnalyticDistributions { get; set; }
     }
 }

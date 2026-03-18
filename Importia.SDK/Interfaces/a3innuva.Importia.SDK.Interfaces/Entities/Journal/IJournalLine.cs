@@ -1,4 +1,6 @@
-﻿namespace a3innuva.TAA.Migration.SDK.Interfaces
+﻿using System.Collections.Generic;
+
+namespace a3innuva.TAA.Migration.SDK.Interfaces
 {
     /// <summary>
     /// Journal line
@@ -29,5 +31,10 @@
         /// Debit amount on format X.XX
         /// </summary>
         decimal Credit { get; set; }
+
+        /// <summary>
+        /// Analytic distributions
+        /// </summary>
+        IEnumerable<IAnalyticDistribution> AnalyticDistributions { get; set; }
     }
 }
