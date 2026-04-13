@@ -32,8 +32,6 @@
             this.CreateRule(x => this.ValidateNullable(x.Concept, 255), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Concepto'"));
 
             this.CreateRule(x => x.HasValidAmount(), "Los importes no son correctos");
-
-            this.CreateRule(x => this.ValidateAnalyticDistributionsTotalPercentage(x.AnalyticDistributions), "La suma de los porcentajes de las distribuciones analíticas no puede ser superior a 100");
         }
 
         public override IEnumerable<IValidationResult> Validate(IJournalLine entity)
@@ -50,14 +48,6 @@
             }
 
             return errors;
-        }
-
-        private bool ValidateAnalyticDistributionsTotalPercentage(IEnumerable<IAnalyticDistribution> distributions)
-        {
-            if (distributions == null)
-                return true;
-
-            return distributions.Sum(d => d.Percentage) <= 100;
         }
     }
 }
