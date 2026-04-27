@@ -145,7 +145,7 @@
 
         private bool ValidateTypeOfGood(int input)
         {
-            return input >= 0 && input <= 4;
+            return input > 0 && input <= 49;
         }
 
         private bool ValidateRetirementReason(int? input)
