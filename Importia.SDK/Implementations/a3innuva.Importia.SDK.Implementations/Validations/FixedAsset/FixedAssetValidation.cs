@@ -145,7 +145,7 @@
 
         private bool ValidateTypeOfGood(int input)
         {
-            return input > 0 && input <= 49;
+            return Enum.IsDefined(typeof(TypeOfGood), input) && input != (int)TypeOfGood.None;
         }
 
         private bool ValidateRetirementReason(int? input)
@@ -171,6 +171,31 @@
         private bool ValidateSaleField(int? retirementReason, bool input)
         {
             return (input == true && retirementReason == 2) || input == false;
+        }
+
+        private enum TypeOfGood
+        {
+            None = 0,                           // 0 Sin especificar
+            LandDumpSites = 11,                 // 11 Terrenos dedicad. escombreras
+            BuildingsConstructions = 12,        // 12 Edificaciones Construcciones
+            Machinery = 21,                     // 21 Maquinaria
+            TransportElements = 22,             // 22 Elementos de Transporte
+            ComputersAndITEquipment = 23,       // 23 Ordenadores y otros equip. inf
+            Furniture = 24,                     // 24 Mobiliario
+            Installations = 25,                 // 25 Instalaciones
+            ShipsAndAircraft = 26,              // 26 Barcos y Aeronaves
+            Raft = 27,                          // 27 Batea
+            ToolsAndUtensils = 28,              // 28 Útiles y Herramientas
+            OtherTangibleFixedAssets = 29,      // 29 Otro Inmovilizado Material
+            PatentsAndTrademarks = 31,          // 31 Patentes y Marcas
+            TransferRights = 32,                // 32 Derechos de Traspaso
+            SoftwareApplications = 33,          // 33 Aplicaciones Informáticas
+            OtherIntangibleAssets = 39,         // 39 Otro inmovilizado Intangible
+            CattlePigsSheepGoats = 41,          // 41 Ganad. vac. porc. ovi. y capr.
+            HorsesFruitTreesNonCitrus = 42,     // 42 Ganad. equin. frut. no cítric.
+            CitrusFruitsAndVineyards = 43,      // 43 Frutales cítricos y viñedos
+            OliveGrove = 44,                    // 44 Olivar
+            OtherAgriculturalLiveAssets = 49    // 49 Otros Bienes Semov. Agrícol.
         }
     }
 }

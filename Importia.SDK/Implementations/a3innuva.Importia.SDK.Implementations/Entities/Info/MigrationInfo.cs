@@ -27,7 +27,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations
 
         public bool IsKnowType() => Enum.IsDefined(typeof(MigrationType), Type);
 
-        public bool IsValidYear() => Type == MigrationType.ChartOfAccount ? Year == 0 : Year != 0;
+        public bool IsValidYear() => Type == MigrationType.ChartOfAccount || Type == MigrationType.FixedAsset ? Year == 0 : Year != 0;
 
         public bool IsValidVatNumber() => !string.IsNullOrEmpty(VatNumber?.Trim());
 

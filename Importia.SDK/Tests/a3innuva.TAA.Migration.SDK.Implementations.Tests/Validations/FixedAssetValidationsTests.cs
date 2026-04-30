@@ -159,7 +159,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
                 Source = "extern",
                 AccountCode = "600000",
                 AccountDescription = "Cuenta activo",
-                TypeOfGood = 1,
+                TypeOfGood = 11,
                 Identifier = "FA-001",
                 Description = "Equipo informático",
                 IsCapitalAsset = false,
