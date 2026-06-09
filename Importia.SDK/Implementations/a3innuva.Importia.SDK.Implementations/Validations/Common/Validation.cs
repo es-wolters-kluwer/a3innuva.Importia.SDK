@@ -71,7 +71,7 @@
             if (date == null)
                 return true;
 
-            return this.Validate(date.Value);
+            return this.ValidateDepreciationQuotaDateTime(date.Value);
         }
 
         protected bool Validate(Guid id)
