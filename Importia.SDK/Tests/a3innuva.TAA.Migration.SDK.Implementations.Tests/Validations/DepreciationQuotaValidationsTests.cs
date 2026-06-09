@@ -46,7 +46,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
         public void Validate_AccountingQuotaAmount_required_failed()
         {
             var entity = this.CreateEntity();
-            entity.AccountingQuotaAmount = 0m;
+            entity.AccountingQuotaAmount = -1m;
 
             var errors = this.validation.Validate(entity);
 
@@ -57,7 +57,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
         public void Validate_FiscalQuotaAmount_required_failed()
         {
             var entity = this.CreateEntity();
-            entity.FiscalQuotaAmount = 0m;
+            entity.FiscalQuotaAmount = -1m;
 
             var errors = this.validation.Validate(entity);
 
@@ -68,7 +68,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
         public void Validate_StartDate_required_failed()
         {
             var entity = this.CreateEntity();
-            entity.StartDate = new DateTime(2101, 1, 1);
+            entity.StartDate = DateTime.MinValue;
 
             var errors = this.validation.Validate(entity);
 
@@ -79,7 +79,7 @@ namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
         public void Validate_EndDate_required_failed()
         {
             var entity = this.CreateEntity();
-            entity.EndDate = new DateTime(2101, 1, 1);
+            entity.EndDate = DateTime.MinValue;
 
             var errors = this.validation.Validate(entity);
 

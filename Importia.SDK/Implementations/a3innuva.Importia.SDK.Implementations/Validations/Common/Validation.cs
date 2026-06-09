@@ -53,13 +53,25 @@
         {
             return date != DateTime.MinValue && date <= new DateTime(2100,12,31);
         }
-
         protected bool Validate(DateTime? date)
         {
             if (date == null)
                 return true;
 
             return this.Validate(date.Value);
+        }
+
+        protected bool ValidateDepreciationQuotaDateTime(DateTime date)
+        {
+            return date != DateTime.MinValue;
+        }
+
+        protected bool ValidateDepreciationQuotaDateTime(DateTime? date)
+        {
+            if (date == null)
+                return true;
+
+            return this.ValidateDepreciationQuotaDateTime(date.Value);
         }
 
         protected bool Validate(Guid id)
@@ -100,7 +112,10 @@
         {
             return input != 0;
         }
-
+        protected bool ValidateDepreciationQuotaAmount(decimal input)
+        {
+            return input >= 0;
+        }
         protected string ReplaceInMessage(string message, params string[] list)
         {
             var keys = new List<(int,string)>();
