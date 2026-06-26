@@ -1,4 +1,6 @@
-﻿namespace a3innuva.TAA.Migration.SDK.Interfaces
+﻿using System.Collections.Generic;
+
+namespace a3innuva.TAA.Migration.SDK.Interfaces
 {
     public interface IInvoiceLine : IMigrationEntity
     {
@@ -63,5 +65,9 @@
         /// </summary>
         string WithHolding { get; set; }
 
+        /// <summary>
+        /// Analytic distributions
+        /// </summary>
+        IEnumerable<IAnalyticDistribution> AnalyticDistributions { get; set; }
     }
 }

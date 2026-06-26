@@ -1,6 +1,7 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Implementations
 {
     using System;
+    using System.Collections.Generic;
     using a3innuva.TAA.Migration.SDK.Interfaces;
 
     public class InputInvoiceLine : IInputInvoiceLine
@@ -27,5 +28,6 @@
         public decimal? WithHoldingAmount { get; set; }
         public string Transaction { get; set; }
         public string WithHolding { get; set; }
+        public IEnumerable<IAnalyticDistribution> AnalyticDistributions { get; set; }
     }
 }
