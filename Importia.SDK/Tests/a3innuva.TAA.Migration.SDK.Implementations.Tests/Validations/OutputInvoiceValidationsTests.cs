@@ -338,6 +338,47 @@
             errors.Count.Should().Be(0);
         }
 
+        [Fact(DisplayName = "Validate analytic distributions without accounting affected failed")]
+        public void Validate_analytic_distributions_without_accounting_affected_failed()
+        {
+            IOutputInvoice entity = this.CreateEntity();
+            entity.AccountingAffected = false;
+            entity.Lines.First().AnalyticDistributions = new List<IAnalyticDistribution>()
+            {
+                new AnalyticDistribution { Percentage = 100 }
+            };
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "No se pueden crear distribuciones analíticas si la factura no genera asiento contable ('Contabilizar' debe estar activado)");
+        }
+
+        [Fact(DisplayName = "Validate analytic distributions with accounting affected succeed")]
+        public void Validate_analytic_distributions_with_accounting_affected_succeed()
+        {
+            IOutputInvoice entity = this.CreateEntity();
+            entity.AccountingAffected = true;
+            entity.Lines.First().AnalyticDistributions = new List<IAnalyticDistribution>()
+            {
+                new AnalyticDistribution { Percentage = 100 }
+            };
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().NotContain(x => !x.IsValid && x.Code == "No se pueden crear distribuciones analíticas si la factura no genera asiento contable ('Contabilizar' debe estar activado)");
+        }
+
+        [Fact(DisplayName = "Validate without analytic distributions and accounting affected false succeed")]
+        public void Validate_without_analytic_distributions_and_accounting_affected_false_succeed()
+        {
+            IOutputInvoice entity = this.CreateEntity();
+            entity.AccountingAffected = false;
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().NotContain(x => !x.IsValid && x.Code == "No se pueden crear distribuciones analíticas si la factura no genera asiento contable ('Contabilizar' debe estar activado)");
+        }
+
         private IOutputInvoice CreateEntity()
         {
             return new OutputInvoice()

@@ -51,6 +51,8 @@
             this.CreateRule(x => this.ValidateNullable(x.CountryCode, 2), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Código país'"));
 
             this.CreateRule(x => this.ValidateAmounts(x.PendingAmount, x.SatisfiedAmount), this.ReplaceInMessage(ValidationMessages.InvalidValue, "'Solo un importe informado'"));
+
+            this.CreateRule(x => this.ValidateAnalyticDistributionsRequireAccountingAffected(x), "No se pueden crear distribuciones analíticas si la factura no genera asiento contable ('Contabilizar' debe estar activado)");
         }
 
         public override IEnumerable<IValidationResult> Validate(IInputInvoice entity)
@@ -99,6 +101,14 @@
                 return error;
             });
             errors.AddRange(listErrors);
+        }
+
+        private bool ValidateAnalyticDistributionsRequireAccountingAffected(IInputInvoice entity)
+        {
+            if (entity.AccountingAffected)
+                return true;
+
+            return entity.Lines == null || !entity.Lines.Any(line => line.AnalyticDistributions != null && line.AnalyticDistributions.Any());
         }
 
         private bool ValidateVatNumber(string input)
