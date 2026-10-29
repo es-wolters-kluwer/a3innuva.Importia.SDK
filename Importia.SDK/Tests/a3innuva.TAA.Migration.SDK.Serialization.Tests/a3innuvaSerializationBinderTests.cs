@@ -6,7 +6,7 @@ using a3innuva.TAA.Migration.SDK.Interfaces;
 
 namespace a3innuva.TAA.Migration.SDK.Serialization.Tests
 {
-    using FluentAssertions;
+    using AwesomeAssertions;
     using Xunit;
 
     [Trait("Unit test", "a3innuvaSerializationBinder")]

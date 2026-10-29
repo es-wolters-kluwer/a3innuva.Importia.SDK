@@ -1,7 +1,7 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
 {
     using a3innuva.TAA.Migration.SDK.Interfaces;
-    using FluentAssertions;
+    using AwesomeAssertions;
     using System;
     using System.Linq;
     using Xunit;

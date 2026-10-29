@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using FluentAssertions;
+using AwesomeAssertions;
 using Xunit;
 using a3innuva.TAA.Migration.SDK.Interfaces;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using FluentAssertions;
+using AwesomeAssertions;
 using Xunit;
 using a3innuva.TAA.Migration.SDK.Interfaces;
 

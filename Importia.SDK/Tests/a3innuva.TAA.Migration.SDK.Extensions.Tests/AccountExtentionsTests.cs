@@ -1,6 +1,6 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Extensions.Tests
 {
-    using FluentAssertions;
+    using AwesomeAssertions;
     using Implementations;
     using Interfaces;
     using Xunit;
