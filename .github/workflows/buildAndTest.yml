@@ -28,6 +28,11 @@ jobs:
       with:
         useConfigFile: true
         configFilePath: GitVersion.yml
+    - name: Show version
+      run: |
+        echo "Version: $GitVersion_SemVer (FullSemVer: $GitVersion_FullSemVer)"
+        echo "PACKAGE_VERSION=$GitVersion_SemVer" >> "$GITHUB_ENV"
+        echo "### Version generated: \`$GitVersion_SemVer\`" >> "$GITHUB_STEP_SUMMARY"
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
