@@ -3,6 +3,19 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      target:
+        description: 'Where to publish the packages'
+        type: choice
+        options:
+          - all
+          - nuget.org
+          - artifactory
+        default: all
+      forceAlphaNuget:
+        description: 'Publish alpha versions to nuget.org too'
+        type: boolean
+        default: false
 jobs:
   Publish:
     if: github.event_name == 'workflow_dispatch' || github.event.release.prerelease == false
@@ -39,12 +52,12 @@ jobs:
       run: dotnet test --no-build --verbosity normal --configuration Release 
     - name: Publish packages
       id: nugetorg
-      if: ${{ !contains(env.PACKAGE_VERSION, 'alpha') }}
+      if: ${{ inputs.target != 'artifactory' && (!contains(env.PACKAGE_VERSION, 'alpha') || inputs.forceAlphaNuget == true) }}
       continue-on-error: true
       run: dotnet nuget push **.nupkg --source nuget.org --api-key ${{secrets.NUGETORG_TOKEN}} --skip-duplicate
     - name: Publish packages to Artifactory
       id: artifactory
-      if: ${{ !cancelled() }}
+      if: ${{ inputs.target != 'nuget.org' }}
       continue-on-error: true
       env:
         ARTIFACTORY_NUGET_URL: ${{ secrets.ARTIFACTORY_NUGET_URL }}
@@ -116,8 +129,8 @@ jobs:
           echo
           echo "| Destination | Result |"
           echo "|---|---|"
-          echo "| nuget.org | $(icon '${{ steps.nugetorg.outcome }}')$([ '${{ steps.nugetorg.outcome }}' = skipped ] && echo ' (alpha versions are not published to nuget.org)') |"
-          echo "| Artifactory | $(icon '${{ steps.artifactory.outcome }}') |"
+          echo "| nuget.org | $(icon '${{ steps.nugetorg.outcome }}')$([ '${{ steps.nugetorg.outcome }}' = skipped ] && echo ' (not selected, or alpha version without forceAlphaNuget)') |"
+          echo "| Artifactory | $(icon '${{ steps.artifactory.outcome }}')$([ '${{ steps.artifactory.outcome }}' = skipped ] && echo ' (not selected)') |"
           if [ -s "$RUNNER_TEMP/artifactory-results.md" ]; then
             echo
             echo "### Artifactory packages"
@@ -126,7 +139,7 @@ jobs:
             cat "$RUNNER_TEMP/artifactory-results.md"
           fi
         } >> "$GITHUB_STEP_SUMMARY"
-        if [ "${{ steps.nugetorg.outcome }}" = "failure" ] || [ "${{ steps.artifactory.outcome }}" != "success" ]; then
+        if [ "${{ steps.nugetorg.outcome }}" = "failure" ] || [ "${{ steps.artifactory.outcome }}" = "failure" ]; then
           echo "::error::At least one publication failed. See the summary for details."
           exit 1
         fi
