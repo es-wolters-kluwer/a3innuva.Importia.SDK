@@ -23,17 +23,24 @@ stages:
     steps:
       - checkout: self
         clean: true
+        fetchDepth: 0
 
-      - task: gitversion/setup@4
+      - task: gitversion-setup@4
         displayName: 'Install GitTools'
         inputs:
           versionSpec: '6.x'
 
-      - task: gitversion/execute@4
+      - task: gitversion-execute@4
         displayName: 'Execute Git version'
         inputs:
-          useConfigFile: true
           configFilePath: 'GitVersion.yml'
+          buildNumberFormat: '${GitVersion_SemVer}'
+
+      - bash: |
+          echo "SemVer: $(GitVersion_SemVer)"
+          echo "FullSemVer: $(GitVersion_FullSemVer)"
+          echo "MajorMinorPatch: $(GitVersion_MajorMinorPatch)"
+        displayName: 'Show calculated version'
       
       - task: SonarQubePrepare@8
         displayName: 'Prepare SonarQube Analysis'
@@ -42,7 +49,7 @@ stages:
           scannerMode: 'dotnet'
           projectKey: $(SonarQubeProjectName)
           projectName: $(SonarQubeProjectName)
-          projectVersion : $(GitVersion.SemVer)
+          projectVersion : $(GitVersion_SemVer)
           extraProperties: |
             sonar.cs.vscoveragexml.reportsPaths=$(Agent.TempDirectory)/coverage/**/*.xml
             sonar.log.level=INFO
