@@ -38,8 +38,14 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --configuration Release 
     - name: Publish packages
+      id: nugetorg
+      if: ${{ !contains(env.PACKAGE_VERSION, 'alpha') }}
+      continue-on-error: true
       run: dotnet nuget push **.nupkg --source nuget.org --api-key ${{secrets.NUGETORG_TOKEN}} --skip-duplicate
     - name: Publish packages to Artifactory
+      id: artifactory
+      if: ${{ !cancelled() }}
+      continue-on-error: true
       env:
         ARTIFACTORY_NUGET_URL: ${{ secrets.ARTIFACTORY_NUGET_URL }}
         ARTIFACTORY_PUBLISH_WK_TOKEN: ${{ secrets.ARTIFACTORY_PUBLISH_WK_TOKEN }}
@@ -60,6 +66,8 @@ jobs:
         fi
         echo "Found ${#packages[@]} package(s):"
         printf ' - %s\n' "${packages[@]}"
+        failed=0
+        : > "$RUNNER_TEMP/artifactory-results.md"
         for package in "${packages[@]}"; do
           name=$(basename "$package")
           size=$(stat -c%s "$package")
@@ -84,11 +92,41 @@ jobs:
           fi
           if [ "$curl_exit" -ne 0 ]; then
             echo "::error::curl failed uploading $name (exit code $curl_exit)"
-            exit 1
+            echo "| $name | ❌ curl error (exit $curl_exit) |" >> "$RUNNER_TEMP/artifactory-results.md"
+            failed=1
+            continue
           fi
           if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
             echo "::error::Upload of $name failed (HTTP $status)"
-            exit 1
+            echo "| $name | ❌ HTTP $status |" >> "$RUNNER_TEMP/artifactory-results.md"
+            failed=1
+            continue
           fi
           echo "Uploaded $name (HTTP $status)"
+          echo "| $name | ✅ HTTP $status |" >> "$RUNNER_TEMP/artifactory-results.md"
         done
+        exit $failed
+    - name: Publication summary
+      if: ${{ !cancelled() }}
+      run: |
+        icon() { case "$1" in success) echo "✅ Success";; failure) echo "❌ Failed";; skipped) echo "⏭️ Skipped";; *) echo "$1";; esac; }
+        {
+          echo "## Publication summary"
+          echo "Version: \`$PACKAGE_VERSION\`"
+          echo
+          echo "| Destination | Result |"
+          echo "|---|---|"
+          echo "| nuget.org | $(icon '${{ steps.nugetorg.outcome }}')$([ '${{ steps.nugetorg.outcome }}' = skipped ] && echo ' (alpha versions are not published to nuget.org)') |"
+          echo "| Artifactory | $(icon '${{ steps.artifactory.outcome }}') |"
+          if [ -s "$RUNNER_TEMP/artifactory-results.md" ]; then
+            echo
+            echo "### Artifactory packages"
+            echo "| Package | Result |"
+            echo "|---|---|"
+            cat "$RUNNER_TEMP/artifactory-results.md"
+          fi
+        } >> "$GITHUB_STEP_SUMMARY"
+        if [ "${{ steps.nugetorg.outcome }}" = "failure" ] || [ "${{ steps.artifactory.outcome }}" != "success" ]; then
+          echo "::error::At least one publication failed. See the summary for details."
+          exit 1
+        fi
