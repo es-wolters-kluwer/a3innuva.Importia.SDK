@@ -288,6 +288,211 @@
 
         }
 
+        [Theory(DisplayName = "Validate CountryCode uppercase two letters failed")]
+        [InlineData("E")]
+        [InlineData("es")]
+        [InlineData("Es")]
+        [InlineData("E1")]
+        [InlineData("12")]
+        [InlineData(" ")]
+        public void Validate_CountryCode_uppercase_failed(string input)
+        {
+            Account entity = this.CreateEntity();
+            entity.CountryCode = input;
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "El campo 'Código país' tiene formato incorrecto");
+        }
+
+        [Theory(DisplayName = "Validate spanish document with ES country succeed")]
+        [InlineData("A58417346")]
+        [InlineData("B61441267")]
+        [InlineData("C43123520")]
+        [InlineData("E79823134")]
+        [InlineData("F43548049")]
+        [InlineData("G08480378")]
+        [InlineData("H59008441")]
+        [InlineData("P0700005B")]
+        [InlineData("S0811001G")]
+        [InlineData("Q0800007G")]
+        [InlineData("Q5850014A")]
+        [InlineData("S2800556I")]
+        [InlineData("P1304700F")]
+        [InlineData("P8890001D")]
+        [InlineData("R2801324A")]
+        [InlineData("K2345670S")]
+        [InlineData("X8541111S")]
+        [InlineData("Y0018909V")]
+        [InlineData("11111111H")]
+        [InlineData("45987452X")]
+        [InlineData("32569874B")]
+        public void Validate_spanish_document_es_country_succeed(string vatNumber)
+        {
+            Account entity = this.CreateEntity();
+            entity.VatNumber = vatNumber;
+            entity.CountryCode = "ES";
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            errors.Count.Should().Be(0);
+        }
+
+        [Theory(DisplayName = "Validate spanish document with foreign country failed")]
+        [InlineData("A58417346")]
+        [InlineData("B61441267")]
+        [InlineData("C43123520")]
+        [InlineData("E79823134")]
+        [InlineData("F43548049")]
+        [InlineData("G08480378")]
+        [InlineData("H59008441")]
+        [InlineData("P0700005B")]
+        [InlineData("S0811001G")]
+        [InlineData("Q0800007G")]
+        [InlineData("Q5850014A")]
+        [InlineData("S2800556I")]
+        [InlineData("P1304700F")]
+        [InlineData("P8890001D")]
+        [InlineData("R2801324A")]
+        [InlineData("K2345670S")]
+        [InlineData("X8541111S")]
+        [InlineData("Y0018909V")]
+        [InlineData("11111111H")]
+        [InlineData("45987452X")]
+        [InlineData("32569874B")]
+        public void Validate_spanish_document_foreign_country_failed(string vatNumber)
+        {
+            Account entity = this.CreateEntity();
+            entity.VatNumber = vatNumber;
+            entity.CountryCode = "FR";
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "Para un NIF, CIF o NIE el único país válido es 'ES'");
+        }
+
+        [Theory(DisplayName = "Validate intra community vat number with matching country succeed")]
+        [InlineData("AT123456789")]
+        [InlineData("BE123456789")]
+        [InlineData("BE1234567890")]
+        [InlineData("BG123456789")]
+        [InlineData("BG1234567890")]
+        [InlineData("CY123456789")]
+        [InlineData("CZ12345678")]
+        [InlineData("CZ123456789")]
+        [InlineData("CZ1234567890")]
+        [InlineData("DE123456789")]
+        [InlineData("DK12345678")]
+        [InlineData("EE123456789")]
+        [InlineData("EL123456789")]
+        [InlineData("FI12345678")]
+        [InlineData("FR12345678901")]
+        [InlineData("GB12345")]
+        [InlineData("GB123456789")]
+        [InlineData("GB123456789012")]
+        [InlineData("HR12345678901")]
+        [InlineData("XI12345")]
+        [InlineData("XI123456789")]
+        [InlineData("XI123456789012")]
+        [InlineData("HU12345678")]
+        [InlineData("IE12345678")]
+        [InlineData("IE123456789")]
+        [InlineData("IT12345678901")]
+        [InlineData("LT123456789")]
+        [InlineData("LT123456789012")]
+        [InlineData("LU12345678")]
+        [InlineData("LV12345678901")]
+        [InlineData("MT12345678")]
+        [InlineData("NL123456789012")]
+        [InlineData("PL1234567890")]
+        [InlineData("PT123456789")]
+        [InlineData("RO12")]
+        [InlineData("RO123")]
+        [InlineData("RO12345")]
+        [InlineData("RO123456789")]
+        [InlineData("RO1234567890")]
+        [InlineData("SE123456789012")]
+        [InlineData("SI12345678")]
+        [InlineData("SK1234567890")]
+        public void Validate_intra_community_matching_country_succeed(string vatNumber)
+        {
+            Account entity = this.CreateEntity();
+            entity.VatNumber = vatNumber;
+            entity.CountryCode = vatNumber.Substring(0, 2);
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            errors.Count.Should().Be(0);
+        }
+
+        [Theory(DisplayName = "Validate intra community vat number with different country failed")]
+        [InlineData("AT123456789")]
+        [InlineData("BE123456789")]
+        [InlineData("BE1234567890")]
+        [InlineData("BG123456789")]
+        [InlineData("BG1234567890")]
+        [InlineData("CY123456789")]
+        [InlineData("CZ12345678")]
+        [InlineData("CZ123456789")]
+        [InlineData("CZ1234567890")]
+        [InlineData("DE123456789")]
+        [InlineData("DK12345678")]
+        [InlineData("EE123456789")]
+        [InlineData("EL123456789")]
+        [InlineData("FI12345678")]
+        [InlineData("FR12345678901")]
+        [InlineData("GB12345")]
+        [InlineData("GB123456789")]
+        [InlineData("GB123456789012")]
+        [InlineData("HR12345678901")]
+        [InlineData("XI12345")]
+        [InlineData("XI123456789")]
+        [InlineData("XI123456789012")]
+        [InlineData("HU12345678")]
+        [InlineData("IE12345678")]
+        [InlineData("IE123456789")]
+        [InlineData("IT12345678901")]
+        [InlineData("LT123456789")]
+        [InlineData("LT123456789012")]
+        [InlineData("LU12345678")]
+        [InlineData("LV12345678901")]
+        [InlineData("MT12345678")]
+        [InlineData("NL123456789012")]
+        [InlineData("PL1234567890")]
+        [InlineData("PT123456789")]
+        [InlineData("RO12")]
+        [InlineData("RO123")]
+        [InlineData("RO12345")]
+        [InlineData("RO123456789")]
+        [InlineData("RO1234567890")]
+        [InlineData("SE123456789012")]
+        [InlineData("SI12345678")]
+        [InlineData("SK1234567890")]
+        public void Validate_intra_community_different_country_failed(string vatNumber)
+        {
+            Account entity = this.CreateEntity();
+            entity.VatNumber = vatNumber;
+            entity.CountryCode = "ES";
+
+            var errors = this.validation.Validate(entity);
+
+            errors.Should().Contain(x => !x.IsValid && x.Code == "Los dos primeros caracteres del NIF intracomunitario deben coincidir con el país");
+        }
+
+        [Theory(DisplayName = "Validate vat number without country succeed")]
+        [InlineData("11111111H")]
+        [InlineData("FR12345678901")]
+        public void Validate_vat_number_without_country_succeed(string vatNumber)
+        {
+            Account entity = this.CreateEntity();
+            entity.VatNumber = vatNumber;
+            entity.CountryCode = null;
+
+            var errors = this.validation.Validate(entity).ToList();
+
+            errors.Count.Should().Be(0);
+        }
+
         private Account CreateEntity()
         {
             return new Account()

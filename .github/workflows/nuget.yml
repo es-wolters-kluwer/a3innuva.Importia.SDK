@@ -39,3 +39,35 @@ jobs:
       run: dotnet test --no-build --verbosity normal --configuration Release 
     - name: Publish packages
       run: dotnet nuget push **.nupkg --source nuget.org --api-key ${{secrets.NUGETORG_TOKEN}} --skip-duplicate
+    - name: Publish packages to Artifactory
+      env:
+        ARTIFACTORY_NUGET_URL: ${{ secrets.ARTIFACTORY_NUGET_URL }}
+        ARTIFACTORY_PUBLISH_WK_TOKEN: ${{ secrets.ARTIFACTORY_PUBLISH_WK_TOKEN }}
+      run: |
+        if [ -z "$ARTIFACTORY_NUGET_URL" ]; then
+          echo "::error::ARTIFACTORY_NUGET_URL secret is not set."
+          exit 1
+        fi
+        if [ -z "$ARTIFACTORY_PUBLISH_WK_TOKEN" ]; then
+          echo "::error::ARTIFACTORY_PUBLISH_WK_TOKEN secret is not set."
+          exit 1
+        fi
+        mapfile -t packages < <(find . -name "*.nupkg" -path "*/bin/Release/*" -not -name "*.symbols.nupkg")
+        if [ ${#packages[@]} -eq 0 ]; then
+          echo "::error::No packages found to publish."
+          exit 1
+        fi
+        for package in "${packages[@]}"; do
+          name=$(basename "$package")
+          echo "Uploading $name"
+          status=$(curl -sS -o /dev/null -w "%{http_code}" -X PUT \
+            -H "Authorization: Bearer $ARTIFACTORY_PUBLISH_WK_TOKEN" \
+            -H "Content-Type: application/octet-stream" \
+            --data-binary @"$package" \
+            "${ARTIFACTORY_NUGET_URL%/}/$name")
+          if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
+            echo "::error::Upload of $name failed (HTTP $status)"
+            exit 1
+          fi
+          echo "Uploaded $name (HTTP $status)"
+        done
