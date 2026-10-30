@@ -5,7 +5,7 @@
     using System.Linq;
     using a3innuva.TAA.Migration.SDK.Implementations;
     using a3innuva.TAA.Migration.SDK.Interfaces;
-    using FluentAssertions;
+    using AwesomeAssertions;
     using Xunit;
 
     public class MigrationSetExtensionsTests

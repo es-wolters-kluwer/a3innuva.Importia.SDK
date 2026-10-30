@@ -9,6 +9,11 @@
         private readonly Regex accountCodeFormat; 
         private readonly Regex nifFormat;
         private readonly Regex postalCodeFormat;
+        private readonly Regex countryCodeFormat = new Regex(@"^[A-Z]{2}$", RegexOptions.Compiled, TimeSpan.FromSeconds(5));
+        // NIF (incl. K, L, M), NIE and CIF
+        private readonly Regex spanishDocumentFormat = new Regex(@"^([0-9]{8}[A-Z]|[KLM][0-9]{7}[A-Z]|[XYZ][0-9]{7}[A-Z]|[ABCDEFGHJNPQRSUVW][0-9]{7}[0-9A-J])$", RegexOptions.Compiled, TimeSpan.FromSeconds(5));
+        private readonly Regex intraCommunityVatFormat = new Regex(@"^[A-Z]{2}[A-Z0-9]+$", RegexOptions.Compiled, TimeSpan.FromSeconds(5));
+
         protected PartnerValidation()
         {
             this.accountCodeFormat = new Regex(@"^[1-9]{1}[0-9]*$", RegexOptions.Compiled, TimeSpan.FromSeconds(5));
@@ -25,6 +30,9 @@
             this.CreateRule(x => this.ValidateNullable(x.VatNumber, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'NIF'"));
             this.CreateRule(x => this.ValidateVatNumber(x.VatNumber), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'NIF'"));
             this.CreateRule(x => this.ValidatePostalCode(x.PostalCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Código postal'"));
+            this.CreateRule(x => this.ValidateCountryCode(x.CountryCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'País'"));
+            this.CreateRule(x => this.ValidateCountryForSpanishDocument(x.VatNumber, x.CountryCode), this.ReplaceInMessage("Para un NIF, CIF o NIE el único país válido es 'ES'"));
+            this.CreateRule(x => this.ValidateCountryForIntraCommunityVat(x.VatNumber, x.CountryCode), this.ReplaceInMessage("Los dos primeros caracteres del NIF intracomunitario deben coincidir con el país"));
             this.CreateRule(x => this.ValidateNullable(x.CounterPartAccountCode, 20), this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Contrapartida'"));
             this.CreateRule(x => this.ValidateAccountFormat(x.CounterPartAccountCode), this.ReplaceInMessage(ValidationMessages.InvalidFormat, "'Contrapartida'"));
             this.CreateRule(x => x.MaturitiesAccountCode == null || x.MaturitiesAccountCode.Length <= 20, this.ReplaceInMessage(ValidationMessages.InvalidLength, "'Cuenta bancaria'"));
@@ -55,6 +63,33 @@
                 return true;
 
             return this.postalCodeFormat.IsMatch(input);
+        }
+
+        private bool ValidateCountryCode(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return true;
+
+            return this.countryCodeFormat.IsMatch(input);
+        }
+
+        private bool ValidateCountryForSpanishDocument(string vatNumber, string countryCode)
+        {
+            if (string.IsNullOrEmpty(vatNumber) || string.IsNullOrEmpty(countryCode))
+                return true;
+
+            return !this.spanishDocumentFormat.IsMatch(vatNumber) || countryCode == "ES";
+        }
+
+        private bool ValidateCountryForIntraCommunityVat(string vatNumber, string countryCode)
+        {
+            if (string.IsNullOrEmpty(vatNumber) || string.IsNullOrEmpty(countryCode))
+                return true;
+
+            if (this.spanishDocumentFormat.IsMatch(vatNumber) || !this.intraCommunityVatFormat.IsMatch(vatNumber))
+                return true;
+
+            return vatNumber.StartsWith(countryCode, StringComparison.Ordinal);
         }
 
         private bool ValidateVatNumber(string input)

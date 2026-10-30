@@ -4,7 +4,7 @@ namespace a3innuva.TAA.Migration.SDK.Serialization.Tests
     using System.Collections.Generic;
     using a3innuva.TAA.Migration.SDK.Implementations;
     using a3innuva.TAA.Migration.SDK.Interfaces;
-    using FluentAssertions;
+    using AwesomeAssertions;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
     using Xunit;

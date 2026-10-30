@@ -43,7 +43,3 @@ stages:
           parameters:
             slnPath: 'a3innuva.Importia.SDK/*.sln'
             outputDirectory: '$(Agent.BuildDirectory)'
-  - template: /build/templates/backend/security/template-checkmarx.yml@pipelines
-    parameters:
-      bit: $(Bit)
-      projectName: $(ProjectName)

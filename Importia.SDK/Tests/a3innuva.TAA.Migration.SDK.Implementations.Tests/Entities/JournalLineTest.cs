@@ -1,6 +1,6 @@
 ﻿namespace a3innuva.TAA.Migration.SDK.Implementations.Tests
 {
-    using FluentAssertions;
+    using AwesomeAssertions;
     using Xunit;
 
     [Trait("Unit test", "JournalLine")]

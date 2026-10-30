@@ -37,23 +37,29 @@ stages:
         steps:
           - checkout: self
             clean: true
+            fetchDepth: 0
 
-          - task: gitversion/setup@3
+          - task: gitversion-setup@4
             displayName: 'Install GitTools'
             inputs:
-              versionSpec: '5.x'
+              versionSpec: '6.x'
 
-          - task: gitversion/execute@3
+          - task: gitversion-execute@4
             displayName: 'Execute Git version'
             inputs:
-              useConfigFile: true
               configFilePath: 'GitVersion.yml'
-              versionSpec: '5.x'
+              buildNumberFormat: '${GitVersion_SemVer}'
 
           - bash: |
-              echo "##vso[task.setvariable variable=gitSemVersion;isOutput=true]$(GitVersion.SemVer)"
-              echo "##vso[task.setvariable variable=gitMajorMinorVersion;isOutput=true]$(GitVersion.MajorMinorPatch)"
-              echo "##vso[task.setvariable variable=gitAssemblySemVer;isOutput=true]$(GitVersion.AssemblySemVer)"     
+              echo "SemVer: $(GitVersion_SemVer)"
+              echo "FullSemVer: $(GitVersion_FullSemVer)"
+              echo "MajorMinorPatch: $(GitVersion_MajorMinorPatch)"
+            displayName: 'Show calculated version'
+
+          - bash: |
+              echo "##vso[task.setvariable variable=gitSemVersion;isOutput=true]$(GitVersion_SemVer)"
+              echo "##vso[task.setvariable variable=gitMajorMinorVersion;isOutput=true]$(GitVersion_MajorMinorPatch)"
+              echo "##vso[task.setvariable variable=gitAssemblySemVer;isOutput=true]$(GitVersion_AssemblySemVer)"     
             name: SetupVars
 
           - script: |
@@ -74,7 +80,7 @@ stages:
           displayName: 'Use donet'
           inputs:
             packageType: 'sdk'
-            version: '9.x'
+            version: '10.x'
 
         - task: DotNetCoreCLI@2
           displayName: 'dotnet restore'

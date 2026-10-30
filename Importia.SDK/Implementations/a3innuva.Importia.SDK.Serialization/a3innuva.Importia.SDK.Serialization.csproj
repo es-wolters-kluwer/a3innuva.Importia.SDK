@@ -1,10 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net451;net461;net471;net48;net5.0;netcoreapp3.1;net6.0;net8.0;net9.0</TargetFrameworks>
-    <AssemblyName>a3innuva.TAA.Migration.SDK.Serialization</AssemblyName>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net48;net8.0;net9.0;net10.0</TargetFrameworks>    <AssemblyName>a3innuva.TAA.Migration.SDK.Serialization</AssemblyName>
     <RootNamespace>a3innuva.TAA.Migration.SDK.Serialization</RootNamespace>
-    <Version>2.48.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Product>a3innuva.Importia.SDK</Product>
     <PackageId>a3innuva.Importia.SDK.Serialization</PackageId>

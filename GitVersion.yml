@@ -1,24 +1,24 @@
-mode: Mainline
+workflow: GitHubFlow/v1
 branches:
   main:
     regex: ^principal$
-    tag: ''
+    label: beta
     increment: Minor
     is-release-branch: true
-    is-mainline: true
-    source-branches: 
+    is-main-branch: true
+    source-branches:
       - feature
   release:
-    tag: ''
+    label: ''
     increment: Minor
     regex: ^release?
     source-branches:
       - main
       - release
     is-release-branch: true
-    is-mainline: true
+    is-main-branch: true
   feature:
-    tag: 'alpha'
+    label: alpha
     increment: Inherit
     regex: ^feature?
     source-branches:
@@ -26,7 +26,7 @@ branches:
       - hotfix
       - main
   pull-request:
-    tag: 'PR'
+    label: PR
     increment: Inherit
     source-branches:
       - main
@@ -34,7 +34,8 @@ branches:
       - feature
       - hotfix
   hotfix:
-    tag: 'beta'
+    regex: ^hotfix(es)?[/-]
+    label: beta
     increment: Patch
     source-branches:
       - release

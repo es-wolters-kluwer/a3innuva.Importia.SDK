@@ -23,40 +23,45 @@ stages:
     steps:
       - checkout: self
         clean: true
+        fetchDepth: 0
 
-      - task: gitversion/setup@3
+      - task: gitversion-setup@4
         displayName: 'Install GitTools'
         inputs:
-          versionSpec: '5.x'
+          versionSpec: '6.x'
 
-      - task: gitversion/execute@3
+      - task: gitversion-execute@4
         displayName: 'Execute Git version'
         inputs:
-          useConfigFile: true
           configFilePath: 'GitVersion.yml'
-          versionSpec: '5.x'
+          buildNumberFormat: '${GitVersion_SemVer}'
+
+      - bash: |
+          echo "SemVer: $(GitVersion_SemVer)"
+          echo "FullSemVer: $(GitVersion_FullSemVer)"
+          echo "MajorMinorPatch: $(GitVersion_MajorMinorPatch)"
+        displayName: 'Show calculated version'
       
-      - task: SonarQubePrepare@7
+      - task: SonarQubePrepare@8
         displayName: 'Prepare SonarQube Analysis'
         inputs:
-          SonarQube: 'SonarQube - Github'
+          SonarQube: 'Sonar Qube EE'
           scannerMode: 'dotnet'
           projectKey: $(SonarQubeProjectName)
           projectName: $(SonarQubeProjectName)
-          projectVersion : $(GitVersion.SemVer)
+          projectVersion : $(GitVersion_SemVer)
           extraProperties: |
-            sonar.cs.vstest.reportsPaths=$(Agent.TempDirectory)/*.trx
-            sonar.cs.opencover.reportsPaths=$(Agent.TempDirectory)/**/coverage.opencover.xml
+            sonar.cs.vscoveragexml.reportsPaths=$(Agent.TempDirectory)/coverage/**/*.xml
             sonar.log.level=INFO
             sonar.exclusions=**/bin/**/*, **/obj/**/*, **/*.yml, **/*.yaml
             sonar.dotnet.excludeTestProjects=true
             sonar.projectBaseDir=$(Agent.BuildDirectory)
 
       - task: UseDotNet@2
-        displayName: 'Use donet'
+        displayName: 'Use dotnet'
         inputs:
           packageType: 'sdk'
-          version: '9.x'
+          version: '10.x'
 
       - task: DotNetCoreCLI@2
         displayName: 'dotnet restore'
@@ -77,10 +82,10 @@ stages:
         displayName: 'dotnet test'
         inputs:
           command: 'test'
-          projects: a3innuva.Importia.SDK.sln
-          arguments: '--filter "FullyQualifiedName~.tests"  -c $(BuildConfiguration) --no-build --no-restore --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover'
-          testRunTitle: 'Tests'
+          projects: ''
+          arguments: '--solution a3innuva.Importia.SDK.sln -c $(BuildConfiguration) --no-build --no-restore --coverage --coverage-output-format xml --results-directory $(Agent.TempDirectory)/coverage'
+          publishTestResults: false
             
-      - task: SonarQubeAnalyze@7
+      - task: SonarQubeAnalyze@8
         displayName: 'SonarQube analyze'
         continueOnError: false
