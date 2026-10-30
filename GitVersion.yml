@@ -18,6 +18,7 @@ branches:
     is-release-branch: true
     is-main-branch: true
   feature:
+    mode: ContinuousDelivery
     label: alpha
     increment: Inherit
     regex: ^feature?
