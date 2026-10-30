@@ -93,18 +93,9 @@ jobs:
             "${ARTIFACTORY_NUGET_URL%/}/$name" 2> "$RUNNER_TEMP/artifactory-curl-error.txt")
           curl_exit=$?
           set -e
-          echo "curl exit code: $curl_exit, HTTP status: ${status:-n/a}"
-          if [ -s "$RUNNER_TEMP/artifactory-curl-error.txt" ]; then
-            echo "curl error output:"
-            cat "$RUNNER_TEMP/artifactory-curl-error.txt"
-          fi
-          if [ -s "$RUNNER_TEMP/artifactory-response.txt" ]; then
-            echo "Server response:"
-            cat "$RUNNER_TEMP/artifactory-response.txt"
-            echo
-          fi
           if [ "$curl_exit" -ne 0 ]; then
             echo "::error::curl failed uploading $name (exit code $curl_exit)"
+            cat "$RUNNER_TEMP/artifactory-curl-error.txt"
             echo "| $name | ❌ curl error (exit $curl_exit) |" >> "$RUNNER_TEMP/artifactory-results.md"
             failed=1
             continue
@@ -115,8 +106,8 @@ jobs:
             failed=1
             continue
           fi
-          echo "Uploaded $name (HTTP $status)"
-          echo "| $name | ✅ HTTP $status |" >> "$RUNNER_TEMP/artifactory-results.md"
+          echo "Uploaded $name"
+          echo "| $name | ✅ Uploaded |" >> "$RUNNER_TEMP/artifactory-results.md"
         done
         exit $failed
     - name: Publication summary
