@@ -52,19 +52,40 @@ jobs:
           echo "::error::ARTIFACTORY_PUBLISH_WK_TOKEN secret is not set."
           exit 1
         fi
+        echo "Target URL host: $(echo "$ARTIFACTORY_NUGET_URL" | sed -E 's#^(https?://[^/]+).*#\1#')"
         mapfile -t packages < <(find . -name "*.nupkg" -path "*/bin/Release/*" -not -name "*.symbols.nupkg")
         if [ ${#packages[@]} -eq 0 ]; then
           echo "::error::No packages found to publish."
           exit 1
         fi
+        echo "Found ${#packages[@]} package(s):"
+        printf ' - %s\n' "${packages[@]}"
         for package in "${packages[@]}"; do
           name=$(basename "$package")
-          echo "Uploading $name"
-          status=$(curl -sS -o /dev/null -w "%{http_code}" -X PUT \
+          size=$(stat -c%s "$package")
+          echo "Uploading $name ($size bytes) to Artifactory"
+          set +e
+          status=$(curl -sS --show-error -o "$RUNNER_TEMP/artifactory-response.txt" -w "%{http_code}" -X PUT \
             -H "Authorization: Bearer $ARTIFACTORY_PUBLISH_WK_TOKEN" \
             -H "Content-Type: application/octet-stream" \
             --data-binary @"$package" \
-            "${ARTIFACTORY_NUGET_URL%/}/$name")
+            "${ARTIFACTORY_NUGET_URL%/}/$name" 2> "$RUNNER_TEMP/artifactory-curl-error.txt")
+          curl_exit=$?
+          set -e
+          echo "curl exit code: $curl_exit, HTTP status: ${status:-n/a}"
+          if [ -s "$RUNNER_TEMP/artifactory-curl-error.txt" ]; then
+            echo "curl error output:"
+            cat "$RUNNER_TEMP/artifactory-curl-error.txt"
+          fi
+          if [ -s "$RUNNER_TEMP/artifactory-response.txt" ]; then
+            echo "Server response:"
+            cat "$RUNNER_TEMP/artifactory-response.txt"
+            echo
+          fi
+          if [ "$curl_exit" -ne 0 ]; then
+            echo "::error::curl failed uploading $name (exit code $curl_exit)"
+            exit 1
+          fi
           if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
             echo "::error::Upload of $name failed (HTTP $status)"
             exit 1
